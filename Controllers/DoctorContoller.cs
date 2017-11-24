@@ -17,6 +17,14 @@ namespace aspnetapp.Controllers
             return View();
             
         }
+
+        //it's a shared page with Registrator
+        public IActionResult PatientCard() {
+
+            ViewData["ParentController"] = "Doctor";
+            
+            return View();
+        }
         
 
         public IActionResult Error()

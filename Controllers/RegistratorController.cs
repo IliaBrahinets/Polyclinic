@@ -11,6 +11,12 @@ namespace aspnetapp.Controllers
         {
             return View();
         }
+
+        public IActionResult PatientCard() {
+            ViewData["ParentController"] = "Registrator";
+            
+            return View();
+        }
         
         [HttpPost]
         public IActionResult CreatePatient() {

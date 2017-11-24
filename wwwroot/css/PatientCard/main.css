@@ -5,3 +5,7 @@
 #checkUpList .card .time {
     min-width: 75px;
 }
+
+.personal-data {
+    font-size: 0.9em;
+}
