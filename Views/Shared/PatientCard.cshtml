@@ -24,9 +24,9 @@
                     <div class = 'col'></div>
                     @if(ViewData["ParentController"] == "Registrator") {
                     <div class ='w-100'></div>
-                       <div class = 'col mt-1 text-right'> 
-                           @Html.ActionLink("Редактировать","","")
-                        </div>
+                    <div class = 'col mt-1 text-right'> 
+                        @Html.ActionLink("Редактировать","","")
+                    </div>
                     }
                 </div>
                 
@@ -50,7 +50,7 @@
                     <label for='datePicker'>Дата</label>
                     <input type='text' id = 'datePicker' name='datePicker' class='form-control form-contrl-sm'>
                 </div>
-                <div class='row justify-content-md-center mt-4'>
+                <div class='text-center mt-4'>
                     <button type="submit" class="btn btn-primary">Применить фильтр</button>
                 </div>
             </form>

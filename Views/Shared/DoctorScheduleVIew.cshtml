@@ -38,8 +38,8 @@
                                     <% _.each(days[d].events,function(event) { %>
 
                                     <div class='row day-inf pr-0 text-center'>
-                                        <div class='relief-time col pr-0 pl-0'><%= event.relief %></div>
-                                        <div class='count col pr-0 pl-0'><%= event.count %></div>
+                                        <div class='relief-time col-sm pr-0 pl-0'><%= event.relief %></div>
+                                        <div class='count col-sm pr-0 pl-0'><%= event.count %></div>
                                     </div>
 
                                     <% }); %>
@@ -63,24 +63,45 @@
                 <td>Иванов И.В.</td>
 
                 <td class = 'recordActions'>
-                   @Html.ActionLink("Просмотр карточки","","PatientCard") | @Html.ActionLink("Занести результаты приема в карточку","WriteCheckUpInfo","Doctor")
+                    @if(ViewData["ParentController"] == "Doctor") {
+                        @Html.ActionLink("Просмотр карточки","PatientCard") <text> | </text> @Html.ActionLink("Занести результаты приема в карточку","WriteCheckUpInfo","Doctor")
+                    } else {
+                        @Html.ActionLink("Удалить запись","","")
+                    } 
                 </td>
             </tr>
 
+            @if(ViewData["ParentController"] == "Registrator") {
             <tr>
-                <td>12:15</td>
+                <td>12:00</td>
+
+                <td></td>
+
+                <td class = 'recordActions'>
+                     @Html.ActionLink("Записать пациента","","")
+                </td>
+            </tr>
+
+            }
+
+            <tr>
+                <td>12:30</td>
 
                 <td>Петров А.В.</td>
 
                 <td class = 'recordActions'>
-                    @Html.ActionLink("Просмотр карточки","","PatientCard") | @Html.ActionLink("Занести результаты приема в карточку","WriteCheckUpInfo","Doctor")
+                     @if(ViewData["ParentController"] == "Doctor") {
+                        @Html.ActionLink("Просмотр карточки","PatientCard") <text> | </text> @Html.ActionLink("Занести результаты приема в карточку","WriteCheckUpInfo","Doctor")
+                    } else {
+                        @Html.ActionLink("Удалить запись","","")
+                    } 
                 </td>
             </tr>
         </tbody>
     </table>
 
     @section Styles {
-         <link rel='stylesheet' href='~/css/Doctor/main.css' asp-append-version='true' />
+         <link rel='stylesheet' href='~/css/DoctorScheduleView/main.css' asp-append-version='true' />
      } 
     @section Scripts {
 
@@ -90,7 +111,7 @@
 
     <script src='~/lib/clndr/src/clndr.js' asp-append-version='true'></script>
 
-    <script src='~/js/Doctor/main.js' asp-append-version='true'></script>
+    <script src='~/js/DoctorScheduleView/main.js' asp-append-version='true'></script>
 
     }
 

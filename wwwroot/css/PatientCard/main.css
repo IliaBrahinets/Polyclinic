@@ -9,3 +9,8 @@
 .personal-data {
     font-size: 0.9em;
 }
+
+.personal-data .row>.col {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

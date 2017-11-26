@@ -1,89 +1,80 @@
 //configuring clndr.js
-$(document).ready( function() {
-    
+$(document).ready(function() {
+
     // Assuming you've got the appropriate language files,
     // clndr will respect whatever moment's language is set to.
-    
+
     moment.locale("ru");
-    
+
     // Here's some magic to make sure the dates are happening this month.
-    var thisMonth = moment().format('YYYY-MM');
+    var thisMonth = moment().format('DD-MM-YYYY');
+    console.log(thisMonth);
     // Events to load into calendar
-    var eventArray = [
-        {
-            title: 'Multi-Day Event',
-            endDate: thisMonth + '-14',
-            startDate: thisMonth + '-10'
-        }, {
-            endDate: thisMonth + '-23', 
-            startDate: thisMonth + '-21',
-            title: 'Another Multi-Day Event'
-        }, {
-            date: thisMonth + '-27',
-            title: 'Single Day Event'
-        }
-    ];
+    var eventArray = [{
+        date: '2017-11-23',
+        relief: '8:00-19:00',
+        count: '8/10'
+    }, {
+        date: '2017-11-23',
+        relief: '8:00-19:00',
+        count: '8/10'
+    }];
 
     // The order of the click handlers is predictable. Direct click action
     // callbacks come first: click, nextMonth, previousMonth, nextYear,
     // previousYear, nextInterval, previousInterval, or today. Then
     // onMonthChange (if the month changed), inIntervalChange if the interval
     // has changed, and finally onYearChange (if the year changed).
-     var sh = $('#schedule').clndr({
+    var sh = $('#schedule').clndr({
 
         //daysOfTheWeek: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Вс'],
-        moment:moment,
-        
+        moment: moment,
+
         numberOfRows: 5,
 
         events: eventArray,
         clickEvents: {
-            click: function (target) {
+            click: function(target) {
                 console.log('Cal-1 clicked: ', target);
             },
-            today: function () {
+            today: function() {
                 console.log('Cal-1 today');
             },
-            nextMonth: function () {
+            nextMonth: function() {
                 console.log('Cal-1 next month');
             },
-            previousMonth: function () {
+            previousMonth: function() {
                 console.log('Cal-1 previous month');
             },
-            onMonthChange: function () {
+            onMonthChange: function() {
                 console.log('Cal-1 month changed');
             },
-            nextYear: function () {
+            nextYear: function() {
                 console.log('Cal-1 next year');
             },
-            previousYear: function () {
+            previousYear: function() {
                 console.log('Cal-1 previous year');
             },
-            onYearChange: function () {
+            onYearChange: function() {
                 console.log('Cal-1 year changed');
             },
-            nextInterval: function () {
+            nextInterval: function() {
                 console.log('Cal-1 next interval');
             },
-            previousInterval: function () {
+            previousInterval: function() {
                 console.log('Cal-1 previous interval');
             },
-            onIntervalChange: function () {
+            onIntervalChange: function() {
                 console.log('Cal-1 interval changed');
             }
         },
-        doneRendering: function () {
-            
-         },
-        multiDayEvents: {
-            singleDay: 'date',
-            endDate: 'endDate',
-            startDate: 'startDate'
+        doneRendering: function() {
+
         },
         showAdjacentMonths: true,
         adjacentDaysChangeMonth: false,
-        template:$("#scheduletemplate").html()
+        template: $("#scheduletemplate").html()
     });
 
-    
+
 });

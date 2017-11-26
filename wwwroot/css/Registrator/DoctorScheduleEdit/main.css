@@ -1,0 +1,59 @@
+#schedule tbody tr td {
+    padding: 5px!important;
+}
+
+#schedule .adjacent-month {
+    background-color: rgb(239, 238, 238)!important;
+    border-color: rgb(239, 238, 238)!important;
+    opacity: 0.3;
+}
+
+#schedule .today {
+    border: 3px solid rgb(207, 113, 113)
+}
+
+#schedule .header-days {
+    font-size: 1.3em;
+}
+
+
+/*Сб Вс*/
+
+#schedule .calendar-dow-5,
+#schedule .calendar-dow-6 {
+    background: rgb(255, 221, 221);
+    border-color: rgb(255, 221, 221);
+}
+
+#schedule .day {
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+}
+
+#schedule .day-contents {
+    /*border-bottom: 2px solid #b6b8bb;*/
+    font-size: 1.3em;
+}
+
+#schedule .day-inf {
+    font-size: 0.7em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#schedule .clndr-control-button {
+    max-width: 100px;
+}
+
+.patientList .recordActions {}
+
+#reliefsSetted>div,
+#reliefsAvaliable>div {
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    max-height: 100%;
+}
+
+#reliefsSetted,
+#reliefsAvaliable {}

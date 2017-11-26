@@ -1,0 +1,73 @@
+<div class = 'container mt-4'>
+    <form>
+        <div class = 'form-group'>
+            <div class = 'form-row'>
+                <div class = 'col-sm-4'>
+                    <label for = 'firstname'>Имя</label>
+                    <input class ='form-control'type = 'text' name = 'firstname' placeholder='Имя'>
+                </div>
+                <div class = 'col-sm-4'>
+                    <label for = 'firstname'>Фамилия</label>
+                    <input class ='form-control'type = 'text' name = 'surname' placeholder='Фамилия'>
+                </div>
+                <div class = 'col-sm-4'>
+                    <label for = 'firstname'>Отчество</label>
+                    <input class ='form-control' type = 'text' name = 'lastname' placeholder='Отчество'>
+                </div>
+            </div>  
+        </div>
+        <div class='form-group'>
+            <div class = 'form-row'>
+
+                <div class = 'col-sm text-center sex-picker'>
+                    <label for='sex'>Пол:</label>
+                    <select class = 'form-control' name = 'sex'>
+                        <option value = 'M'>
+                            М
+                        </option>
+                        <option value = 'Fm'>
+                            Ж
+                        </option>
+                    </select>
+                </div>
+
+                <div class='col-sm'>
+                    <div class ='form-group'>
+                        <label for = 'birthdate'>Дата рождения</label>
+                        <input class = 'form-control' type='text' id='birthdate' name='birthdate'>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class='form-group'>
+            <label for = 'street'>Улица</label>
+            <select class='form-control' name='street'>
+                <option>ул.Пролетарская</option>
+                <option>Дерматолог</option>
+                <option>Невролог</option>
+                <option>Хирург</option>
+                <option>Терапевт</option>
+            </select>
+        </div>
+
+        <div class = 'form-group'>
+            <button class ='btn btn-primary' type = 'submit'>
+                Добавить
+            </button>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
+    <script src='~/lib/datetimepicker/js/daterangepicker.js' asp-append-version='true'></script>
+    <script src='~/js/Registrator/CreatePatient/main.js' asp-append-version='true'></script>
+}
+@section Styles {
+    <link rel='stylesheet' href='~/lib/datetimepicker/css/daterangepicker.css' asp-append-version='true' />
+    <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' asp-append-version='true' />
+    <link rel='stylesheet' href='~/css/Registrator/CreatePatient/main.css' asp-append-version='true' />
+}

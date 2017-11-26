@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Doctor"; }
+@{ ViewData["Title"] = "Doctor"; }
 
 <script type='text/template' id='scheduletemplate'>
     <div class='container mb-3 mt-3'>
@@ -38,8 +38,8 @@
                                     <% _.each(days[d].events,function(event) { %>
 
                                     <div class='row day-inf pr-0 text-center'>
-                                        <div class='relief-time col pr-0 pl-0'><%= event.relief %></div>
-                                        <div class='count col pr-0 pl-0'><%= event.count %></div>
+                                        <div class='relief-time col-sm pr-0 pl-0'><%= event.relief %></div>
+                                        <div class='count col-sm pr-0 pl-0'><%= event.count %></div>
                                     </div>
 
                                     <% }); %>
@@ -52,37 +52,47 @@
     </table>
 </script>
 
-<diV class='container'>
-    <div id='schedule'></div>
+<div class = 'row' id = 'scheduleEdit'>
+    <div class = 'col-lg-8'>
+        <div id='schedule'></div>
+    </div>
 
-    <table class='patientList table table-sm text-center'>
-        <tbody>
-            <tr>
-                <td>12:00</td>
+    <div class = 'row col-md'>
+        <div class= 'col-sm mt-2' id = 'reliefsSetted'>
+            <h4 class = 'text-center'>Назначенные</h3>
+            <div>
+                <div class="btn-group-vertical w-100" role="group">
+                    <button type="button" class="btn btn-light">8:00-19:00</button>
+                    <button type="button" class="btn btn-light">14:00-18:00</button>
+                    <button type="button" class="btn btn-light">9:00-15:00</button>
+                </div>
+            </div>
+        </div>
+        <div class= 'col-sm mt-2' id ='reliefsAvaliable'>
+            <h4 class = 'text-center'>Использованные</h3>
+            <div>
+                <div class="btn-group-vertical w-100" role="group">
+                    <button type="button" class="btn btn-light">8:00-19:00</button>
+                    <div class = 'text-center'>
+                        <small class="relief-desc form-text text-muted">
+                            Для окулистов
+                        </small>
+                    </div>
+                    <button type="button" class="btn btn-light">14:00-18:00</button>
+                    <button type="button" class="btn btn-light">10:00-14:00</button>
+                    <button type="button" class="btn btn-light">9:00-13:00</button>
+                    <button type="button" class="btn btn-light">9:00-15:00</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <td>Иванов И.В.</td>
+@section Styles {
+     <link rel='stylesheet' href='~/css/Registrator/DoctorScheduleEdit/main.css' asp-append-version='true' />
+}
 
-                <td class = 'recordActions'>
-                   @Html.ActionLink("Просмотр карточки","","PatientCard") | @Html.ActionLink("Занести результаты приема в карточку","WriteCheckUpInfo","Doctor")
-                </td>
-            </tr>
-
-            <tr>
-                <td>12:15</td>
-
-                <td>Петров А.В.</td>
-
-                <td class = 'recordActions'>
-                    @Html.ActionLink("Просмотр карточки","","PatientCard") | @Html.ActionLink("Занести результаты приема в карточку","WriteCheckUpInfo","Doctor")
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    @section Styles {
-         <link rel='stylesheet' href='~/css/Doctor/main.css' asp-append-version='true' />
-     } 
-    @section Scripts {
+@section Scripts {
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 
@@ -90,8 +100,6 @@
 
     <script src='~/lib/clndr/src/clndr.js' asp-append-version='true'></script>
 
-    <script src='~/js/Doctor/main.js' asp-append-version='true'></script>
+    <script src='~/js/Registrator/DoctorScheduleEdit/main.js' asp-append-version='true'></script>
 
     }
-
-</div>

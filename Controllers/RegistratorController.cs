@@ -13,19 +13,47 @@ namespace aspnetapp.Controllers
         }
 
         public IActionResult PatientCard() {
+
             ViewData["ParentController"] = "Registrator";
             
             return View();
         }
-        
-        [HttpPost]
-        public IActionResult CreatePatient() {
-            
-            Console.WriteLine(Request.Form["pwd"]);
 
-            return null;
-
+        public IActionResult DoctorData() {
+            return View();
         }
+        
+        public IActionResult SearchDoctor() {
+            return View();
+        }
+
+        public IActionResult CreateDoctor() {
+            return View();
+        }
+
+        public IActionResult SearchPatient() {
+            return View();
+        }
+
+
+        public IActionResult CreatePatient() {
+
+            return View();
+            
+        }
+
+        public IActionResult DoctorScheduleView() {
+
+            ViewData["ParentController"] = "Registrator";
+            
+            return View();
+        }
+
+        public IActionResult DoctorScheduleEdit() {
+            
+            return View();
+        }
+
 
         public IActionResult Error()
         {
