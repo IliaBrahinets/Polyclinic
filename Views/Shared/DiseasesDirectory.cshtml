@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class='container mt-4'>
+
+    <div class='mb-2'>
+        @Html.ActionLink("Добавить", "CreateDisease")
+    </div>
+
+    <form class='mb-2'>
+        <div class='form-row'>
+            <div class='col'>
+                <input class='form-control' type='search' placeholder='Введите название...'>
+            </div>
+            <div class='col-sm-2'>
+                <button class='btn btn-primary w-100' type='submit'>Показать</button>
+            </div>
+        </div>
+    </form>
+
+    <div id='drugsList'>
+
+        <div class='drug card'>
+
+            <div class='card-header'>
+                <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                    <strong>Миокардит</strong>
+                </a>
+                <span class='edit-butts'>@Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")</span>
+            </div>
+
+            <div class='drug-info collapse'>
+                <div class='card-body'>
+                    поражение сердечной мышцы, миокарда. Обычно поражения носят воспалительный характер.
+                </div>
+            </div>
+
+        </div>
+
+        <div class='drug card'>
+
+            <div class='card-header'>
+                <a data-toggle="collapse" href="#drugsList .drug:nth-child(2) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                    <strong>Гломерулонефрит</strong>
+                </a>
+                <span class='edit-butts'>@Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")</span>
+            </div>
+
+            <div class='drug-info collapse'>
+                <div class='card-body'>
+          
+                    Гломерулонефрит также является воспалительным заболеванием, при котором поражаются почечные канальцы, клубочки.
+
+                    Причиной этой болезни почек чаще всего является инфекция в результате перенесенной ангины, пневмонии, скарлатины и гнойных кожных заболеваний. Реже гломерулонефрит возникает из-за переохлаждения организма, малярии, туберкулеза.
+
+                  
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Styles {
+    <link rel='stylesheet' href='~/css/Shared/DiseasesDirectory/main.css' asp-append-version='true' />
+}

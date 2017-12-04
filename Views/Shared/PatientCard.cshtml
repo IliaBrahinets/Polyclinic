@@ -2,7 +2,7 @@
     ViewData["Title"] = "Карточка пациента"; 
     }
 <div class='row mt-4 ml-1'>
-    <div class='col-3'>
+    <div class='col-md-3'>
 
         <div class ='card mb-2 personal-data'>
             <div class = 'card-header'>
@@ -34,7 +34,7 @@
         </div>
 
 
-        <div class='card p-3'>
+        <div class='filter card p-3'>
             <form>
                 <div class='form-group'>
                     <label for='speciality'>Специальность врача</label>
@@ -56,59 +56,76 @@
             </form>
         </div>
     </div>
-    <div class='col-9'>
-        <div id='checkUpList'>
-            <div class='card'>
-                <div class='card-header bg-transparent'>
-                    <div class='row' data-toggle='collapse' data-target='#checkUpList .card:nth-child(1) .collapse'>
-                        <span class='date col-2 text-right'>19.11.2017</span>
-                        <span class='time col-1'>15:30</span>
-                        <div class='col-8 text-center'>
-                            <span class='speciality'>Хирург</span>
-                            <span class='doctorName'>Иванов Иван Петрович</span>
+
+    <div class='col-md-9'>
+
+        <table  id = 'checkUpList' class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Время</th>
+                    <th scope="col">Специальность</th>
+                    <th scope="col">ФИО</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-toggle = 'collapse' data-target = '#checkUpList tbody tr:nth-of-type(2) .collapse'>
+                    <td class = 'date'>19.11.2017</td>
+                    <td class = 'time'>15:30</td>
+                    <td class = 'speciality'>Хирург</td>
+                    <td class = 'name'>Иванов Иван Петрович</td>
+                </tr>
+                <tr class = 'record-inf'>
+                    <td class = 'pt-0 pb-0' colspan="4">
+                        <div class = 'collapse text-left pl-4 pr-4'>
+
+                            <div class = 'pt-4'></div>
+
+                            <h4 class="card-title diagnosis-title">Диагноз</h4>
+                            <p class="card-text diagnosis">Перелом руки</p>
+                            <h4 class="card-title recomend-title">Рекомендации</h4>
+                            <p class="card-text recomend">Употребление кальция</p>
+
+                            <div class = 'pt-4'></div>
+
                         </div>
-                    </div>
-                </div>
-                <div class='collapse'>
-                    <div class='card-body'>
-                        <h4 class="card-title diagnosis-title">Диагноз</h4>
-                        <p class="card-text diagnosis">Перелом руки</p>
-                        <h4 class="card-title recomend-title">Рекомендации</h4>
-                        <p class="card-text recomend">Употребление кальция</p>
-                    </div>
-                </div>
-            </div>
-            <div class='card'>
-                <div class='card-header bg-transparent'>
-                    <div class='row' data-toggle='collapse' data-target='#checkUpList .card:nth-child(2) .collapse'>
-                        <span class='date col-2 text-right'>20.11.2017</span>
-                        <span class='time col-1'>15:30</span>
-                        <div class='col-8 text-center'>
-                            <span class='speciality'>Хирург</span>
-                            <span class='doctorName'>Иванов Иван Петрович</span>
+                    </td>
+                </tr>
+                <tr data-toggle = 'collapse' data-target = '#checkUpList tbody tr:nth-of-type(4) .collapse'>
+                    <td class = 'date'>19.11.2017</td>
+                    <td class = 'time'>15:30</td>
+                    <td class = 'speciality'>Хирург</td>
+                    <td class = 'name'>Иванов Иван Петрович</td>
+                </tr>
+                <tr class = 'record-inf'>
+                    <td class = 'pt-0 pb-0' colspan="4">
+                        <div class = 'collapse text-left pl-4 pr-4'>
+
+                            <div class = 'pt-4'></div>
+
+                            <h4 class="card-title diagnosis-title">Диагноз</h4>
+                            <p class="card-text diagnosis">Перелом руки</p>
+                            <h4 class="card-title recomend-title">Рекомендации</h4>
+                            <p class="card-text recomend">Употребление кальция</p>
+
+                            <div class = 'pt-4'></div>
+
                         </div>
-                    </div>
-                </div>
-                <div class='collapse'>
-                    <div class='card-body'>
-                        <h4 class="card-title diagnosis-title">Диагноз</h4>
-                        <p class="card-text diagnosis">Перелом руки</p>
-                        <h4 class="card-title recomend-title">Рекомендации</h4>
-                        <p class="card-text recomend">Употребление кальция</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
 @section Styles {
     <link rel='stylesheet' href='~/lib/datetimepicker/css/daterangepicker.css' asp-append-version='true' />
     <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' asp-append-version='true' />
-    <link rel='stylesheet' href='~/css/PatientCard/main.css' asp-append-version='true' /> 
+    <link rel='stylesheet' href='~/css/Shared/PatientCard/main.css' asp-append-version='true' /> 
 }
 
 @section Scripts {
     <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
     <script src='~/lib/datetimepicker/js/daterangepicker.js' asp-append-version='true'></script>
-    <script src='~/js/PatientCard/main.js' asp-append-version='true'></script>
+    <script src='~/js/Shared/PatientCard/main.js' asp-append-version='true'></script>
 }

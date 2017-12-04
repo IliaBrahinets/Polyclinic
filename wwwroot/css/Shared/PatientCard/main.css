@@ -1,0 +1,28 @@
+
+@media (max-width:460px)  {
+    
+    #checkUpList{
+        font-size:13px;
+    }
+
+}
+
+@media (max-width:384px)  {
+    
+    #checkUpList{
+        font-size:9px;
+    }
+
+
+}
+
+.personal-data .card-body .row .col:nth-of-type(3n+1){
+    text-align: right;
+}
+.personal-data .row>.col {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.personal-data,.filter {
+    font-size: 1.1em;
+}

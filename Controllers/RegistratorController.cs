@@ -12,48 +12,90 @@ namespace aspnetapp.Controllers
             return View();
         }
 
-        public IActionResult PatientCard() {
+        public IActionResult PatientCard()
+        {
 
             ViewData["ParentController"] = "Registrator";
-            
+
             return View();
         }
 
-        public IActionResult DoctorData() {
-            return View();
-        }
-        
-        public IActionResult SearchDoctor() {
+        public IActionResult Doctors()
+        {
             return View();
         }
 
-        public IActionResult CreateDoctor() {
+        public IActionResult CreateDoctor()
+        {
             return View();
         }
 
-        public IActionResult SearchPatient() {
+        public IActionResult Patients()
+        {
             return View();
         }
 
 
-        public IActionResult CreatePatient() {
+        public IActionResult CreatePatient()
+        {
 
             return View();
-            
+
         }
 
-        public IActionResult DoctorScheduleView() {
+        public IActionResult DoctorScheduleView()
+        {
 
             ViewData["ParentController"] = "Registrator";
-            
+
             return View();
         }
 
-        public IActionResult DoctorScheduleEdit() {
-            
+        public IActionResult DoctorScheduleEdit()
+        {
+
             return View();
         }
 
+        public IActionResult Regions()
+        {
+            return View();
+        }
+
+        public IActionResult CreateRegion()
+        {
+            return View();
+        }
+
+        public IActionResult Specialities()
+        {
+            return View();
+        }
+
+        public IActionResult CreateSpeciality()
+        {
+            return View();
+        }
+
+        public IActionResult DiseasesDirectory()
+        {
+            return View();
+        }
+
+        public IActionResult CreateDisease()
+        {
+            return View();
+        }
+
+        public IActionResult DrugsDirectory()
+        {
+            return View();
+        }
+
+        public IActionResult CreateDrug()
+        {
+            return View();
+        }
 
         public IActionResult Error()
         {

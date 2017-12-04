@@ -1,0 +1,94 @@
+<div class = 'container mt-4'>
+    
+    <div class='mb-2'>
+        @Html.ActionLink("Добавить", "CreateRegion", "")
+    </div>
+
+     <form class = 'mb-2'>
+        <div class='form-row'>
+            <div class='col'>
+                <input class='form-control' type='search' placeholder='Введите улицу...'>
+            </div>
+            <div class='col-sm-2'>
+                <button class='btn btn-primary w-100' type='submit'>Показать</button>
+            </div>
+        </div>
+    </form>
+
+    <table class = 'table text-center table-responsive-lg' id = 'RegionsList'>
+        <tr>
+            <th>№ Участка</th>
+            <th>Улицы</th>
+            <th>Адреса</th>
+            <th></th>
+        </tr>
+
+        <tr class = 'new-region'>
+            <th>1</th>
+            <th></th>
+            <th></th>
+            <th>@Html.ActionLink("Удалить участок","","")</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                ул.Стахановская
+            </td>
+            <td>
+                1,2,3,4,5,6,7,8,9
+            </td>
+            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                ул.Ленина
+            </td>
+            <td>
+                Все
+            </td>
+            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+        </tr>
+
+        <tr class = 'new-region'>
+            <th>2</th>
+            <th></th>
+            <th></th>
+            <th>@Html.ActionLink("Удалить участок","","")</th>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                ул.Стахановская
+            </td>
+            <td>
+                1,2,3,4,5,6,7,8,9
+            </td>
+            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                ул.Ленина
+            </td>
+            <td>
+                Все
+            </td>
+            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+        </tr>
+
+    </table>
+
+
+</div>
+
+@section Scripts {
+
+}
+
+@section Styles {
+    <link rel = 'stylesheet' href = '~/css/Registrator/Regions/main.css' asp-append-version='true' />
+}

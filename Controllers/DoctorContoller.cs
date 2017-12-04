@@ -12,27 +12,50 @@ namespace aspnetapp.Controllers
             return View();
         }
 
-        public IActionResult WriteCheckUpInfo() {
+        public IActionResult WriteCheckUpInfo()
+        {
 
             return View();
-            
+
         }
 
         //it's a shared page with Registrator
-        public IActionResult PatientCard() {
+        public IActionResult PatientCard()
+        {
 
             ViewData["ParentController"] = "Doctor";
-            
+
             return View();
         }
 
-        public IActionResult DoctorScheduleView() {
+        public IActionResult DoctorScheduleView()
+        {
 
             ViewData["ParentController"] = "Doctor";
-            
+
             return View();
         }
-        
+
+        public IActionResult DiseasesDirectory()
+        {
+            return View();
+        }
+
+        public IActionResult CreateDisease()
+        {
+            return View();
+        }
+
+        public IActionResult DrugsDirectory()
+        {
+            return View();
+        }
+
+        public IActionResult CreateDrug()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

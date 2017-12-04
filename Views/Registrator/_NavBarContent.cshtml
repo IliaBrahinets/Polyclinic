@@ -8,16 +8,18 @@
 
         <div class="navbar-collapse collapse" id = "navbarToggler">
                 <ul class="mr-auto navbar-nav">
-                    <li class = "nav-item"><a class = "nav-link" asp-area="" asp-controller="Registrator" asp-action="SearchDoctor">Врачи</a></li>
-                    <li class = "nav-item"><a class = "nav-link" asp-area="" asp-controller="Registrator" asp-action="SearchPatient">Пациенты</a>
+                    <li class = "nav-item"><a class = "nav-link" asp-area="" asp-controller="Registrator" asp-action="Doctors">Врачи</a></li>
+                    <li class = "nav-item"><a class = "nav-link" asp-area="" asp-controller="Registrator" asp-action="Patients">Пациенты</a>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Registrator" asp-action="Regions">Участки</a>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Registrator" asp-action="Specialities">Специальности врачей</a>
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Справочники...
                             </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Специальностей врачей</a>
-                            <a class="dropdown-item" href="#">Участков</a>
-                            <a class="dropdown-item" href="#">Кабинетов</a>
+                            <a class="dropdown-item"  asp-controller="Registrator" asp-action="DrugsDirectory">Лекарства</a>
+                            <a class="dropdown-item"  asp-controller="Registrator" asp-action="DiseasesDirectory">Болезни</a>
                             
                         </div>
                     </li>

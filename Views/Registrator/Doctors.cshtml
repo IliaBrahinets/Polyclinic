@@ -1,0 +1,96 @@
+<div class='mt-4'>
+
+    <div class='row'>
+        <div class='newDoctor col mb-2 text-center'>
+            @Html.ActionLink("Добавить нового врача","CreateDoctor")
+        </div>
+        <div class = 'col-xl-10'></div>
+    </div>
+
+    
+    <div class='row'>
+        <div class='col'>
+            <div class='filter card p-3 mb-2'>
+                <form>
+                    <div class='form-group'>
+                        <label for='speciality'>Специальность врача</label>
+                        <select class='form-control form-control-sm' name='speciality'>
+                            <option>Окулист</option>
+                            <option>Дерматолог</option>
+                            <option>Невролог</option>
+                            <option>Хирург</option>
+                            <option>Терапевт</option>
+                        </select>
+                        <label class='mt-1' for='region'>Участок</label>
+                        <select class='form-control form-control-sm' name='region'>
+                            <option>ул.Осенняя</option>
+                            <option>Дерматолог</option>
+                            <option>Невролог</option>
+                            <option>Хирург</option>
+                            <option>Терапевт</option>
+                        </select>
+                    </div>
+                    <div class='text-center mt-4'>
+                        <button type="submit" class="btn btn-primary">Показать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class='col-lg-10'>
+
+            <form>
+                <div class='form-row'>
+                    <div class='col'>
+                        <input class='form-control' type='search' placeholder='Введите ФИО...'>
+                    </div>
+                    <div class='col-sm-2'>
+                        <button class='btn btn-primary w-100' type='submit'>Показать</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div class='row mt-2'>
+                <table class = 'table text-center table-responsive-md'>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Специальность</th>
+                        <th>Участок</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    <tr>
+                        <td>Иванов И.А.</td>
+                        <td>Окулист</td>
+                        <td>ул.Весенняя</td>
+                        <td>@Html.ActionLink("Расписание","","") </td>
+                        <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+                    </tr>
+
+                        <tr>
+                        <td>Иванов И.А.</td>
+                        <td>Окулист</td>
+                        <td>ул.Весенняя</td>
+                        <td>@Html.ActionLink("Расписание","","") </td>
+                        <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+                    </tr>
+
+                        <tr>
+                        <td>Иванов И.А.</td>
+                        <td>Окулист</td>
+                        <td>ул.Весенняя</td>
+                        <td>@Html.ActionLink("Расписание","","") </td>
+                        <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@section Styles {
+    <link rel = 'stylesheet' href = '~/css/Registrator/Doctors/main.css' asp-append-version='true' />
+}
