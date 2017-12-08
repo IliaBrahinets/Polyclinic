@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Drug>
 
-@{
-}
 <div class='container mt-4'>
 
     <div class='mb-2'>
@@ -21,22 +19,29 @@
         Наименование лекарства
     </form>
    
-   
+ 
         <div id='drugsList'>
+            @{ 
+                int counter = 0;
+
+
             @foreach (var item in Model)
             {
+                counter++;
             <div class='drug card'>
-
+                
                 <div class='card-header'>
-                    <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                
+                    <a data-toggle="collapse" href="#drugsList .drug:nth-child(@counter) .drug-info" aria-expanded="true" aria-controls="collapseOne">
                         <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                      
                     </a>
                     <span>
-
                         <a asp-action="EditDrugs" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
                         <a asp-action="DeleteDrugs" class='edit-butts' asp-route-id="@item.ID">Удалить</a> 
                     </span>
                 </div>
+                    
 
                 <div class='drug-info collapse'>
                     <div class='card-body'>
@@ -44,9 +49,10 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </div>
                 </div>
-
+                
             </div>
             }
+                }
         </div>
 
 </div>

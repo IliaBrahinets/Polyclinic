@@ -1,6 +1,7 @@
 ﻿using Polyclinic.Models;
 using System;
 using System.Linq;
+using System.Collections;
 
 namespace Polyclinic.Data
 {
@@ -23,7 +24,11 @@ namespace Polyclinic.Data
             {
                 return;   // DB has been seeded
             }
-
+            if (context.Regions.Any())
+            {
+                return;
+            }
+                
             var Specialities = new Speciality[]
             {
             new Speciality{Name="Carson",CheckUpTime=15},
@@ -53,7 +58,7 @@ namespace Polyclinic.Data
             {
                 context.Drugs.Add(s);
             }
-
+           
 
             context.SaveChanges();
         }
