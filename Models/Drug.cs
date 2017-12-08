@@ -1,5 +1,6 @@
 ﻿using System;
 
+using System.Collections.Generic;
 namespace Polyclinic.Models
 {
     public class Drug

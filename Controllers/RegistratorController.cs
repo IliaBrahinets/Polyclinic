@@ -149,25 +149,85 @@ namespace Polyclinic.Controllers
 
 
 
-        public IActionResult DiseasesDirectory()
+        public async Task<IActionResult> DiseasesDirectory()
         {
-            return View();
+            return View(await db.Diseases.ToListAsync());
         }
 
         public IActionResult CreateDisease()
         {
             return View();
         }
-
-        public IActionResult DrugsDirectory()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDisease([Bind("ID,Name,Description")] Disease disease)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(disease);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(DiseasesDirectory));
+            }
+            return View(disease);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteDisease(int? id)
+        {
+            if (id != null)
+            {
+                Disease disease = new Disease { ID = id.Value };
+                db.Entry(disease).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(DiseasesDirectory));
+            }
+            return NotFound();
+        }
+        public IActionResult EditDisease()
         {
             return View();
+        }
+
+
+        public async Task<IActionResult> DrugsDirectory()
+        {
+            return View(await db.Drugs.ToListAsync());
         }
 
         public IActionResult CreateDrug()
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDrug([Bind("ID,Name,Description")] Drug drug)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(drug);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(DrugsDirectory));
+            }
+            return View(drug);
+        }
+       
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteDrugs(int? id)
+        {
+            if (id != null)
+            {
+                Drug spec = new Drug { ID = id.Value };
+                db.Entry(spec).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(DrugsDirectory));
+            }
+            return NotFound();
+        }
+        public IActionResult EditDrugs()
+        {
+            return View();
+        }
+
 
         public IActionResult Error()
         {

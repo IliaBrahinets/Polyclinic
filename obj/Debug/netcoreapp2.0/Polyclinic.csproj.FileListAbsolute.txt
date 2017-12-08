@@ -1,0 +1,11 @@
+E:\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.deps.json
+E:\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.runtimeconfig.json
+E:\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.runtimeconfig.dev.json
+E:\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.dll
+E:\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.pdb
+E:\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.csproj.CoreCompileInputs.cache
+E:\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.AssemblyInfoInputs.cache
+E:\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.AssemblyInfo.cs
+E:\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.dll
+E:\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.pdb
+E:\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.csprojResolveAssemblyReference.cache

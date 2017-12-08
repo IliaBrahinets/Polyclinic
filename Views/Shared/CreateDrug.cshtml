@@ -1,18 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Drug
 @{
+    ViewData["Title"] = "CreateDrug";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class='container mt-4'>
 
-    <form>
+    <form asp-action="CreateDrug" asp-controller="registrator">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class='form-group'>
-            <label for='drugName'>Название</label>
-            <input class='form-control' name='drugName' type='text' placeholder='Название лекарства...'/>
+            <label asp-for='Name'>Название</label>
+            <input asp-for='Name' class='form-control' type='text' placeholder='Название лекарства...' />
         </div>
         <div class='form-group'>
-            <label for='drugDescription'>Описание лекарства</label>
-            <textarea class='form-control' name='drugDescription' type='text' placeholder='Описание...' rows='4'></textarea>
+            <label asp-for='Description'>Описание лекарства</label>
+            <textarea asp-for='Description' class='form-control' type='text' placeholder='Описание...' rows='4'></textarea>
         </div>
         <button class='btn btn-primary' type='submit'>Сохранить</button>
     </form>

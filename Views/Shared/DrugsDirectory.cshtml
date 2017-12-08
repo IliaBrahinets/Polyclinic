@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Drug>
+
 @{
 }
 <div class='container mt-4'>
@@ -19,51 +18,33 @@
             </div>
         </div>
     </form>
+   
+   
+        <div id='drugsList'>
+            @foreach (var item in Model)
+            {
+            <div class='drug card'>
 
-    <div id='drugsList'>
+                <div class='card-header'>
+                    <a data-toggle="collapse" href="#drugsList .drug:nth-child(i) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                        <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                    </a>
+                    <span>
 
-        <div class='drug card'>
-
-            <div class='card-header'>
-                <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>Ибуклин</strong>
-                </a>
-                <span class='edit-butts'>@Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")</span>
-            </div>
-
-            <div class='drug-info collapse'>
-                <div class='card-body'>
-                    <strong>ПОКАЗАНИЯ К ПРИМЕНЕНИЮ</strong> <br />
-                    Слабый и умеренный болевой синдром различного происхождения (головная и зубная боль, невралгия, боль при остеохондрозе позвоночника, артралгия, миалгия, тендовагинит, бурсит, боль при травматическом повреждении мышц, связок, сухожилий); лихорадка при инфекционно-воспалительных заболеваниях (в т.ч. заболевания верхних дыхательных путей и ЛОР-органов — тонзиллит, фарингит, трахеобронхит, синусит, отит); артриты (ревматоидный артрит, включая ювенильный, анкилозирующий спондилит, подагрический артрит, ревматизм), дисальгоменорея, аднексит.
+                        <a asp-action="EditDrugs" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
+                        <a asp-action="DeleteDrugs" class='edit-butts' asp-route-id="@item.ID">Удалить</a> 
+                    </span>
                 </div>
-           </div>
 
-        </div>
+                <div class='drug-info collapse'>
+                    <div class='card-body'>
+                        <strong>ПОКАЗАНИЯ К ПРИМЕНЕНИЮ</strong> <br />
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </div>
+                </div>
 
-        <div class='drug card'>
-
-            <div class='card-header'>
-                <a data-toggle="collapse" href="#drugsList .drug:nth-child(2) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>Ингалипт</strong>
-                </a>
-                <span class='edit-butts'>@Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")</span>
             </div>
-
-            <div class='drug-info collapse'>
-                <div class='card-body'>
-                    <strong>ПОКАЗАНИЯ К ПРИМЕНЕНИЮ</strong> <br />
-                    Тонзиллит, фарингит, ларингит, афтозный стоматит.<br />
-                    <strong>Состав</strong> <br />
-                    Активные вещества: сульфаниламид натрия - 0,750 г, сульфатиазола натрия пентагидрат - 0,750 г, тимол - 0,015 г, масло эвкалиптовое - 0,015 г, мяты перечной масло - 0,015 г. Вспомогательные вещества: этанол (спирт этиловый) 95 % - 1,800 г, сахарин натрия - 0,045 г, глицерол (глицерин) - 2,100 г, полисорбат-80 (твин-80) - 0,900 г, вода очищенная - до 30 мл, азот - от 0,3 до 0,4 г.
-                   </div>
-            </div>
-
+            }
         </div>
-
-    </div>
 
 </div>
-
-@section Styles {
-    <link rel='stylesheet' href='~/css/Shared/DrugsDirectory/main.css' asp-append-version='true' /> 
-}

@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Disease>
+
 @{
 }
 <div class='container mt-4'>
@@ -21,44 +20,30 @@
     </form>
 
     <div id='drugsList'>
-
+        @foreach (var item in Model)
+        {
         <div class='drug card'>
 
             <div class='card-header'>
                 <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>Миокардит</strong>
+                    <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
                 </a>
-                <span class='edit-butts'>@Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")</span>
+                <span>
+
+                    <a asp-action="EditDisease" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
+                    <a asp-action="DeleteDisease" class='edit-butts' asp-route-id="@item.ID">Удалить</a>
+                </span>
             </div>
 
             <div class='drug-info collapse'>
                 <div class='card-body'>
-                    поражение сердечной мышцы, миокарда. Обычно поражения носят воспалительный характер.
+                    @Html.DisplayFor(modelItem => item.Description) 
                 </div>
             </div>
 
         </div>
+        }
 
-        <div class='drug card'>
-
-            <div class='card-header'>
-                <a data-toggle="collapse" href="#drugsList .drug:nth-child(2) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>Гломерулонефрит</strong>
-                </a>
-                <span class='edit-butts'>@Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")</span>
-            </div>
-
-            <div class='drug-info collapse'>
-                <div class='card-body'>
-          
-                    Гломерулонефрит также является воспалительным заболеванием, при котором поражаются почечные канальцы, клубочки.
-
-                    Причиной этой болезни почек чаще всего является инфекция в результате перенесенной ангины, пневмонии, скарлатины и гнойных кожных заболеваний. Реже гломерулонефрит возникает из-за переохлаждения организма, малярии, туберкулеза.
-
-                  
-            </div>
-
-        </div>
 
     </div>
 
