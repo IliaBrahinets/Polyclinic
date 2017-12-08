@@ -10,7 +10,7 @@ public class Speciality
 {
    public int ID { get; set; }
    public string Name { get; set; }
-   public DateTime CheckUpTime { get; set; }
+   public int CheckUpTime { get; set; }
 
     public ICollection<Doctor> Doctors { get; set; }
 }

@@ -13,12 +13,12 @@ namespace Polyclinic.Controllers
 {
     public class RegistratorController : Controller
     {
-        private readonly PolyclinicContext _context;
+        private readonly PolyclinicContext db;
 
 
         public RegistratorController(PolyclinicContext context)
         {
-            _context = context;
+            db = context;
         }
 
         public IActionResult Index()
@@ -83,13 +83,71 @@ namespace Polyclinic.Controllers
 
         public async Task<IActionResult> Specialities()
         {
-            return View(await _context.Specialities.ToListAsync());
+            return View(await db.Specialities.ToListAsync());
         }
 
         public IActionResult CreateSpeciality()
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateSpeciality([Bind("ID,Name,CheckUpTime")] Speciality speciality)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(speciality);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Specialities));
+            }
+            return View(speciality);
+        }
+
+        public async Task<IActionResult> EditSpeciality(int? id)
+        {
+            if (id != null)
+            {
+                Speciality spec = await db.Specialities.FirstOrDefaultAsync(p => p.ID == id);
+                if (spec != null)
+                    return View(spec);
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditSpeciality(Speciality spec)
+        {
+            db.Specialities.Update(spec);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(Specialities));
+        }
+
+        [HttpGet]
+       // [ActionName("DeleteSpeciality")]
+        public async Task<IActionResult> ConfirmDelete(int? id)
+        {
+            if (id != null)
+            {
+                Speciality spec = await db.Specialities.FirstOrDefaultAsync(p => p.ID == id);
+                if (spec != null)
+                    return View(spec);
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSpeciality(int? id)
+        {
+            if (id != null)
+            {
+                Speciality spec = new Speciality { ID = id.Value };
+                db.Entry(spec).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Specialities));
+            }
+            return NotFound();
+        }
+
+
 
         public IActionResult DiseasesDirectory()
         {

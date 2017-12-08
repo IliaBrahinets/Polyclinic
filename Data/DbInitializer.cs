@@ -18,9 +18,9 @@ namespace Polyclinic.Data
 
             var Specialities = new Speciality[]
             {
-            new Speciality{Name="Carson",CheckUpTime=DateTime.Parse("Thu, 01 May 2008 07:34:42 GMT")},
-            new Speciality{Name="Carson",CheckUpTime=DateTime.Parse("Thu, 01 May 2008 07:34:42 GMT")},
-            new Speciality{Name="Carson",CheckUpTime=DateTime.Parse("Thu, 01 May 2008 07:34:42 GMT")}
+            new Speciality{Name="Carson",CheckUpTime=15},
+            new Speciality{Name="Carson",CheckUpTime=20},
+            new Speciality{Name="Carson",CheckUpTime=30}
             };
             foreach (Speciality s in Specialities)
             {

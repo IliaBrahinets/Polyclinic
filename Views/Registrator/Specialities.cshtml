@@ -37,7 +37,10 @@
                         @Html.DisplayFor(modelItem => item.CheckUpTime)
                     </td>
                     <td>
-                        @Html.ActionLink("Удалить", "", "") | @Html.ActionLink("Редактировать", "", "")
+                        
+                        <a asp-action="DeleteSpeciality" asp-route-id="@item.ID">Удалить</a> |
+                        <a asp-action="EditSpeciality" asp-route-id="@item.ID">Изменить</a>
+
                     </td>
                 </tr>
             }

@@ -1,19 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Speciality
+
 @{
+    ViewData["Title"] = "CreateSpeciality";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <div class='container mt-4'>
 
-    <form>
+    <form asp-action="CreateSpeciality" asp-controller="registrator">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class='form-group'>
-            <label for='specialityName'>Название специальности</label>
-            <input class='form-control' name='specialityName' type='text' placeholder='Название специальности...' />
+            <label asp-for='Name'>Название специальности</label>
+            <input asp-for='Name' class="form-control" placeholder='Название специальности...' />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class='form-row'>
             <div class='form-group col-sm-3'>
-                <label for='checkUpDuration'>Длительность приема</label>
-                <input class='form-control' name='checkUpDuration' type='number' placeholder='Длительность приема...'/>
+                <label asp-for='CheckUpTime'>Длительность приема</label>
+                <input asp-for='CheckUpTime' type='number' class="form-control" placeholder='Длительность приема...' />
+                <span asp-validation-for="CheckUpTime" class="text-danger"></span>
             </div>
         </div>
         <button class='btn btn-primary' type='submit'>Сохранить</button>

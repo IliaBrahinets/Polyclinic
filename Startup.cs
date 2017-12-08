@@ -49,7 +49,7 @@ namespace Polyclinic
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Registrator}/{action=Index}");
             });
         }
     }
