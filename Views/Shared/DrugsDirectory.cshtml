@@ -16,7 +16,9 @@
             <div class='col-sm-2'>
                 <button class='btn btn-primary w-100' type='submit'>Показать</button>
             </div>
+
         </div>
+        Наименование лекарства
     </form>
    
    
@@ -26,7 +28,7 @@
             <div class='drug card'>
 
                 <div class='card-header'>
-                    <a data-toggle="collapse" href="#drugsList .drug:nth-child(i) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                    <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
                         <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
                     </a>
                     <span>
@@ -48,3 +50,6 @@
         </div>
 
 </div>
+@section Styles {
+    <link rel='stylesheet' href='~/css/Shared/DrugsDirectory/main.css' asp-append-version='true' />
+}

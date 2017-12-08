@@ -11,38 +11,49 @@
     <form class='mb-2'>
         <div class='form-row'>
             <div class='col'>
+
                 <input class='form-control' type='search' placeholder='Введите название...'>
+                <thead>
+                    <th>Наименование болезни</th>
+                    <th></th>
+                    <th></th>
+                </thead>
             </div>
             <div class='col-sm-2'>
                 <button class='btn btn-primary w-100' type='submit'>Показать</button>
             </div>
         </div>
+       
     </form>
 
-    <div id='drugsList'>
-        @foreach (var item in Model)
-        {
-        <div class='drug card'>
+     <div class='drug card'>
+           
 
-            <div class='card-header'>
-                <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
-                </a>
-                <span>
+         <div id='drugsList'>
+             @foreach (var item in Model)
+             {
 
-                    <a asp-action="EditDisease" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
-                    <a asp-action="DeleteDisease" class='edit-butts' asp-route-id="@item.ID">Удалить</a>
-                </span>
-            </div>
+                 <div class='card-header'>
+                     <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                         <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                     </a>
+                     <td>
 
-            <div class='drug-info collapse'>
-                <div class='card-body'>
-                    @Html.DisplayFor(modelItem => item.Description) 
-                </div>
-            </div>
+                         <a asp-action="EditDisease" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
+                         <a asp-action="DeleteDisease" class='edit-butts' asp-route-id="@item.ID">Удалить</a>
+                     </td>
+                 </div>
 
-        </div>
-        }
+                 <div class='drug-info collapse'>
+                     <div class='card-body'>
+                         @Html.DisplayFor(modelItem => item.Description)
+                     </div>
+                 </div>
+
+
+             }
+         </div>
+
 
 
     </div>
