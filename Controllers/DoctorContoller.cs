@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using aspnetapp.Models;
+using Polyclinic.Models;
 
-namespace aspnetapp.Controllers
+namespace Polyclinic.Controllers
 {
     public class DoctorController : Controller
     {

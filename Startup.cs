@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
-namespace aspnetapp
+using Polyclinic.Data;
+
+namespace Polyclinic
 {
     public class Startup
     {
@@ -21,9 +24,10 @@ namespace aspnetapp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PolyclinicContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc();
-            
-            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +36,7 @@ namespace aspnetapp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
             else
             {
@@ -40,13 +45,11 @@ namespace aspnetapp
 
             app.UseStaticFiles();
 
-            app.UseSession();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Registrator}/{action=Index}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

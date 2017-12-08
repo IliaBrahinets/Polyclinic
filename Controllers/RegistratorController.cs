@@ -1,12 +1,26 @@
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using aspnetapp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Polyclinic.Data;
+using Polyclinic.Models;
+using System.Diagnostics;
 
-namespace aspnetapp.Controllers
+namespace Polyclinic.Controllers
 {
     public class RegistratorController : Controller
     {
+        private readonly PolyclinicContext _context;
+
+
+        public RegistratorController(PolyclinicContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -67,9 +81,9 @@ namespace aspnetapp.Controllers
             return View();
         }
 
-        public IActionResult Specialities()
+        public async Task<IActionResult> Specialities()
         {
-            return View();
+            return View(await _context.Specialities.ToListAsync());
         }
 
         public IActionResult CreateSpeciality()
