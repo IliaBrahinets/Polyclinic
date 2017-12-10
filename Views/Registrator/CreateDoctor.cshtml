@@ -1,33 +1,47 @@
+@model Doctor
+
+@{
+    ViewData["Title"] = "CreateDoctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <div class = 'container mt-4'>
-    <form>
-        <div class = 'form-group'>
-            <div class = 'form-row'>
-                <div class = 'col-sm-4'>
-                    <label for = 'firstname'>Имя</label>
-                    <input class ='form-control'type = 'text' name = 'firstname' placeholder='Имя'>
-                </div>
-                <div class = 'col-sm-4'>
-                    <label for = 'firstname'>Фамилия</label>
-                    <input class ='form-control'type = 'text' name = 'surname' placeholder='Фамилия'>
-                </div>
-                <div class = 'col-sm-4'>
-                    <label for = 'firstname'>Отчество</label>
-                    <input class ='form-control'type = 'text' name = 'lastname' placeholder='Отчество'>
-                </div>
-            </div>  
-        </div>
+    <form asp-action="CreateDoctor" asp-controller="registrator">
         <div class='form-group'>
-            <label for = 'speciality'>Специальность</label>
-            <select class='form-control' name='speciality'>
-                <option>Окулист</option>
-                <option>Дерматолог</option>
-                <option>Невролог</option>
-                <option>Хирург</option>
-                <option>Терапевт</option>
-            </select>
+            <div class='form-row'>
+                <div class='col-sm-4'>
+                    <label asp-for="Name">Имя</label>
+                    <input asp-for='Name' class="form-control" placeholder='Имя' />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class='col-sm-4'>
+                    <label asp-for="Surname">Фамилия</label>
+                    <input asp-for='Surname' class="form-control" placeholder='Фамилия' />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class='col-sm-4'>
+                    <label asp-for="Lastname">Отчество</label>
+                    <input asp-for='Lastname' class="form-control" placeholder='Отчество' />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+            </div>
         </div>
+        <div class='form-row'>
+            <div class='col-sm-4'>
+                <label asp-for='ChainedCabinet'>Номер кабинета</label>
+                <input asp-for='ChainedCabinet' class="form-control" placeholder='Номер' />
+                <span asp-validation-for="ChainedCabinet" ></span>
+               
+            </div>
+            <div class='col-sm-8'>
+                <label asp-for='Speciality.Name'>Специальность</label>
+                <input asp-for='Speciality.Name' class="form-control" placeholder='Специальность' />
+                <span asp-validation-for="Speciality.Name" class="text-danger"></span>
+
+
+            </div>
+           </div>
         <div class='form-group'>
-            <label for = 'region'>Участок</label>
+            <label for='region'>Участок</label>
             <select class='form-control' name='region'>
                 <option>ул.Пролетарская</option>
                 <option>Дерматолог</option>
@@ -37,8 +51,8 @@
             </select>
         </div>
 
-        <div class = 'form-group'>
-            <button class ='btn btn-primary' type = 'submit'>
+        <div class='form-group'>
+            <button class='btn btn-primary' type='submit'>
                 Сохранить
             </button>
         </div>

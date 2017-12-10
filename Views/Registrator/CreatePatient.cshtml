@@ -1,18 +1,30 @@
+@model Patient
+
+@{
+    ViewData["Title"] = "CreatePatient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <div class = 'container mt-4'>
-    <form>
+    <form asp-action="CreatePatient" asp-controller="registrator">
         <div class = 'form-group'>
+
             <div class = 'form-row'>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class = 'col-sm-4'>
-                    <label for = 'firstname'>Имя</label>
-                    <input class ='form-control'type = 'text' name = 'firstname' placeholder='Имя'>
+                    <label asp-for='Name'>Имя</label>
+                    <input asp-for='Name' class="form-control" placeholder='Имя' />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class = 'col-sm-4'>
-                    <label for = 'firstname'>Фамилия</label>
-                    <input class ='form-control'type = 'text' name = 'surname' placeholder='Фамилия'>
+                    <label asp-for='Surname'>Фамилия</label>
+                    <input asp-for='Surname' class="form-control" placeholder='Фамилия' />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
                 </div>
                 <div class = 'col-sm-4'>
-                    <label for = 'firstname'>Отчество</label>
-                    <input class ='form-control' type = 'text' name = 'lastname' placeholder='Отчество'>
+                    <label asp-for='Lastname'>Отчество</label>
+                    <input asp-for='Lastname' class="form-control" placeholder='Отчество' />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
                 </div>
             </div>  
         </div>
@@ -20,21 +32,18 @@
             <div class = 'form-row'>
 
                 <div class = 'col-sm  sex-picker'>
-                    <label for='sex'>Пол</label>
-                    <select class = 'form-control' name = 'sex'>
-                        <option value = 'M'>
-                            М
-                        </option>
-                        <option value = 'Fm'>
-                            Ж
-                        </option>
+                    <label asp-for='Sex'>Пол</label>
+                    <select asp-for="Sex" class="form-control">
+                        <option value="true">M</option>
+                        <option value="false">Ж</option>
                     </select>
+                    <input asp-for="Sex" type="hidden" />
                 </div>
 
                 <div class='col-sm'>
                     <div class ='form-group'>
-                        <label for = 'birthdate'>Дата рождения</label>
-                        <input class = 'form-control' type='text' id='birthdate' name='birthdate'>
+                        <label asp-for="BirthDate">Дата рождения</label>
+                        <input asp-for="BirthDate" class = 'form-control' type='date'>
                     </div>
                 </div>
 
@@ -42,14 +51,10 @@
         </div>
         
         <div class='form-group'>
-            <label for = 'street'>Улица</label>
-            <select class='form-control' name='street'>
-                <option>ул.Пролетарская</option>
-                <option>Дерматолог</option>
-                <option>Невролог</option>
-                <option>Хирург</option>
-                <option>Терапевт</option>
-            </select>
+            <label asp-for="Address">Адрес</label>
+           
+            <input asp-for="Address" class ="form-control" type="text" />
+         
         </div>
 
         <div class = 'form-group'>

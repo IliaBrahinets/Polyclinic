@@ -22,23 +22,7 @@ namespace Polyclinic.Controllers
         {
             db = context;
         }
-        IEnumerable<Street> streets = new List<Street>
-        {
-        new Street { ID = 1, Name = "Kurchatova" },
-        new Street { ID = 2, Name = "Samsung" },
-        new Street { ID=3, Name="Microsoft" }
-        };
-        public IActionResult ViewStreet()
-        {
-            ViewBag.streets = new SelectList(streets, "ID", "Name","Addresses");
-            return View();
-        }
         [HttpPost]
-        public string ViewStreet(Street phone)
-        {
-            Street str = streets.FirstOrDefault(c => c.ID == phone.RegionID);
-            return $"Добавлен новый элемент: {phone.RegionID} {phone.Name} ({str?.Addresses})";
-        }
 
         public IActionResult Index()
         {
@@ -55,19 +39,43 @@ namespace Polyclinic.Controllers
 
         public IActionResult Doctors()
         {
-            return View();
+            return View(db.Doctors.Include(x => x.Speciality));
         }
 
         public IActionResult CreateDoctor()
         {
             return View();
         }
-
-        public IActionResult Patients()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDoctor([Bind("ID,Name,Surname,Lastname,ChainedCabinet,Speciality")] Doctor doctor)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                db.Add(doctor);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Doctors));
+            }
+            return View(doctor);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DeleteDoctor(int? id)
+        {
+            if (id != null)
+            {
+                Doctor doctor = new Doctor { ID = id.Value };
+                db.Entry(doctor).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Doctors));
+            }
+            return NotFound();
+        }
+
+        public async Task<IActionResult> Patients()
+        {
+            return View(await db.Patients.ToListAsync());
+        }
 
         public IActionResult CreatePatient()
         {
@@ -75,6 +83,33 @@ namespace Polyclinic.Controllers
             return View();
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePatient([Bind("ID,Name,Surname,Lastname,BirthDate,Address,Sex")] Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(patient);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Patients));
+            }
+            return View(patient);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeletePatient(int? id)
+        {
+            if (id != null)
+            {
+                Patient patient = new Patient { ID = id.Value };
+                db.Entry(patient).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Patients));
+            }
+            return NotFound();
+        }
+
+
+
 
         public IActionResult DoctorScheduleView()
         {

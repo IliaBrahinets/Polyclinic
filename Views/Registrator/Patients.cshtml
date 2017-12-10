@@ -1,3 +1,4 @@
+@model IEnumerable<Patient>
 <div class='mt-4'>
 
     <div class='row'>
@@ -60,48 +61,14 @@
             </form>
             <div class = 'mt-2'>
                 
-                <div class='col-md-4' style="display:none">
-
-                     <div class ='card mt-2 patient-data'>
-                        <div class = 'card-header'>
-                            <h5 class='card-title text-center'>Иванов И.А.</h4>
-                        </div>
-                        <div class = 'card-body'>
-                            <div class ='row'>
-                                <div class = 'col-sm'>Дата рождения</div>
-                                <div class = 'col-sm'>20.11.1990</div>
-                                <div class="w-100"></div>
-                                <div class = 'col-sm'>Пол</div>
-                                <div class = 'col-sm'>Муж</div>
-                                <div class="w-100"></div>
-                                <div class = 'col-sm'>Адрес</div>
-                                <div class = 'col-sm'>ул.Пролетарская</div>
-                                <div class="w-100"></div>
-                                <div class = 'col-sm'>Участок</div>
-                                <div class = 'col-sm'></div>
-                                <div class ='w-100'></div>
-                                <div class= 'col-sm text-center '>
-                                    <a href = '/Registrator/PatientCard' class = 'btn btn-light'>Перейти к карточке</a>
-                                </div>
-                                 <div class= 'col-sm text-center'>
-                                    <a href = '/Registrator/PatientCard' class = 'btn btn-light'>Записать на прием</a>
-                                </div>
-                                <div class = 'col-sm mt-1 text-right'> 
-                                    @Html.ActionLink("Редактировать","","")
-                                </div>
-
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                </div>
-                
 
                 <table class = 'table text-center table-responsive-lg'>
                     <thead>
                         <tr>
+                            
                             <th>ФИО</th>
+                            <th></th>
+                            <th></th>
                             <th>Дата рождения</th>
                             <th>Пол</th>
                             <th>Адрес</th>
@@ -110,17 +77,31 @@
                             <th></th>
                         </tr>
                     </thead>
+                    
+                        @foreach (var item in Model)
+                        {
+
+                            /* if (item.Surname != null && item.Lastname != null)
+                             {
+                                 var sur = item.Surname.Substring(0, 1);
+                                 var last = item.Lastname.Substring(0, 1);
+                             }*/
                     <tbody>
                         <tr>
-                            <td>Иванов И.А.</td>
-                            <td>20.11.1990</td>
-                            <td>Муж</td>
-                            <td>ул.Пролетарская</td>
+                           <td>@Html.DisplayFor(modelItem => item.Name)</td> 
+                           <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Lastname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Sex)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Address)</td>
                             <td></td>
-                            <td>@Html.ActionLink("Записать на прием","","") | @Html.ActionLink("Карточка","","")</td>
-                            <td>@Html.ActionLink("Редактировать","","") | @Html.ActionLink("Удалить","","")</td>
+                            <td>@Html.ActionLink("Записать на прием", "", "") | @Html.ActionLink("Карточка", "", "")</td>
+                            <td>@Html.ActionLink("Редактировать", "", "") |<a asp-action="DeletePatient" asp-route-id="@item.ID"> Удалить</a></td>
                         </tr>
                     </tbody>
+                        }
+
+                    
                 </table>
         
 
