@@ -1,0 +1,20 @@
+﻿@using Polyclinic.Models
+@model Street
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Addresses)
+        @Html.EditorFor(m => m.Addresses)
+    </div>
+    <div>
+      
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}

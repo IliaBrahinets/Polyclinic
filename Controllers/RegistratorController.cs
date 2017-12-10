@@ -13,12 +13,31 @@ namespace Polyclinic.Controllers
 {
     public class RegistratorController : Controller
     {
+      
+
         private readonly PolyclinicContext db;
 
 
         public RegistratorController(PolyclinicContext context)
         {
             db = context;
+        }
+        IEnumerable<Street> streets = new List<Street>
+        {
+        new Street { ID = 1, Name = "Kurchatova" },
+        new Street { ID = 2, Name = "Samsung" },
+        new Street { ID=3, Name="Microsoft" }
+        };
+        public IActionResult ViewStreet()
+        {
+            ViewBag.streets = new SelectList(streets, "ID", "Name","Addresses");
+            return View();
+        }
+        [HttpPost]
+        public string ViewStreet(Street phone)
+        {
+            Street str = streets.FirstOrDefault(c => c.ID == phone.RegionID);
+            return $"Добавлен новый элемент: {phone.RegionID} {phone.Name} ({str?.Addresses})";
         }
 
         public IActionResult Index()
