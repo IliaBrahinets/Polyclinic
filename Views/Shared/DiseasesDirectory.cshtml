@@ -19,36 +19,53 @@
         </div>
     </form>
 
+
     <div id='drugsList'>
+        @{
+            int counter = 1;
+        }
         @foreach (var item in Model)
         {
-        <div class='drug card'>
+            <div class='drug card data-group'>
 
-            <div class='card-header'>
-                <a data-toggle="collapse" href="#drugsList .drug:nth-child(1) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
-                </a>
-                <span>
+                <div class='card-header'>
 
-                    <a asp-action="EditDisease" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
-                    <a asp-action="DeleteDisease" class='edit-butts' asp-route-id="@item.ID">Удалить</a>
-                </span>
-            </div>
+                    <a class="disease-header" data-toggle="collapse" href="#drugsList .drug:nth-child(@counter) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                        <strong>
+                            <input name='Name' class="input-sm" value="@item.Name" readonly />
+                        </strong>
+                    </a>
 
-            <div class='drug-info collapse'>
-                <div class='card-body'>
-                    @Html.DisplayFor(modelItem => item.Description) 
+                    <span class="edit-buttons">
+                        <a asp-action="DeleteDisease" asp-route-id="@item.ID">Удалить</a>
+                    </span>
+
                 </div>
+
+                <div class='drug-info collapse'>
+                    <div class='card-body'>
+
+                        <div class="text-right">
+                            <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
+                            <a class='sendWithAddition hide' data-to-add='["Name","Description"]' asp-action="EditDesease" asp-route-id="@item.ID">Сохранить</a>
+                        </div>
+
+                        <input name='Description' class="input-sm" value="@item.Description" readonly />
+
+                    </div>
+                </div>
+
             </div>
+            counter++;
 
-        </div>
         }
-
-
     </div>
 
 </div>
 
 @section Styles {
-    <link rel='stylesheet' href='~/css/Shared/DiseasesDirectory/main.css' asp-append-version='true' />
+    <link rel="stylesheet" href="~/css/Shared/DiseasesDirectory/main.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script type="text/javascript" src="~/js/Shared/DiseaseDirectory/main.js" asp-append-version="true"></script>
 }

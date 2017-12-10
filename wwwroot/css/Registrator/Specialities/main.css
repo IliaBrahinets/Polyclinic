@@ -1,0 +1,8 @@
+﻿.hide {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+.show {
+    opacity:1;
+}

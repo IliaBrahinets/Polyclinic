@@ -9,6 +9,7 @@ using Polyclinic.Data;
 using Polyclinic.Models;
 using System.Diagnostics;
 
+
 namespace Polyclinic.Controllers
 {
     public class RegistratorController : Controller
@@ -73,12 +74,71 @@ namespace Polyclinic.Controllers
 
         public IActionResult Regions()
         {
-            return View();
+            return View(db.Regions.Include(x => x.Streets));
         }
 
         public IActionResult CreateRegion()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRegion([FromBody]ICollection<Street> Streets)
+        {
+            Region region = new Region { Streets = Streets }; 
+            
+            foreach(Street Street in Streets)
+            {
+                db.Streets.Add(Street);
+            }
+            db.Regions.Add(region);
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Regions));
+        }
+
+        public async Task<IActionResult> DeleteRegion(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var region = await db.Regions.FirstOrDefaultAsync(x => x.ID == id);
+            if (region != null)
+            {
+                db.Regions.Remove(region);
+                await db.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Regions));
+        }
+
+        public async Task<IActionResult> EditStreet([Bind("ID,Name,Addresses,RegionID")]Street street)
+        {
+            db.Streets.Update(street);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(Regions));
+        }
+        public async Task<IActionResult> DeleteStreet(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var Street = await db.Streets.FirstOrDefaultAsync(x => x.ID == id);
+
+            if (Street != null)
+            {
+                db.Streets.Remove(Street);
+
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Regions));
+
         }
 
         public async Task<IActionResult> Specialities()
@@ -103,18 +163,9 @@ namespace Polyclinic.Controllers
             return View(speciality);
         }
 
-        public async Task<IActionResult> EditSpeciality(int? id)
-        {
-            if (id != null)
-            {
-                Speciality spec = await db.Specialities.FirstOrDefaultAsync(p => p.ID == id);
-                if (spec != null)
-                    return View(spec);
-            }
-            return NotFound();
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditSpeciality(Speciality spec)
+        
+        [HttpGet]
+        public async Task<IActionResult> EditSpeciality([Bind("ID,Name,CheckUpTime")]Speciality spec)
         {
             db.Specialities.Update(spec);
             await db.SaveChangesAsync();
@@ -209,25 +260,29 @@ namespace Polyclinic.Controllers
             }
             return View(drug);
         }
-       
+
+        [HttpGet]
+        public async Task<IActionResult> EditDrug([Bind("ID,Name,Description")]Drug drug)
+        {
+            db.Drugs.Update(drug);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(DrugsDirectory));
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> DeleteDrugs(int? id)
         {
             if (id != null)
             {
-                Drug spec = new Drug { ID = id.Value };
-                db.Entry(spec).State = EntityState.Deleted;
+                Drug drug = new Drug { ID = id.Value };
+                db.Entry(drug).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(DrugsDirectory));
             }
             return NotFound();
         }
-        public IActionResult EditDrugs()
-        {
-            return View();
-        }
-
+        
 
         public IActionResult Error()
         {

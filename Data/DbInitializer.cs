@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 
+using System.Collections.Generic;
+
 namespace Polyclinic.Data
 {
     public static class DbInitializer
@@ -26,7 +28,6 @@ namespace Polyclinic.Data
 
             var Specialities = new Speciality[]
             {
-            new Speciality{Name="Carson",CheckUpTime=15},
             new Speciality{Name="Carson",CheckUpTime=20},
             new Speciality{Name="Carson",CheckUpTime=30}
             };
@@ -40,6 +41,11 @@ namespace Polyclinic.Data
                  new Disease{Name="Carson",Description="323"},
                  new Disease{Name="Carson",Description="212"}
             };
+            var Region = new Region { };
+            var Street = new Street { Name = "улица Пролетарская", Addresses = "1,2" };
+            Region.Streets = new List<Street>();
+            Region.Streets.Add(Street);
+   
 
             foreach (Disease s in Diseases)
             {
@@ -54,6 +60,9 @@ namespace Polyclinic.Data
                 context.Drugs.Add(s);
             }
 
+            
+            context.Regions.Add(Region);
+            context.Streets.Add(Street);
 
             context.SaveChanges();
         }

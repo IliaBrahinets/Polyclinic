@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "CreateSpeciality";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -25,4 +24,8 @@
         <button class='btn btn-primary' type='submit'>Сохранить</button>
     </form>
 
+    @section Scripts{
+        @Html.Partial("_ValidationScriptsPartial")
+    }
+    
 </div>

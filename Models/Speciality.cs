@@ -6,11 +6,15 @@
 using System;
 using System.Collections.Generic;
 
+using System.ComponentModel.DataAnnotations;
+
 public class Speciality
 {
-   public int ID { get; set; }
-   public string Name { get; set; }
-   public int CheckUpTime { get; set; }
+    public int ID { get; set; }
+    [Required(ErrorMessage = "Требуется название")]
+    public string Name { get; set; }
+    [Required(ErrorMessage = "Требуется длительность приема")]
+    public int CheckUpTime { get; set; }
 
     public ICollection<Doctor> Doctors { get; set; }
 }

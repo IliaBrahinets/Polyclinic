@@ -21,30 +21,51 @@
    
    
         <div id='drugsList'>
+            @{
+                int counter = 1;
+            }
             @foreach (var item in Model)
             {
-            <div class='drug card'>
+            <div class='drug card data-group'>
 
                 <div class='card-header'>
-                    <a data-toggle="collapse" href="#drugsList .drug:nth-child(i) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                        <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
-                    </a>
-                    <span>
 
-                        <a asp-action="EditDrugs" class='edit-butts' asp-route-id="@item.ID">Изменить </a>
-                        <a asp-action="DeleteDrugs" class='edit-butts' asp-route-id="@item.ID">Удалить</a> 
+                    <a class ="drug-header" data-toggle="collapse" href="#drugsList .drug:nth-child(@counter) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                        <strong>
+                            <input name='Name' class="input-sm" value="@item.Name" readonly />
+                        </strong>
+                    </a>
+
+                    <span class ="edit-buttons">
+                        <a asp-action="DeleteDrugs" asp-route-id="@item.ID">Удалить</a> 
                     </span>
+
                 </div>
 
                 <div class='drug-info collapse'>
                     <div class='card-body'>
-                        <strong>ПОКАЗАНИЯ К ПРИМЕНЕНИЮ</strong> <br />
-                        @Html.DisplayFor(modelItem => item.Description)
+
+                        <div class="text-right">
+                            <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
+                            <a class='sendWithAddition hide' data-to-add='["Name","Description"]' asp-action="EditDrug" asp-route-id="@item.ID">Сохранить</a>
+                        </div>
+
+                        <input name='Description' class="input-sm" value="@item.Description" readonly />
+
                     </div>
                 </div>
 
             </div>
+                counter++;
+
             }
         </div>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Shared/DrugsDirectory/main.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script type="text/javascript" src="~/js/Shared/DrugsDirectory/main.js" asp-append-version="true"></script>
+}

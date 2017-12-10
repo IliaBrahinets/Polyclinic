@@ -1,3 +1,24 @@
-﻿.edit-butts {
-    float:right;
+﻿.hide {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+
+.show {
+    opacity: 1;
+}
+
+.edit-buttons {
+    float: right;
+}
+
+input {
+    background-color: transparent;
+    border: solid transparent;
+    border: 0px;
+}
+
+.disease-header input {
+    font-size: 1.2em;
+    color: #007bff;
 }

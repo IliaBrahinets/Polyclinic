@@ -3,23 +3,52 @@
 *@
 @{
 }
+@model Street
+
 <div class='container mt-4'>
-    <form>
-        <div class='form-group form-row'>
-            <div class='col-md'>
-                <label for='street'>Улица</label>
-                <input class='streetInput form-control' name='street' type='text' placeholder='Введите улицу...' />
-            </div>
-            <div class='col-md'>
-                <label for='street'>Номера через запятую</label>
-                <input class='streetNumber form-control' name='streetNumber' type='text' placeholder='Введите номера...' />
+    <form id="CreateRegionForm" asp-action="CreateRegion" asp-controller="registrator" method="post" enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="streetFieldsContainer">
+            <div class='streetField form-group form-row'>
+                <div class='col-md'>
+                    <label asp-for='Name'>Улица</label>
+                    <input asp-for='Name' class='streetInput form-control' type='text' placeholder='Введите улицу...' />
+                    <span asp-validation-for='Name' class="text-danger"></span>
+                </div>
+                <div class='col-md'>
+                    <label asp-for='Addresses'>Номера через запятую</label>
+                    <input asp-for='Addresses' class='streetNumber form-control' type='text' placeholder='Введите номера...' />
+                    <span asp-validation-for='Addresses' class="text-danger"></span>
+                </div>
+
+                <div class="w-100"></div>
+
+                <div class="deleteButtonConatiner col-sm-1">
+                    <a class="deleteStreetField" href="javascript:;">Удалить</a>
+                </div>
+
             </div>
         </div>
-        <button class='btn btn-primary' type='submit'>Сохранить</button>
+
+        <div class="mt-2 mb-2">
+            <a id="addStreetField" href="javascript:;">Добавить улицу</a>
+        </div>
+
+        <div>
+            <button class='btn btn-primary' type='submit'>Сохранить</button>
+        </div>
     </form>
 </div>
 
 @section Scripts {
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvWQAIEkFj89pU7bRqI4g8n0W9NFI_Uuk&libraries=places"></script>
-    <script type="text/javascript" src="~/js/Registrator/CreateRegion/main.js"></script>
+    <script type="text/javascript" src="~/js/Registrator/CreateRegion/main.js" asp-append-version="true"></script>
+     @Html.Partial("_ValidationScriptsPartial")
 }
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Registrator/CreateRegion/main.css" asp-append-version="true" />
+   
+} 

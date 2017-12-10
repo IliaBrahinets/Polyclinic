@@ -29,24 +29,36 @@
 
             @foreach (var item in Model){
 
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CheckUpTime)
-                    </td>
-                    <td>
-                        
-                        <a asp-action="DeleteSpeciality" asp-route-id="@item.ID">Удалить</a> |
-                        <a asp-action="EditSpeciality" asp-route-id="@item.ID">Изменить</a>
+                    <tr class="data-group">
+                     
+                        <td>
+                            <input name = 'Name' class="form-control-plaintext input-sm" value="@Html.DisplayFor(modelItem => item.Name)" readonly />
+                        </td>
+                        <td>
+                            <input name = 'CheckUpTime' type='number' class="form-control-plaintext input-sm" value="@Html.DisplayFor(modelItem => item.CheckUpTime)" readonly  />
+                        </td>
+                        <td>
+                            
+                            <a asp-action="DeleteSpeciality" asp-route-id="@item.ID" >Удалить</a> | 
+                            <a class='clickShowHideNext' href="javascript:1;">Изменить</a> | 
+                            <a class = 'sendWithAddition hide' data-to-add = '["Name","CheckUpTime"]' asp-action="EditSpeciality" asp-route-id="@item.ID">Сохранить</a>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
             }
 
 
         </tbody>
 
     </table>
+
 </div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/Registrator/Specialities/main.js" asp-append-version='true'></script>
+
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Registrator/Specialities/main.css" asp-append-version='true' />
+}

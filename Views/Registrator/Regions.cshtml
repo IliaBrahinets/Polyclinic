@@ -1,3 +1,4 @@
+@model dynamic
 <div class = 'container mt-4'>
     
     <div class='mb-2'>
@@ -15,78 +16,57 @@
         </div>
     </form>
 
-    <table class = 'table text-center table-responsive-lg' id = 'RegionsList'>
-        <tr>
-            <th>№ Участка</th>
-            <th>Улицы</th>
-            <th>Адреса</th>
-            <th></th>
-        </tr>
+     <table class='table text-center table-responsive-lg' id='RegionsList'>
 
-        <tr class = 'new-region'>
-            <th>1</th>
-            <th></th>
-            <th></th>
-            <th>@Html.ActionLink("Удалить участок","","")</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                ул.Стахановская
-            </td>
-            <td>
-                1,2,3,4,5,6,7,8,9
-            </td>
-            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-        </tr>
+         <tr>
+             <th>№ Участка</th>
+             <th>Улицы</th>
+             <th>Адреса</th>
+             <th></th>
+         </tr>
+         @foreach (Region region in Model)
+         {
+             <tr class='new-region'>
+                 <th>@region.ID</th>
+                 <th></th>
+                 <th></th>
+                 <th>
+                     <a asp-action="DeleteRegion" asp-route-id="@region.ID">Удалить участок</a>
+                 </th>
+             </tr>
+             @if (region.Streets != null)
+             {
 
-        <tr>
-            <td></td>
-            <td>
-                ул.Ленина
-            </td>
-            <td>
-                Все
-            </td>
-            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-        </tr>
+                 foreach (Street street in region.Streets)
+                 {
+             <tr class="data-group">
+                 <td>
+                     <input name="RegionID" value="@region.ID" hidden/> 
+                 </td>
+                 <td>
+                     <input name='Name' class="form-control-plaintext input-sm" value="@street.Name" readonly />
+                 </td>
+                 <td>
+                     <input name='Addresses' class="form-control-plaintext input-sm" value="@street.Addresses" readonly />
+                 </td>
+                 <td>
+                     <a asp-action="DeleteStreet" asp-route-id="@street.ID">Удалить</a> |
+                     <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
+                     <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionID"]' asp-action="EditStreet" asp-route-id="@street.ID">Сохранить</a>
+                 </td>
+             </tr>
+             }
+         }
 
-        <tr class = 'new-region'>
-            <th>2</th>
-            <th></th>
-            <th></th>
-            <th>@Html.ActionLink("Удалить участок","","")</th>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                ул.Стахановская
-            </td>
-            <td>
-                1,2,3,4,5,6,7,8,9
-            </td>
-            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                ул.Ленина
-            </td>
-            <td>
-                Все
-            </td>
-            <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-        </tr>
-
-    </table>
+     }
+     </table>
+    
 
 
 </div>
 
 @section Scripts {
-
+    <script type="text/javascript" src="~/js/Registrator/Regions/main.js" asp-append-version="true" ></script>
 }
 
 @section Styles {
