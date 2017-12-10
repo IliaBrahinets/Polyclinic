@@ -13,8 +13,6 @@ public class Region
    public int ID { get; set; }
 
    public ICollection<Street> Streets { get; set; }
-
-
    public ICollection<Patient> Patients { get; set; }
    public ICollection<Doctor> Doctors { get; set; }
 }

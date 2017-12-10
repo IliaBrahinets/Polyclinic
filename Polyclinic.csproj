@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\SpecialitiesController.cs" />
     <Compile Remove="Views\Registrator\DiseasesDirectory.cshtml.cs" />
   </ItemGroup>
 
