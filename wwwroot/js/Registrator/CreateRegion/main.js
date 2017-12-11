@@ -64,8 +64,6 @@ function SetDeleteListener() {
 
         if (StreetField.parent().children().length <= 1) return;
 
-        console.log(StreetField);
-
         StreetField.remove();
     });
 
@@ -77,23 +75,22 @@ $("#CreateRegionForm").submit(function () {
 
     var data = $(this).serializeArray();
 
-    var SendObj = [];
-    //-1 because of a ValidateToken
-    for (var i = 0; i < data.length - 1; i+=2) {
+    var SendObj = {};
+    //-1 because of a RequestToken
+    for (var i = 0; i < data.length - 1; i += 2) {
 
-        var curr = {};
-        curr[data[i].name] = data[i].value;
-        curr[data[i + 1].name] = data[i + 1].value;
-        
-        SendObj.push(curr);
+        SendObj["[" + i + "]." + data[i].name] = data[i].value;
+        SendObj["[" + i + "]." + data[i + 1].name] = data[i + 1].value;
     }
+
+    SendObj[data[data.length - 1].name] = data[data.length - 1].value;
+
 
     $.ajax("/Registrator/CreateRegion",
         {
             method: "POST",
             url: "/Registrator/CreateRegion",
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(SendObj),
+            data: SendObj,
             success: function () {
                 location.href = "/Registrator/Regions"
             }

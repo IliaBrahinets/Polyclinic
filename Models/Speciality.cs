@@ -17,4 +17,12 @@ public class Speciality
     public int CheckUpTime { get; set; }
 
     public ICollection<Doctor> Doctors { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        Speciality spec = obj as Speciality;
+
+        return (this.Name.ToLower() == spec.Name.ToLower());
+
+    }
 }

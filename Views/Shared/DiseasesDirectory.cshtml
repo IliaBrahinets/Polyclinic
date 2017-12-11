@@ -8,10 +8,10 @@
         @Html.ActionLink("Добавить", "CreateDisease")
     </div>
 
-    <form class='mb-2'>
+    <form asp-controller="Registrator" asp-action="DiseasesDirectory" class='mb-2'>
         <div class='form-row'>
             <div class='col'>
-                <input class='form-control' type='search' placeholder='Введите название...'>
+                <input name="q" class='form-control' type='search' placeholder='Введите название...'>
             </div>
             <div class='col-sm-2'>
                 <button class='btn btn-primary w-100' type='submit'>Показать</button>

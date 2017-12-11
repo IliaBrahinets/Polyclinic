@@ -7,6 +7,7 @@ namespace Polyclinic.Data
     {
         public PolyclinicContext(DbContextOptions<PolyclinicContext> options) : base(options)
         {
+            
         }
 
         public DbSet<Doctor> Doctors { get; set; }

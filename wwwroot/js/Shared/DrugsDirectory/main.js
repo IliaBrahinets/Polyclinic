@@ -40,7 +40,7 @@ $(".clickShowHideNext").click(function () {
         Inputs.removeClass("form-control");
         Inputs.addClass("form-control-plaintext");
 
-        Inputs.attr("readonly");
+        Inputs.attr("readonly","");
 
         next.removeClass("show");
         next.addClass("hide");

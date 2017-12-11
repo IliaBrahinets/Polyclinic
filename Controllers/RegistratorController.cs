@@ -16,7 +16,6 @@ namespace Polyclinic.Controllers
     {
         private readonly PolyclinicContext db;
 
-
         public RegistratorController(PolyclinicContext context)
         {
             db = context;
@@ -72,48 +71,97 @@ namespace Polyclinic.Controllers
             return View();
         }
 
-        public IActionResult Regions()
+        public async Task<IActionResult> Regions(String q)
         {
-            return View(db.Regions.Include(x => x.Streets));
+            if (q != null)
+            {
+
+                //q is a ID 
+                int ID;
+
+                if (Int32.TryParse(q, out ID))
+                {
+                    Region Region = db.Regions.Find(ID);
+
+                    db.Entry(Region).Collection(x => x.Streets).Load();
+
+                    return View(new List<Region> { Region });
+                }
+
+                //q is a street name
+                q = q.ToLower();
+
+                List<Region> result = new List<Region>();
+
+                dynamic Regions = await db.Regions.Include(x => x.Streets).ToListAsync();
+
+                foreach (Region Region in Regions)
+                {
+                    
+                    foreach (Street Street in Region.Streets)
+
+                        if (Street.Name.ToLower().Contains(q))
+                        {
+                            result.Add(Region);
+                            break;
+                        }
+                }
+
+                return View(result);
+
+            }
+            else
+            {
+                return View(await db.Regions.Include(x => x.Streets).ToListAsync());
+            }
         }
 
         public IActionResult CreateRegion()
         {
             return View();
-        }
+        }   
 
         [HttpPost]
-        public async Task<IActionResult> CreateRegion([FromBody]ICollection<Street> Streets)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRegion([Bind("Name,Addresses")]ICollection<Street> Streets)
         {
-            Region region = new Region { Streets = Streets }; 
-            
-            foreach(Street Street in Streets)
-            {
-                db.Streets.Add(Street);
-            }
-            db.Regions.Add(region);
 
-            await db.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                Region region = new Region { Streets = Streets };
+
+                foreach (Street Street in Streets)
+                {
+                    db.Streets.Add(Street);
+                }
+                db.Regions.Add(region);
+
+                await db.SaveChangesAsync();
+
+            }
 
             return RedirectToAction(nameof(Regions));
         }
 
         public async Task<IActionResult> DeleteRegion(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            var region = await db.Regions.FirstOrDefaultAsync(x => x.ID == id);
-            if (region != null)
+            bool exist = await db.Regions.AnyAsync(x => x.ID == id);
+
+            if (exist)
             {
-                db.Regions.Remove(region);
+                Region region = new Region { ID = (int)id };
+                db.Entry(region).State = EntityState.Deleted;
+
                 await db.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Regions));
+
         }
 
         public async Task<IActionResult> EditStreet([Bind("ID,Name,Addresses,RegionID")]Street street)
@@ -122,6 +170,7 @@ namespace Polyclinic.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Regions));
         }
+        
         public async Task<IActionResult> DeleteStreet(int? id)
         {
             if(id == null)
@@ -129,42 +178,54 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
 
-            var Street = await db.Streets.FirstOrDefaultAsync(x => x.ID == id);
+            bool exist = await db.Streets.AnyAsync(x => x.ID == id);
 
-            if (Street != null)
+            if (exist)
             {
-                db.Streets.Remove(Street);
+                Street street = new Street { ID = (int)id  };
+                db.Entry(street).State = EntityState.Deleted;
 
                 await db.SaveChangesAsync();
             }
+           
             return RedirectToAction(nameof(Regions));
 
         }
 
-        public async Task<IActionResult> Specialities()
+        public IActionResult Specialities(String q)
         {
-            return View(await db.Specialities.ToListAsync());
+           
+            if (q != null)
+            {
+                q = q.ToLower();
+                return View(db.Specialities.Where(x => (x.Name.ToLower().Contains(q))));
+            }
+            else
+            {
+               return View(db.Specialities.ToList());
+            }
         }
 
         public IActionResult CreateSpeciality()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateSpeciality([Bind("ID,Name,CheckUpTime")] Speciality speciality)
+        public async Task<IActionResult> CreateSpeciality([Bind("Name,CheckUpTime")] Speciality speciality)
         {
             if (ModelState.IsValid)
             {
                 db.Add(speciality);
                 await db.SaveChangesAsync();
-                return RedirectToAction(nameof(Specialities));
+               
             }
-            return View(speciality);
+            return RedirectToAction(nameof(Specialities));
         }
 
-        
-        [HttpGet]
+       
+      
         public async Task<IActionResult> EditSpeciality([Bind("ID,Name,CheckUpTime")]Speciality spec)
         {
             db.Specialities.Update(spec);
@@ -172,37 +233,37 @@ namespace Polyclinic.Controllers
             return RedirectToAction(nameof(Specialities));
         }
 
-        [HttpGet]
-       // [ActionName("DeleteSpeciality")]
-        public async Task<IActionResult> ConfirmDelete(int? id)
-        {
-            if (id != null)
-            {
-                Speciality spec = await db.Specialities.FirstOrDefaultAsync(p => p.ID == id);
-                if (spec != null)
-                    return View(spec);
-            }
-            return NotFound();
-        }
-
-        [HttpGet]
+      
         public async Task<IActionResult> DeleteSpeciality(int? id)
         {
-            if (id != null)
+            if (id == null)
             {
-                Speciality spec = new Speciality { ID = id.Value };
-                db.Entry(spec).State = EntityState.Deleted;
-                await db.SaveChangesAsync();
-                return RedirectToAction(nameof(Specialities));
+                return NotFound();
             }
-            return NotFound();
+                 
+            Speciality spec = new Speciality { ID = id.Value };
+
+            db.Entry(spec).State = EntityState.Deleted;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Specialities));
+           
         }
 
 
 
-        public async Task<IActionResult> DiseasesDirectory()
+        public IActionResult DiseasesDirectory(String q)
         {
-            return View(await db.Diseases.ToListAsync());
+            if (q != null)
+            {
+                q = q.ToLower();
+
+                return View(db.Diseases.Where(x => (x.Name.ToLower().Contains(q) || x.Description.ToLower().Contains(q))));
+            }
+            else
+            {
+                return View(db.Diseases.ToList());
+            }
         }
 
         public IActionResult CreateDisease()
@@ -211,7 +272,7 @@ namespace Polyclinic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDisease([Bind("ID,Name,Description")] Disease disease)
+        public async Task<IActionResult> CreateDisease([Bind("Name,Description")] Disease disease)
         {
             if (ModelState.IsValid)
             {
@@ -221,17 +282,22 @@ namespace Polyclinic.Controllers
             }
             return View(disease);
         }
+
         [HttpGet]
         public async Task<IActionResult> DeleteDisease(int? id)
         {
-            if (id != null)
+            if (id == null)
             {
-                Disease disease = new Disease { ID = id.Value };
-                db.Entry(disease).State = EntityState.Deleted;
-                await db.SaveChangesAsync();
-                return RedirectToAction(nameof(DiseasesDirectory));
+                return NotFound();
             }
-            return NotFound();
+                    
+            Disease disease = new Disease { ID = id.Value };
+
+            db.Entry(disease).State = EntityState.Deleted;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(DiseasesDirectory));
+           
         }
         public IActionResult EditDisease()
         {
@@ -239,9 +305,18 @@ namespace Polyclinic.Controllers
         }
 
 
-        public async Task<IActionResult> DrugsDirectory()
+        public IActionResult DrugsDirectory(String q)
         {
-            return View(await db.Drugs.ToListAsync());
+            if (q != null)
+            { 
+                q = q.ToLower();
+
+                return View(db.Drugs.Where(x => ( x.Name.ToLower().Contains(q) || x.Description.ToLower().Contains(q) ) ) );
+            }
+            else
+            {
+                return View(db.Drugs.ToList());
+            }
         }
 
         public IActionResult CreateDrug()
@@ -250,15 +325,14 @@ namespace Polyclinic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDrug([Bind("ID,Name,Description")] Drug drug)
+        public async Task<IActionResult> CreateDrug([Bind("Name,Description")] Drug drug)
         {
             if (ModelState.IsValid)
             {
                 db.Add(drug);
                 await db.SaveChangesAsync();
-                return RedirectToAction(nameof(DrugsDirectory));
             }
-            return View(drug);
+            return RedirectToAction(nameof(DrugsDirectory));
         }
 
         [HttpGet]
@@ -273,14 +347,17 @@ namespace Polyclinic.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteDrugs(int? id)
         {
-            if (id != null)
+            if (id == null)
             {
-                Drug drug = new Drug { ID = id.Value };
-                db.Entry(drug).State = EntityState.Deleted;
-                await db.SaveChangesAsync();
-                return RedirectToAction(nameof(DrugsDirectory));
+                return NotFound();
             }
-            return NotFound();
+            Drug drug = new Drug { ID = id.Value };
+
+            db.Entry(drug).State = EntityState.Deleted;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(DrugsDirectory));
+           
         }
         
 

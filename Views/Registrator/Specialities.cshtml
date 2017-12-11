@@ -6,10 +6,10 @@
         @Html.ActionLink("Добавить", "CreateSpeciality", "")
     </div>
 
-    <form class = 'mb-2'>
+    <form asp-controller="Registrator" asp-action="Specialities" class = 'mb-2'>
         <div class='form-row'>
             <div class='col'>
-                <input class='form-control' type='search' placeholder='Введите название...'>
+                <input name ="q" class='form-control' type='search' placeholder='Введите название...'>
             </div>
             <div class='col-sm-2'>
                 <button class='btn btn-primary w-100' type='submit'>Показать</button>
@@ -28,9 +28,8 @@
         <tbody>
 
             @foreach (var item in Model){
-
                     <tr class="data-group">
-                     
+            
                         <td>
                             <input name = 'Name' class="form-control-plaintext input-sm" value="@Html.DisplayFor(modelItem => item.Name)" readonly />
                         </td>
@@ -38,8 +37,7 @@
                             <input name = 'CheckUpTime' type='number' class="form-control-plaintext input-sm" value="@Html.DisplayFor(modelItem => item.CheckUpTime)" readonly  />
                         </td>
                         <td>
-                            
-                            <a asp-action="DeleteSpeciality" asp-route-id="@item.ID" >Удалить</a> | 
+                            <a asp-action="DeleteSpeciality" asp-route-id="@item.ID">Удалить</a> | 
                             <a class='clickShowHideNext' href="javascript:1;">Изменить</a> | 
                             <a class = 'sendWithAddition hide' data-to-add = '["Name","CheckUpTime"]' asp-action="EditSpeciality" asp-route-id="@item.ID">Сохранить</a>
 

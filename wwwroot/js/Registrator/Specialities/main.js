@@ -2,15 +2,27 @@
 
     var InputNames = JSON.parse($(this).attr("data-to-add"));
 
+    var ReqNames;
+
+    try {
+        ReqNames = JSON.parse($(this).attr("data-to-add-reqname"));
+    } catch (SyntaxError) {
+        ReqNames = [];
+    }
+
     //taking a data from inputs by the names
 
-    var RequestStr = '&';
+    var RequestStr = '';
+
+    var data_group = $(this).closest(".data-group");
 
     for (var i = 0; i < InputNames.length; i++) {
 
-        var Input = $(this).closest(".data-group").find("input[name=" + InputNames[i] + "]");
+        RequestStr += '&';
 
-        RequestStr +=  InputNames[i] + "=" + Input.val() + "&";
+        var Input = data_group.find("input[name=" + InputNames[i] + "]");
+
+        RequestStr += (ReqNames[i] || InputNames[i]) + "=" + Input.val();
 
     }
 
@@ -40,7 +52,7 @@ $(".clickShowHideNext").click(function () {
         Inputs.removeClass("form-control");
         Inputs.addClass("form-control-plaintext");
 
-        Inputs.attr("readonly");
+        Inputs.attr("readonly", "");
 
         next.removeClass("show");
         next.addClass("hide");
