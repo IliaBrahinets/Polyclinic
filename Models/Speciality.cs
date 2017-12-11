@@ -13,16 +13,10 @@ public class Speciality
     public int ID { get; set; }
     [Required(ErrorMessage = "Требуется название")]
     public string Name { get; set; }
+
     [Required(ErrorMessage = "Требуется длительность приема")]
+    [Range(1,1440,ErrorMessage = "Знaчение должно быть между 1 и 1440")]
     public int CheckUpTime { get; set; }
 
     public ICollection<Doctor> Doctors { get; set; }
-
-    public override bool Equals(object obj)
-    {
-        Speciality spec = obj as Speciality;
-
-        return (this.Name.ToLower() == spec.Name.ToLower());
-
-    }
 }
