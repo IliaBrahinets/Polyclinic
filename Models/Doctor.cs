@@ -5,8 +5,9 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 using Polyclinic.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Doctor : Man
 {
@@ -15,8 +16,9 @@ public class Doctor : Man
 
     public Region Region { get; set; }
 
-
-    public Speciality Speciality { get; set; }
+    [Key]
+    public int SpecailityID { get; set; }
+    public Speciality SpecialityID { get; set; }
 
     public ICollection<Relieve> Schedule { get; set; }
 

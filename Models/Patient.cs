@@ -5,12 +5,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 public class Patient : Man
 {
+    [DataType(DataType.Date)]
+    [Display(Name = "Дата рождения")]
     public DateTime BirthDate { get; set; }
     public bool Sex { get; set; }
     public string Address { get; set; }
+    [DataType(DataType.Date)]
     public DateTime CreationDate { get; set; }
 
     public Region Region { get; set; }

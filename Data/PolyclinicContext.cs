@@ -39,7 +39,7 @@ namespace Polyclinic.Data
                   .Metadata.DeleteBehavior = DeleteBehavior.SetNull;
 
             modelBuilder.Entity<Doctor>()
-                 .HasOne(e => e.Speciality)
+                 .HasOne(e => e.SpecialityID)
                  .WithMany(e => e.Doctors)
                  .Metadata.DeleteBehavior = DeleteBehavior.SetNull;
         }

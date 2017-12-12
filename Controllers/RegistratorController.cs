@@ -36,26 +36,79 @@ namespace Polyclinic.Controllers
 
         public IActionResult Doctors()
         {
-            return View();
+            return View(db.Doctors.Include(x => x.SpecialityID));
         }
 
-        public IActionResult CreateDoctor()
+        public async Task<IActionResult> CreateDoctor()
         {
+            dynamic CreateInf = new Dictionary<String, Object>();
+
+            ViewBag.Specialities = await db.Specialities.ToListAsync();
+
+
             return View();
         }
-
-        public IActionResult Patients()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,Speciality")] Doctor doctor)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+               
+                db.Add(doctor);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Doctors));
+            }
+            return View(doctor);
         }
 
-
-        public IActionResult CreatePatient()
+        [HttpGet]
+        public async Task<IActionResult> DeleteDoctor(int? id)
         {
-
-            return View();
-
+            if (id != null)
+            {
+                Doctor doctor = new Doctor { ID = id.Value };
+                db.Entry(doctor).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Doctors));
+            }
+            return NotFound();
         }
+        public async Task<IActionResult> Patients()
+         {
+             return View(await db.Patients.ToListAsync());
+        }
+
+    public IActionResult CreatePatient()
+    {
+
+        return View();
+
+    }
+        [HttpPost]
+         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePatient([Bind("ID,Name,Surname,Lastname,BirthDate,Address,Sex")] Patient patient)
+        {
+             if (ModelState.IsValid)
+             {
+                 db.Add(patient);
+                 await db.SaveChangesAsync();
+                 return RedirectToAction(nameof(Patients));
+            }
+             return View(patient);
+         }
+         [HttpGet]
+         public async Task<IActionResult> DeletePatient(int? id)
+         {
+             if (id != null)
+             {
+                Patient patient = new Patient { ID = id.Value };
+                db.Entry(patient).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                 return RedirectToAction(nameof(Patients));
+             }
+            return NotFound();
+         }
 
         public IActionResult DoctorScheduleView()
         {

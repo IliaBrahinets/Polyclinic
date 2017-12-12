@@ -1,19 +1,19 @@
+@model IEnumerable<Doctor>
 <div class='mt-4'>
-
     <div class='row'>
         <div class='newDoctor col mb-2 text-center'>
-            @Html.ActionLink("Добавить нового врача","CreateDoctor")
+            @Html.ActionLink("Добавить нового врача", "CreateDoctor")
         </div>
-        <div class = 'col-xl-10'></div>
+        <div class='col-xl-10'></div>
     </div>
 
-    
+
     <div class='row'>
         <div class='col'>
             <div class='filter card p-3 mb-2'>
                 <form>
                     <div class='form-group'>
-                        <label for='speciality'>Специальность врача</label>
+                        <label for='Speciality'>Специальность врача</label>
                         <select class='form-control form-control-sm' name='speciality'>
                             <option>Окулист</option>
                             <option>Дерматолог</option>
@@ -49,40 +49,32 @@
                     </div>
                 </div>
             </form>
-            
+
             <div class='row mt-2'>
-                <table class = 'table text-center table-responsive-md'>
+                <table class='table text-center table-responsive-md'>
                     <tr>
-                        <th>ФИО</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Отчество</th>
+                        <th>Номер кабинета</th>
                         <th>Специальность</th>
                         <th>Участок</th>
                         <th></th>
                         <th></th>
                     </tr>
-
-                    <tr>
-                        <td>Иванов И.А.</td>
-                        <td>Окулист</td>
-                        <td>ул.Весенняя</td>
-                        <td>@Html.ActionLink("Расписание","","") </td>
-                        <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-                    </tr>
-
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                        <td>Иванов И.А.</td>
-                        <td>Окулист</td>
-                        <td>ул.Весенняя</td>
-                        <td>@Html.ActionLink("Расписание","","") </td>
-                        <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-                    </tr>
-
-                        <tr>
-                        <td>Иванов И.А.</td>
-                        <td>Окулист</td>
-                        <td>ул.Весенняя</td>
-                        <td>@Html.ActionLink("Расписание","","") </td>
-                        <td>@Html.ActionLink("Удалить","","") | @Html.ActionLink("Редактировать","","")</td>
-                    </tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Lastname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ChainedCabinet)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SpecialityID.Name)</td>
+                            <td>ул.Весенняя</td>
+                            <td>@Html.ActionLink("Расписание", "", "") </td>
+                            <td><a asp-action="DeleteDoctor" asp-route-id="@item.ID">Удалить</a> | @Html.ActionLink("Редактировать", "", "")</td>
+                        </tr>
+                    }
                 </table>
             </div>
 
@@ -92,5 +84,5 @@
 
 </div>
 @section Styles {
-    <link rel = 'stylesheet' href = '~/css/Registrator/Doctors/main.css' asp-append-version='true' />
+    <link rel='stylesheet' href='~/css/Registrator/Doctors/main.css' asp-append-version='true' />
 }
