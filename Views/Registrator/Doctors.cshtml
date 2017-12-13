@@ -11,16 +11,18 @@
     <div class='row'>
         <div class='col'>
             <div class='filter card p-3 mb-2'>
-                <form>
+                <form asp-controller="Registrator" asp-action="Doctors" class='mb-2'>
                     <div class='form-group'>
-                        <label for='Speciality'>Специальность врача</label>
-                        <select class='form-control form-control-sm' name='speciality'>
+                     
+                        <label class='mt-1' for='speciality'>Специальность</label>
+                        <select name="q" class='form-control' placeholder='speciality'>
                             <option>Окулист</option>
                             <option>Дерматолог</option>
                             <option>Невролог</option>
                             <option>Хирург</option>
                             <option>Терапевт</option>
                         </select>
+                     
                         <label class='mt-1' for='region'>Участок</label>
                         <select class='form-control form-control-sm' name='region'>
                             <option>ул.Осенняя</option>

@@ -34,11 +34,53 @@ namespace Polyclinic.Controllers
             return View();
         }
 
-        public IActionResult Doctors()
+        public async Task<IActionResult> Doctors(string q)
         {
+           
+            if (q != null)
+            {
 
-         
-            return View(db.Doctors.Include(x => x.Speciality).Include(x => x.Region));
+
+                //q is a Id 
+                int Id;
+
+                if (Int32.TryParse(q, out Id))
+                {
+                    Doctor Doctor = db.Doctors.Find(Id);
+
+                    db.Entry(Doctor).Collection(x=>x.Specialities).Load();
+
+                    return View(new List<Doctor> { Doctor });
+                }
+
+                //q is a street name
+                q = q.ToLower();
+
+                List<Doctor> result = new List<Doctor>();
+
+                dynamic Doctors = await db.Doctors.Include(x => x.Speciality).Include(x => x.Region).ToListAsync();
+                dynamic Specialities = await db.Specialities.ToListAsync();
+
+                foreach (Doctor Doctor in Doctors)
+                {
+                    foreach (Speciality Speciality in Specialities)
+                    {
+                        if (Doctor.Speciality.Name.ToLower().Contains(q))
+                        {
+                            result.Add(Doctor);
+                            break;
+                        }
+                    }
+                }
+
+                return View(result);
+
+            }
+            else
+            {
+
+                return View(await db.Doctors.Include(x => x.Speciality).Include(x => x.Region).ToListAsync());
+            }
         }
 
         public async Task<IActionResult> CreateDoctor()
@@ -52,6 +94,7 @@ namespace Polyclinic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId,RegionId")] Doctor doctor)
         {
+            
             if (ModelState.IsValid)
             {
                
@@ -81,12 +124,12 @@ namespace Polyclinic.Controllers
 
     public IActionResult CreatePatient()
     {
-
+        
         return View();
 
     }
         [HttpPost]
-         [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePatient([Bind("Id,Name,Surname,Lastname,BirthDate,Address,Sex")] Patient patient)
         {
              if (ModelState.IsValid)

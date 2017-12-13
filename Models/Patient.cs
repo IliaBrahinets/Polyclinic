@@ -3,6 +3,7 @@
 // Created: 28 кастрычніка 2017 19:07:07
 // Purpose: Definition of Class PatientCard
 
+using Polyclinic.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
