@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\Controllers",
+    "\\Models",
+    "\\Views",
+    "\\Views\\Registrator"
   ],
+  "SelectedNode": "\\Views\\_ViewImports.cshtml",
   "PreviewInSolutionExplorer": false
 }

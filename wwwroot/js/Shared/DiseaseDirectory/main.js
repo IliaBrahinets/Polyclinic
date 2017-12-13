@@ -1,16 +1,16 @@
 ﻿$(".sendWithAddition").click(function () {
 
-    var InputNames = JSON.parse($(this).attr("data-to-add"));
+    var DataNames = JSON.parse($(this).attr("data-to-add"));
 
     //taking a data from inputs by the names
 
     var RequestStr = '&';
 
-    for (var i = 0; i < InputNames.length; i++) {
+    for (var i = 0; i < DataNames.length; i++) {
 
-        var Input = $(this).closest(".data-group").find("input[name=" + InputNames[i] + "]");
+        var data = $(this).closest(".data-group").find("[data-name=" + DataNames[i] + "]");
 
-        RequestStr +=  InputNames[i] + "=" + Input.val() + "&";
+        RequestStr += DataNames[i] + "=" + data.text() + "&";
 
     }
 
@@ -18,29 +18,27 @@
     $(this).attr("href", tmp + RequestStr);
 });
 
- 
+
 $(".clickShowHideNext").click(function () {
 
-    var Inputs = $(this).closest(".data-group").find("input");
+    var Data = $(this).closest(".data-group").find(".AdditionalData");
 
     var next = $(this).next();
 
     if (next.hasClass("hide")) {
 
-        Inputs.removeClass("form-control-plaintext");
-        Inputs.addClass("form-control");
+        Data.addClass("form-control");
 
-        Inputs.removeAttr("readonly");
+        Data.attr("contenteditable", "true");
 
         next.removeClass("hide");
         next.addClass("show");
 
     } else {
 
-        Inputs.removeClass("form-control");
-        Inputs.addClass("form-control-plaintext");
+        Data.removeClass("form-control");
 
-        Inputs.attr("readonly", "");
+        Data.removeAttr("contenteditable");
 
         next.removeClass("show");
         next.addClass("hide");

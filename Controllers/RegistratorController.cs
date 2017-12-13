@@ -299,10 +299,15 @@ namespace Polyclinic.Controllers
             return RedirectToAction(nameof(DiseasesDirectory));
            
         }
-        public IActionResult EditDisease()
+
+        [HttpGet]
+        public async Task<IActionResult> EditDisease([Bind("ID,Name,Description")]Disease disease)
         {
-            return View();
+            db.Diseases.Update(disease);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(DiseasesDirectory));
         }
+
 
 
         public IActionResult DrugsDirectory(String q)
@@ -345,7 +350,7 @@ namespace Polyclinic.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> DeleteDrugs(int? id)
+        public async Task<IActionResult> DeleteDrug(int? id)
         {
             if (id == null)
             {

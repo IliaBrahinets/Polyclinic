@@ -1,50 +1,8 @@
-﻿function googleMapsAutoCompleteInit(placeSearch) {
-
-    var autocomplete = new google.maps.places.Autocomplete(placeSearch, {
-        language: 'ru',
-        componentRestrictions: { country: 'by' },
-        types: ['geocode']
-    });
-
-    function geolocate(autocomplete) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var geolocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                var circle = new google.maps.Circle({
-                    center: geolocation,
-                    radius: position.coords.accuracy
-                });
-                autocomplete.setBounds(circle.getBounds());
-            });
-        }
-    }
-
-    geolocate(autocomplete);
-
-    autocomplete.addListener('place_changed', function () {
-        var place = autocomplete.getPlace();
-        var street = place.address_components[0];
-
-        console.log(place.address_components);
-
-        if (street.types.indexOf("route") != -1)
-            $(placeSearch).val(place.address_components[0]["long_name"]);
-        else
-            $(placeSearch).val('');
-    });
-}
-
-googleMapsAutoCompleteInit(document.getElementsByClassName("streetInput")[0]);
-SetDeleteListener();
+﻿SetDeleteListener();
 
 $("#addStreetField").click(function () {
 
     var streetField = $("#CreateRegionForm .streetField").first();
-
-    console.log(streetField);
 
     var newstreetField = $(streetField).clone();
 
@@ -79,16 +37,17 @@ $("#CreateRegionForm").submit(function () {
     //-1 because of a RequestToken
     for (var i = 0; i < data.length - 1; i += 2) {
 
-        SendObj["[" + i + "]." + data[i].name] = data[i].value;
-        SendObj["[" + i + "]." + data[i + 1].name] = data[i + 1].value;
+        var SendObjNumb = i / 2;
+
+        SendObj["[" + SendObjNumb + "]." + data[i].name] = data[i].value;
+        SendObj["[" + SendObjNumb + "]." + data[i + 1].name] = data[i + 1].value;
     }
 
     SendObj[data[data.length - 1].name] = data[data.length - 1].value;
 
-
     $.ajax("/Registrator/CreateRegion",
         {
-            method: "POST",
+            method: "POST", 
             url: "/Registrator/CreateRegion",
             data: SendObj,
             success: function () {
@@ -96,3 +55,52 @@ $("#CreateRegionForm").submit(function () {
             }
         });
 });
+
+
+function googleMapsAutoCompleteInit(placeSearch) {
+
+    try {
+
+        var autocomplete = new google.maps.places.Autocomplete(placeSearch, {
+            language: 'ru',
+            componentRestrictions: { country: 'by' },
+            types: ['geocode']
+        });
+
+
+        function geolocate(autocomplete) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }
+
+        geolocate(autocomplete);
+
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            var street = place.address_components[0];
+
+            console.log(place.address_components);
+
+            if (street.types.indexOf("route") != -1)
+                $(placeSearch).val(place.address_components[0]["long_name"]);
+            else
+                $(placeSearch).val('');
+        });
+    } catch (RerenceError) {
+        
+        console.error("probably google is not defined!"ф);
+    }
+}
+
+googleMapsAutoCompleteInit(document.getElementsByClassName("streetInput")[0]);

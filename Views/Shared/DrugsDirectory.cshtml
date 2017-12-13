@@ -31,26 +31,24 @@
                 <div class='card-header'>
 
                     <a class ="drug-header" data-toggle="collapse" href="#drugsList .drug:nth-child(@counter) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                        <strong>
-                            <input name='Name' class="mw-100" value="@item.Name" readonly />
-                        </strong>
+                        <div class="AdditionalData d-inline-block" data-name="Name"> <strong>@item.Name</strong> </div> 
                     </a>
 
                     <span class ="edit-buttons">
-                        <a asp-action="DeleteDrugs" asp-route-id="@item.ID">Удалить</a> 
+                        <a asp-action="DeleteDrug" asp-route-id="@item.ID">Удалить</a> 
                     </span>
 
                 </div>
 
                 <div class='drug-info collapse'>
                     <div class='card-body'>
-
+                            
                         <div class="text-right">
                             <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
                             <a class='sendWithAddition hide' data-to-add='["Name","Description"]' asp-action="EditDrug" asp-route-id="@item.ID">Сохранить</a>
                         </div>
 
-                        <input name='Description' class="mw-100" value="@item.Description" readonly />
+                        <div class ="AdditionalData" data-name="Description">@item.Description</div>
 
                     </div>
                 </div>

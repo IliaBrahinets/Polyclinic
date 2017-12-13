@@ -31,10 +31,10 @@
                     <tr class="data-group">
             
                         <td>
-                            <input name = 'Name' class="form-control-plaintext input-sm" value="@Html.DisplayFor(modelItem => item.Name)" readonly />
+                            <input name = 'Name' class="form-control-plaintext" value="@Html.DisplayFor(modelItem => item.Name)" readonly />
                         </td>
                         <td>
-                            <input name = 'CheckUpTime' type='number' class="form-control-plaintext input-sm" value="@Html.DisplayFor(modelItem => item.CheckUpTime)" readonly  />
+                            <input name = 'CheckUpTime' type='number' class="form-control-plaintext" value="@Html.DisplayFor(modelItem => item.CheckUpTime)" readonly  />
                         </td>
                         <td>
                             <a asp-action="DeleteSpeciality" asp-route-id="@item.ID">Удалить</a> | 

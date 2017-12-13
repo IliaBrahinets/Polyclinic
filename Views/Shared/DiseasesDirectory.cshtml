@@ -5,10 +5,10 @@
 <div class='container mt-4'>
 
     <div class='mb-2'>
-        @Html.ActionLink("Добавить", "CreateDisease")
+        @Html.ActionLink("Добавить", "CreateDrug")
     </div>
 
-    <form asp-controller="Registrator" asp-action="DiseasesDirectory" class='mb-2'>
+    <form asp-controller="Registrator" asp-action="DrugsDirectory" class='mb-2'>
         <div class='form-row'>
             <div class='col'>
                 <input name="q" class='form-control' type='search' placeholder='Введите название...'>
@@ -30,10 +30,8 @@
 
                 <div class='card-header'>
 
-                    <a class="disease-header" data-toggle="collapse" href="#drugsList .drug:nth-child(@counter) .drug-info" aria-expanded="true" aria-controls="collapseOne">
-                        <strong>
-                            <input name='Name' class="input-sm" value="@item.Name" readonly />
-                        </strong>
+                    <a class="drug-header" data-toggle="collapse" href="#drugsList .drug:nth-child(@counter) .drug-info" aria-expanded="true" aria-controls="collapseOne">
+                        <div class="AdditionalData d-inline-block" data-name="Name"> <strong>@item.Name</strong> </div>
                     </a>
 
                     <span class="edit-buttons">
@@ -47,10 +45,10 @@
 
                         <div class="text-right">
                             <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
-                            <a class='sendWithAddition hide' data-to-add='["Name","Description"]' asp-action="EditDesease" asp-route-id="@item.ID">Сохранить</a>
+                            <a class='sendWithAddition hide' data-to-add='["Name","Description"]' asp-action="EditDisease" asp-route-id="@item.ID">Сохранить</a>
                         </div>
 
-                        <input name='Description' class="input-sm" value="@item.Description" readonly />
+                        <div class="AdditionalData" data-name="Description">@item.Description</div>
 
                     </div>
                 </div>
