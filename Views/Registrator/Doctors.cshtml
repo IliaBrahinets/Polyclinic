@@ -62,17 +62,17 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    @foreach (var item in Model)
+                    @foreach (Doctor item in Model)
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Name)</td>
                             <td>@Html.DisplayFor(modelItem => item.Surname)</td>
                             <td>@Html.DisplayFor(modelItem => item.Lastname)</td>
                             <td>@Html.DisplayFor(modelItem => item.ChainedCabinet)</td>
-                            <td>@Html.DisplayFor(modelItem => item.SpecialityID.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Speciality.Name)</td>
                             <td>ул.Весенняя</td>
                             <td>@Html.ActionLink("Расписание", "", "") </td>
-                            <td><a asp-action="DeleteDoctor" asp-route-id="@item.ID">Удалить</a> | @Html.ActionLink("Редактировать", "", "")</td>
+                            <td><a asp-action="DeleteDoctor" asp-route-id="@item.Id">Удалить</a> | @Html.ActionLink("Редактировать", "", "")</td>
                         </tr>
                     }
                 </table>

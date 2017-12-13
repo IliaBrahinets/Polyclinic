@@ -10,7 +10,7 @@ using Polyclinic.Models;
 
 public class Region
 {
-   public int ID { get; set; }
+   public int Id { get; set; }
 
    public ICollection<Street> Streets { get; set; }
    public ICollection<Patient> Patients { get; set; }

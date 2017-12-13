@@ -36,21 +36,19 @@ namespace Polyclinic.Controllers
 
         public IActionResult Doctors()
         {
-            return View(db.Doctors.Include(x => x.SpecialityID));
+            return View(db.Doctors.Include(x => x.Speciality));
         }
 
         public async Task<IActionResult> CreateDoctor()
         {
-            dynamic CreateInf = new Dictionary<String, Object>();
 
             ViewBag.Specialities = await db.Specialities.ToListAsync();
-
 
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,Speciality")] Doctor doctor)
+        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,7 @@ namespace Polyclinic.Controllers
         {
             if (id != null)
             {
-                Doctor doctor = new Doctor { ID = id.Value };
+                Doctor doctor = new Doctor { Id = id.Value };
                 db.Entry(doctor).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Doctors));
@@ -87,11 +85,11 @@ namespace Polyclinic.Controllers
     }
         [HttpPost]
          [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePatient([Bind("ID,Name,Surname,Lastname,BirthDate,Address,Sex")] Patient patient)
+        public async Task<IActionResult> CreatePatient([Bind("Id,Name,Surname,Lastname,BirthDate,Address,Sex")] Patient patient)
         {
              if (ModelState.IsValid)
              {
-                 db.Add(patient);
+                 db.Patients.Add(patient);
                  await db.SaveChangesAsync();
                  return RedirectToAction(nameof(Patients));
             }
@@ -102,7 +100,7 @@ namespace Polyclinic.Controllers
          {
              if (id != null)
              {
-                Patient patient = new Patient { ID = id.Value };
+                Patient patient = new Patient { Id = id.Value };
                 db.Entry(patient).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                  return RedirectToAction(nameof(Patients));
@@ -129,12 +127,12 @@ namespace Polyclinic.Controllers
             if (q != null)
             {
 
-                //q is a ID 
-                int ID;
+                //q is a Id 
+                int Id;
 
-                if (Int32.TryParse(q, out ID))
+                if (Int32.TryParse(q, out Id))
                 {
-                    Region Region = db.Regions.Find(ID);
+                    Region Region = db.Regions.Find(Id);
 
                     db.Entry(Region).Collection(x => x.Streets).Load();
 
@@ -203,11 +201,11 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
 
-            bool exist = await db.Regions.AnyAsync(x => x.ID == id);
+            bool exist = await db.Regions.AnyAsync(x => x.Id == id);
 
             if (exist)
             {
-                Region region = new Region { ID = (int)id };
+                Region region = new Region { Id = (int)id };
                 db.Entry(region).State = EntityState.Deleted;
 
                 await db.SaveChangesAsync();
@@ -217,7 +215,7 @@ namespace Polyclinic.Controllers
 
         }
 
-        public async Task<IActionResult> EditStreet([Bind("ID,Name,Addresses,RegionID")]Street street)
+        public async Task<IActionResult> EditStreet([Bind("Id,Name,Addresses,RegionId")]Street street)
         {
             db.Streets.Update(street);
             await db.SaveChangesAsync();
@@ -231,11 +229,11 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
 
-            bool exist = await db.Streets.AnyAsync(x => x.ID == id);
+            bool exist = await db.Streets.AnyAsync(x => x.Id == id);
 
             if (exist)
             {
-                Street street = new Street { ID = (int)id  };
+                Street street = new Street { Id = (int)id  };
                 db.Entry(street).State = EntityState.Deleted;
 
                 await db.SaveChangesAsync();
@@ -279,7 +277,7 @@ namespace Polyclinic.Controllers
 
        
       
-        public async Task<IActionResult> EditSpeciality([Bind("ID,Name,CheckUpTime")]Speciality spec)
+        public async Task<IActionResult> EditSpeciality([Bind("Id,Name,CheckUpTime")]Speciality spec)
         {
             db.Specialities.Update(spec);
             await db.SaveChangesAsync();
@@ -294,7 +292,7 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
                  
-            Speciality spec = new Speciality { ID = id.Value };
+            Speciality spec = new Speciality { Id = id.Value };
 
             db.Entry(spec).State = EntityState.Deleted;
             await db.SaveChangesAsync();
@@ -329,7 +327,7 @@ namespace Polyclinic.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(disease);
+                db.Diseases.Add(disease);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(DiseasesDirectory));
             }
@@ -344,7 +342,7 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
                     
-            Disease disease = new Disease { ID = id.Value };
+            Disease disease = new Disease { Id = id.Value };
 
             db.Entry(disease).State = EntityState.Deleted;
             await db.SaveChangesAsync();
@@ -354,7 +352,7 @@ namespace Polyclinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditDisease([Bind("ID,Name,Description")]Disease disease)
+        public async Task<IActionResult> EditDisease([Bind("Id,Name,Description")]Disease disease)
         {
             db.Diseases.Update(disease);
             await db.SaveChangesAsync();
@@ -387,14 +385,14 @@ namespace Polyclinic.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(drug);
+                db.Drugs.Add(drug);
                 await db.SaveChangesAsync();
             }
             return RedirectToAction(nameof(DrugsDirectory));
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditDrug([Bind("ID,Name,Description")]Drug drug)
+        public async Task<IActionResult> EditDrug([Bind("Id,Name,Description")]Drug drug)
         {
             db.Drugs.Update(drug);
             await db.SaveChangesAsync();
@@ -409,7 +407,7 @@ namespace Polyclinic.Controllers
             {
                 return NotFound();
             }
-            Drug drug = new Drug { ID = id.Value };
+            Drug drug = new Drug { Id = id.Value };
 
             db.Entry(drug).State = EntityState.Deleted;
             await db.SaveChangesAsync();

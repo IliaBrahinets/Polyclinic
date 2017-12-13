@@ -27,11 +27,11 @@
          @foreach (Region region in Model)
          {
              <tr class='new-region'>
-                 <th>@region.ID</th>
+                 <th>@region.Id</th>
                  <th></th>
                  <th></th>
                  <th>
-                     <a asp-action="DeleteRegion" asp-route-id="@region.ID">Удалить участок</a>
+                     <a asp-action="DeleteRegion" asp-route-id="@region.Id">Удалить участок</a>
                  </th>
              </tr>
              @if (region.Streets != null)
@@ -41,7 +41,7 @@
                  {
              <tr class="data-group">
                  <td>
-                     <input name="RegionID" value="@region.ID" hidden/> 
+                     <input name="RegionId" value="@region.Id" hidden/> 
                  </td>
                  <td>   
                      <input name='Name' class="form-control-plaintext input-sm" value="@street.Name" readonly />
@@ -51,9 +51,9 @@
                      <input name='Addresses' class="form-control-plaintext input-sm" value="@street.Addresses" readonly />
                  </td>
                  <td>
-                     <a asp-action="DeleteStreet" asp-route-id="@street.ID">Удалить</a> |
+                     <a asp-action="DeleteStreet" asp-route-id="@street.Id">Удалить</a> |
                      <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
-                     <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionID"]' asp-action="EditStreet" asp-route-id="@street.ID">Сохранить</a>
+                     <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionId"]' asp-action="EditStreet" asp-route-id="@street.Id">Сохранить</a>
                  </td>
              </tr>
              }

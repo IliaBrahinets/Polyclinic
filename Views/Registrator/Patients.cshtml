@@ -95,7 +95,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Sex)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Address)</td>
                                 <td>@Html.ActionLink("Записать на прием", "", "") | @Html.ActionLink("Карточка", "", "")</td>
-                                <td>@Html.ActionLink("Редактировать", "", "") |<a asp-action="DeletePatient" asp-route-id="@item.ID"> Удалить</a></td>
+                                <td>@Html.ActionLink("Редактировать", "", "") |<a asp-action="DeletePatient" asp-route-id="@item.Id"> Удалить</a></td>
                             </tr>
                         </tbody>
                     }

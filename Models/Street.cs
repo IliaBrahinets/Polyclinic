@@ -10,12 +10,15 @@ namespace Polyclinic.Models
 {
     public class Street
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         [Required]
         public string Addresses { get; set; }
-        public int RegionID { get; set; }
+
+        public int RegionId { get; set; }
         public Region Region { get; set; }
     }
 }

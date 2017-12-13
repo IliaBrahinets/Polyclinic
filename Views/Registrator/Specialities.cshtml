@@ -37,9 +37,9 @@
                             <input name = 'CheckUpTime' type='number' class="form-control-plaintext" value="@Html.DisplayFor(modelItem => item.CheckUpTime)" readonly  />
                         </td>
                         <td>
-                            <a asp-action="DeleteSpeciality" asp-route-id="@item.ID">Удалить</a> | 
+                            <a asp-action="DeleteSpeciality" asp-route-id="@item.Id">Удалить</a> | 
                             <a class='clickShowHideNext' href="javascript:1;">Изменить</a> | 
-                            <a class = 'sendWithAddition hide' data-to-add = '["Name","CheckUpTime"]' asp-action="EditSpeciality" asp-route-id="@item.ID">Сохранить</a>
+                            <a class = 'sendWithAddition hide' data-to-add = '["Name","CheckUpTime"]' asp-action="EditSpeciality" asp-route-id="@item.Id">Сохранить</a>
 
                         </td>
                     </tr>

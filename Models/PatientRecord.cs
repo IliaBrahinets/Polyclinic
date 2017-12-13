@@ -7,14 +7,14 @@ using System;
 
 public class PatientRecord
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     public DateTime DateTime { get; set; }
 
-    public int PatientID { get; set; }
+    public int PatientId { get; set; }
     public Patient Patient { get; set; }
 
-    public int DoctorID { get; set; }
+    public int DoctorId { get; set; }
     public Doctor Doctor { get; set; }
 
 }

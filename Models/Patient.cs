@@ -12,11 +12,15 @@ public class Patient : Man
     [DataType(DataType.Date)]
     [Display(Name = "Дата рождения")]
     public DateTime BirthDate { get; set; }
+
     public bool Sex { get; set; }
+
     public string Address { get; set; }
+
     [DataType(DataType.Date)]
     public DateTime CreationDate { get; set; }
 
+    public int? RegionId { get; set; }
     public Region Region { get; set; }
 
     public ICollection<DoctorVisit> DoctorVisits { get; set; }

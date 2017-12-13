@@ -34,11 +34,11 @@
             </div>
             <div class='col-sm-8'>
 
-                <label asp-for='SpecailityID'>Специальность</label>
-                <select asp-for='SpecailityID' class = "form-control">
+                <label asp-for='SpecialityId'>Специальность</label>
+                <select asp-for='SpecialityId' class = "form-control">
                     @foreach (var Speciality in ViewBag.Specialities)
                     {
-                        <option value ="@Speciality.Name">@Speciality.Name</option>
+                        <option value ="@Speciality.Id">@Speciality.Name</option>
                         
                     }
                </select>

@@ -10,11 +10,11 @@ using Polyclinic.Models;
 
 public class RelieveTime
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     public String Description { get; set; }
 
-    public int RelieveID;
+    public int RelieveId;
     public Relieve Relieve;
 }

@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class Speciality
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
     [Required(ErrorMessage = "Требуется название")]
     public string Name { get; set; }
 

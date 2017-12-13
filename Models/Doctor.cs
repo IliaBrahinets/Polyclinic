@@ -14,11 +14,12 @@ public class Doctor : Man
     
     public int ChainedCabinet { get; set; }
 
+    public int? RegionId { get; set; }
     public Region Region { get; set; }
 
-    [Key]
-    public int SpecailityID { get; set; }
-    public Speciality SpecialityID { get; set; }
+
+    public int? SpecialityId { get; set; }
+    public Speciality Speciality { get; set; }
 
     public ICollection<Relieve> Schedule { get; set; }
 
