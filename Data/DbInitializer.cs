@@ -28,24 +28,28 @@ namespace Polyclinic.Data
 
             var Specialities = new Speciality[]
             {
-            new Speciality{Name="Carson",CheckUpTime=20},
-            new Speciality{Name="Carson",CheckUpTime=30}
+            new Speciality{Name="Хирург",CheckUpTime=15},
+            new Speciality{Name="Стоматолог",CheckUpTime=30}
             };
             var Drugs = new Drug[]
             {
-                 new Drug{Name="Carson",Description="323"},
-                 new Drug{Name="Carson",Description="232"}
+                 new Drug{Name="Ибуклин",Description="Описание"},
+                 new Drug{Name="Боярышник",Description="Пей"}
             };
             var Diseases = new Disease[]
             {
-                 new Disease{Name="Carson",Description="323"},
-                 new Disease{Name="Carson",Description="212"}
+                 new Disease{Name="Рак",Description="Всё плохо"},
+                 new Disease{Name="Простуда",Description="Пей чай"}
             };
             var Region = new Region { };
-            var Street = new Street { Name = "улица Пролетарская", Addresses = "1,2" };
+            var Street = new Street
+            {
+                Name = "улица Пролетарская", Addresses = "1,2"
+            };
             Region.Streets = new List<Street>();
-            Region.Streets.Add(Street);
-   
+           
+                Region.Streets.Add(Street);
+            
 
             foreach (Disease s in Diseases)
             {
@@ -62,8 +66,9 @@ namespace Polyclinic.Data
 
             
             context.Regions.Add(Region);
-            context.Streets.Add(Street);
-
+           
+                context.Streets.Add(Street);
+            
             context.SaveChanges();
         }
     }

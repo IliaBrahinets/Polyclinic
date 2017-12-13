@@ -70,7 +70,7 @@
                             <td>@Html.DisplayFor(modelItem => item.Lastname)</td>
                             <td>@Html.DisplayFor(modelItem => item.ChainedCabinet)</td>
                             <td>@Html.DisplayFor(modelItem => item.Speciality.Name)</td>
-                            <td>ул.Весенняя</td>
+                            <td>@Html.DisplayFor(modelItem => item.Region.Id)</td>
                             <td>@Html.ActionLink("Расписание", "", "") </td>
                             <td><a asp-action="DeleteDoctor" asp-route-id="@item.Id">Удалить</a> | @Html.ActionLink("Редактировать", "", "")</td>
                         </tr>

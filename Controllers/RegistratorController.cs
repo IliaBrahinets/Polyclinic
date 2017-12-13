@@ -36,19 +36,21 @@ namespace Polyclinic.Controllers
 
         public IActionResult Doctors()
         {
-            return View(db.Doctors.Include(x => x.Speciality));
+
+         
+            return View(db.Doctors.Include(x => x.Speciality).Include(x => x.Region));
         }
 
         public async Task<IActionResult> CreateDoctor()
         {
 
             ViewBag.Specialities = await db.Specialities.ToListAsync();
-
+            ViewBag.Regions = await db.Regions.ToListAsync();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId")] Doctor doctor)
+        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId,RegionId")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {

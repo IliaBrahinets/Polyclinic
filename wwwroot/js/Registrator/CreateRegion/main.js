@@ -99,7 +99,7 @@ function googleMapsAutoCompleteInit(placeSearch) {
         });
     } catch (RerenceError) {
         
-        console.error("probably google is not defined!"ф);
+        console.error("probably google is not defined!");
     }
 }
 
