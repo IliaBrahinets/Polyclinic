@@ -1,37 +1,35 @@
+@model IEnumerable<Patient>
 <div class='mt-4'>
-
     <div class='row'>
         <div class='newPatient col mb-2 text-center'>
-              @Html.ActionLink("Добавить нового пациента","CreatePatient")
+            @Html.ActionLink("Добавить нового пациента", "CreatePatient")
         </div>
-        <div class = 'col-xl-10'></div>
+        <div class='col-xl-10'></div>
     </div>
-    
+
     <div class='row'>
         <div class='col'>
             <div class='filter card p-3 mb-2'>
                 <form>
                     <div class='form-group'>
                         <label for='birthdate'>Дата рождения</label>
-                        <input class = 'form-control form-control-sm' type = 'text' id='birthdate' name = 'birthdate'>
+                        <input class='form-control form-control-sm' type='text' id='birthdate' name='birthdate'>
                     </div>
-
-                    <div class = 'form-group'>
+                    <div class='form-group'>
                         <label for='sex'>Пол</label>
-                        <select class = 'form-control form-control-sm' name = 'sex'>
-                            <option value = 'All'>
+                        <select class='form-control form-control-sm' name='sex'>
+                            <option value='All'>
                                 Оба
                             </option>
-                            <option value = 'M'>
+                            <option value='M'>
                                 М
                             </option>
-                            <option value = 'Fm'>
+                            <option value='Fm'>
                                 Ж
                             </option>
                         </select>
                     </div>
-
-                    <div class = 'form-group'>
+                    <div class='form-group'>
                         <label for='region'>Участок</label>
                         <select class='form-control form-control-sm' name='region'>
                             <option>ул.Осенняя</option>
@@ -58,50 +56,15 @@
                     </div>
                 </div>
             </form>
-            <div class = 'mt-2'>
-                
-                <div class='col-md-4' style="display:none">
+            <div class='mt-2'>
 
-                     <div class ='card mt-2 patient-data'>
-                        <div class = 'card-header'>
-                            <h5 class='card-title text-center'>Иванов И.А.</h4>
-                        </div>
-                        <div class = 'card-body'>
-                            <div class ='row'>
-                                <div class = 'col-sm'>Дата рождения</div>
-                                <div class = 'col-sm'>20.11.1990</div>
-                                <div class="w-100"></div>
-                                <div class = 'col-sm'>Пол</div>
-                                <div class = 'col-sm'>Муж</div>
-                                <div class="w-100"></div>
-                                <div class = 'col-sm'>Адрес</div>
-                                <div class = 'col-sm'>ул.Пролетарская</div>
-                                <div class="w-100"></div>
-                                <div class = 'col-sm'>Участок</div>
-                                <div class = 'col-sm'></div>
-                                <div class ='w-100'></div>
-                                <div class= 'col-sm text-center '>
-                                    <a href = '/Registrator/PatientCard' class = 'btn btn-light'>Перейти к карточке</a>
-                                </div>
-                                 <div class= 'col-sm text-center'>
-                                    <a href = '/Registrator/PatientCard' class = 'btn btn-light'>Записать на прием</a>
-                                </div>
-                                <div class = 'col-sm mt-1 text-right'> 
-                                    @Html.ActionLink("Редактировать","","")
-                                </div>
-
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                </div>
-                
-
-                <table class = 'table text-center table-responsive-lg'>
+                <table class='table text-center table-responsive-lg'>
                     <thead>
                         <tr>
+
                             <th>ФИО</th>
+                           
+                           
                             <th>Дата рождения</th>
                             <th>Пол</th>
                             <th>Адрес</th>
@@ -110,30 +73,41 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Иванов И.А.</td>
-                            <td>20.11.1990</td>
-                            <td>Муж</td>
-                            <td>ул.Пролетарская</td>
-                            <td></td>
-                            <td>@Html.ActionLink("Записать на прием","","") | @Html.ActionLink("Карточка","","")</td>
-                            <td>@Html.ActionLink("Редактировать","","") | @Html.ActionLink("Удалить","","")</td>
-                        </tr>
-                    </tbody>
+
+                    @foreach (var item in Model)
+                    {
+
+                        /* if (item.Surname != null && item.Lastname != null)
+                          {{
+                             var sur = item.Surname.Substring(0, 1);
+                              var last = item.Lastname.Substring(0, 1);
+                          }*/
+                        <tbody>
+                            <tr>
+                                <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.Surname)
+                                @Html.DisplayFor(modelItem => item.Lastname)
+                                </td>
+                              
+                                
+                                <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Sex)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                <td>@Html.ActionLink("Записать на прием", "", "") | @Html.ActionLink("Карточка", "", "")</td>
+                                <td>@Html.ActionLink("Редактировать", "", "") |<a asp-action="DeletePatient" asp-route-id="@item.ID"> Удалить</a></td>
+                            </tr>
+                        </tbody>
+                    }
+
                 </table>
-        
 
-
-                </div>
 
             </div>
-
         </div>
-
-      
     </div>
 
+</div>
 </div>
 @section Scripts {
     <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
@@ -143,5 +117,5 @@
 @section Styles {
     <link rel='stylesheet' href='~/lib/datetimepicker/css/daterangepicker.css' asp-append-version='true' />
     <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' asp-append-version='true' />
-    <link rel = 'stylesheet' href = '~/css/Registrator/Patients/main.css' asp-append-version='true' />
+    <link rel='stylesheet' href='~/css/Registrator/Patients/main.css' asp-append-version='true' />
 }
