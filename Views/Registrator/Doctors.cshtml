@@ -55,9 +55,7 @@
             <div class='row mt-2'>
                 <table class='table text-center table-responsive-md'>
                     <tr>
-                        <th>Имя</th>
-                        <th>Фамилия</th>
-                        <th>Отчество</th>
+                        <th>ФИО</th>
                         <th>Номер кабинета</th>
                         <th>Специальность</th>
                         <th>Участок</th>
@@ -67,9 +65,11 @@
                     @foreach (Doctor item in Model)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Surname)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Lastname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.Surname)
+                                @Html.DisplayFor(modelItem => item.Lastname)
+                            </td>
+                           
                             <td>@Html.DisplayFor(modelItem => item.ChainedCabinet)</td>
                             <td>@Html.DisplayFor(modelItem => item.Speciality.Name)</td>
                             <td>@Html.DisplayFor(modelItem => item.Region.Id)</td>

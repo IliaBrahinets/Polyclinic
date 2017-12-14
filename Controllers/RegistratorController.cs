@@ -41,19 +41,8 @@ namespace Polyclinic.Controllers
             {
 
 
-                //q is a Id 
-                int Id;
-
-                if (Int32.TryParse(q, out Id))
-                {
-                    Doctor Doctor = db.Doctors.Find(Id);
-
-                    db.Entry(Doctor).Collection(x=>x.Specialities).Load();
-
-                    return View(new List<Doctor> { Doctor });
-                }
-
-                //q is a street name
+               
+                //q is a speciality name
                 q = q.ToLower();
 
                 List<Doctor> result = new List<Doctor>();
