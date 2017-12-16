@@ -26,50 +26,39 @@ namespace Polyclinic.Controllers
             return View();
         }
 
-        public IActionResult PatientCard()
+        public IActionResult PatientCard(int? id)
         {
-
-            ViewData["ParentController"] = "Registrator";
-
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            db.Entry(patient).Collection(x => x.DoctorVisits).Load();
+            db.Entry(patient).Reference(x=>x.Street).Load();
+            return View(patient);
         }
+     
 
-        public async Task<IActionResult> Doctors(string q)
+        public async Task<IActionResult> Doctors(string q,int w)
         {
-           
-            if (q != null)
+            ViewBag.Specialities = await db.Specialities.ToListAsync();
+            ViewBag.Regions = await db.Regions.ToListAsync();
+            var Doctors = from m in db.Doctors select m;
+            if (!String.IsNullOrEmpty(q))
             {
-
-
-               
-                //q is a speciality name
-                q = q.ToLower();
-
-                List<Doctor> result = new List<Doctor>();
-
-                dynamic Doctors = await db.Doctors.Include(x => x.Speciality).Include(x => x.Region).ToListAsync();
-                dynamic Specialities = await db.Specialities.ToListAsync();
-
-                foreach (Doctor Doctor in Doctors)
-                {
-                    foreach (Speciality Speciality in Specialities)
-                    {
-                        if (Doctor.Speciality.Name.ToLower().Contains(q))
-                        {
-                            result.Add(Doctor);
-                            break;
-                        }
-                    }
-                }
-
-                return View(result);
-
+                Doctors = Doctors.Where(s => s.Speciality.Name.ToLower().Contains(q));
             }
-            else
+            if (w!=0)
             {
-
-                return View(await db.Doctors.Include(x => x.Speciality).Include(x => x.Region).ToListAsync());
+                Doctors = Doctors.Where(x => x.Region.Id==w);
             }
+            return View(Doctors);
+            
+
         }
 
         public async Task<IActionResult> CreateDoctor()
@@ -108,18 +97,27 @@ namespace Polyclinic.Controllers
         }
         public async Task<IActionResult> Patients()
          {
-             return View(await db.Patients.ToListAsync());
+            List<Patient> patients = await db.Patients.ToListAsync();
+
+            foreach(Patient patient in patients)
+            {
+                await db.Entry(patient).Reference(x => x.Street).LoadAsync();
+            }
+            
+
+            return View(patients);
         }
 
-    public IActionResult CreatePatient()
+    public async Task<IActionResult> CreatePatient()
     {
-        
+        ViewBag.Streets = await db.Streets.ToListAsync();
+
         return View();
 
     }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePatient([Bind("Id,Name,Surname,Lastname,BirthDate,Address,Sex")] Patient patient)
+        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,StreetId,Sex")] Patient patient)
         {
              if (ModelState.IsValid)
              {
@@ -248,8 +246,27 @@ namespace Polyclinic.Controllers
             return RedirectToAction(nameof(Regions));
 
         }
+        public async Task<IActionResult> CreateStreet()
+        {
 
-        public async Task<IActionResult> EditStreet([Bind("Id,Name,Addresses,RegionId")]Street street)
+            ViewBag.Regions = await db.Regions.ToListAsync();
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateStreet([Bind("Name,Addresses,RegionId")] Street street)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                db.Add(street);
+                await db.SaveChangesAsync();
+
+            }
+            return RedirectToAction(nameof(Regions));
+        }
+
+        public async Task<IActionResult> EditStreet([Bind("Name,Addresses,RegionId")]Street street)
         {
             db.Streets.Update(street);
             await db.SaveChangesAsync();

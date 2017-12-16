@@ -2,7 +2,8 @@
 <div class = 'container mt-4'>
     
     <div class='mb-2'>
-        @Html.ActionLink("Добавить", "CreateRegion", "")
+        @Html.ActionLink("Добавить участок", "CreateRegion", "") |
+        @Html.ActionLink("Добавить улицу", "CreateStreet", "")
     </div>
 
     <form asp-controller="Registrator" asp-action="Regions" class='mb-2'>
@@ -14,7 +15,7 @@
                 <button class='btn btn-primary w-100' type='submit'>Показать</button>
             </div>
         </div>
-    </form>
+    </form> 
 
      <table class='table text-center table-responsive-lg' id='RegionsList'>
 
@@ -31,35 +32,38 @@
                  <th></th>
                  <th></th>
                  <th>
-                     <a asp-action="DeleteRegion" asp-route-id="@region.Id">Удалить участок</a>
+                     <a asp-action="DeleteRegion" asp-route-id="@region.Id">Удалить участок</a> 
                  </th>
-             </tr>
-             @if (region.Streets != null)
-             {
 
-                 foreach (Street street in region.Streets)
-                 {
-             <tr class="data-group">
-                 <td>
-                     <input name="RegionId" value="@region.Id" hidden/> 
-                 </td>
-                 <td>   
-                     <input name='Name' class="form-control-plaintext input-sm" value="@street.Name" readonly />
-                     
-                 </td>
-                 <td>
-                     <input name='Addresses' class="form-control-plaintext input-sm" value="@street.Addresses" readonly />
-                 </td>
-                 <td>
-                     <a asp-action="DeleteStreet" asp-route-id="@street.Id">Удалить</a> |
-                     <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
-                     <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionId"]' asp-action="EditStreet" asp-route-id="@street.Id">Сохранить</a>
-                 </td>
              </tr>
-             }
+                      @if (region.Streets != null)
+                      {
+
+                          foreach (Street street in region.Streets)
+                          {
+                             <tr class="data-group">
+                                 <td>
+                                     <input name="RegionId" value="@region.Id" hidden />
+                                 </td>
+                                 <td>
+                                     <input name='Name' class="form-control-plaintext input-sm" value="@street.Name" readonly />
+
+                                 </td>
+                                 <td>
+                                     <input name='Addresses' class="form-control-plaintext input-sm" value="@street.Addresses" readonly />
+                                 </td>
+                                 <td>
+                                     <a asp-action="DeleteStreet" asp-route-id="@street.Id">Удалить</a> |
+                                     <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
+                                     <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionId"]' asp-action="EditStreet" asp-route-id="@street.Id">Сохранить</a>
+                                 </td>
+                             </tr>
+                            
+
+                          }
+                      }
+
          }
-
-     }
      </table>
     
 

@@ -29,7 +29,7 @@ namespace Polyclinic.Data
         {
          
             modelBuilder.Entity<Patient>()
-                 .HasOne(e => e.Region)
+                 .HasOne(e => e.Street)
                  .WithMany(e => e.Patients)
                  .Metadata.DeleteBehavior = DeleteBehavior.SetNull;
 

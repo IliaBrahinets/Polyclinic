@@ -20,5 +20,7 @@ namespace Polyclinic.Models
 
         public int RegionId { get; set; }
         public Region Region { get; set; }
+
+        public ICollection<Patient> Patients { get; set; }
     }
 }

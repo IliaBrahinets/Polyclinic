@@ -1,0 +1,73 @@
+﻿@model Street
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateStreet</title>
+</head>
+<body>
+    <h4>Улицы</h4>
+    <hr />
+
+    <div class='container mt-4'>
+        <form asp-action="CreateStreet">
+            <div class='streetField form-group form-row'>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="w-50">
+                    <div class='col-md'>
+                        <label asp-for='Name'>Улица</label>
+                        <input asp-for='Name' class='streetInput form-control' type='text' placeholder='Введите улицу...' />
+                        <span asp-validation-for='Name' class="text-danger"></span>
+                    </div>
+                </div>  
+                <div class="w-100"></div>
+                <div class="w-25">
+                    <div class='col-md'>
+                        <label asp-for='Addresses'>Номера через запятую</label>
+                        <input asp-for='Addresses' class='streetNumber form-control' type='text' placeholder='Введите номера...' />
+                        <span asp-validation-for='Addresses' class="text-danger"></span>
+                    </div>
+                    </div>
+
+
+                <div class="w-25">
+                    <div class="col-md">
+                        <label asp-for='RegionId'>Номер участка</label>
+                        <select asp-for='RegionId' class="form-control">
+                            @foreach (var Region in ViewBag.Regions)
+                            {
+                                <option value="@Region.Id">@Region.Id</option>
+
+                            }
+                        </select>
+
+                    </div>
+                    </div>
+
+                </div>
+            <div class="col-md">
+                <button class='btn btn-primary' type='submit'>Сохранить</button>
+            </div>
+        </form>
+
+    </div>
+
+
+    
+       @section Scripts {
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvWQAIEkFj89pU7bRqI4g8n0W9NFI_Uuk&libraries=places"></script>
+    <script type="text/javascript" src="~/js/Registrator/CreateRegion/main.js" asp-append-version="true"></script>
+    @Html.Partial("_ValidationScriptsPartial")
+    }
+
+    @section Styles{
+        <link rel="stylesheet" href="~/css/Registrator/CreateRegion/main.css" asp-append-version="true" />
+
+    }
+    
+</body>
+</html>

@@ -1,35 +1,41 @@
+@model Patient
 @{ 
-    ViewData["Title"] = "Карточка пациента"; 
-    }
+    ViewData["Title"] = "Карточка пациента";
+}
 <div class='row mt-4 ml-1'>
     <div class='col-lg-3'>
 
         <div class ='card mb-2 personal-data'>
             <div class = 'card-header'>
-               <h5 class='card-title text-center'>Персональные данные</h4>
+               <h5 class='card-title text-center'>Персональные данные</h5>
             </div>
             <div class = 'card-body'>
-
-                <div class ='row'>
-                    <div class = 'col'>Дата рождения</div>
-                    <div class = 'col'>20.11.1990</div>
-                    <div class="w-100"></div>
-                    <div class = 'col'>Пол</div>
-                    <div class = 'col'>Муж</div>
-                    <div class="w-100"></div>
-                    <div class = 'col'>Адрес</div>
-                    <div class = 'col'>ул.Пролетарская</div>
-                    <div class="w-100"></div>
-                    <div class = 'col'>Участок</div>
-                    <div class = 'col'></div>
-                    @if(ViewData["ParentController"] == "Registrator") {
-                    <div class ='w-100'></div>
-                    <div class = 'col mt-1 text-right'> 
-                        @Html.ActionLink("Редактировать","","")
+               
+                    <div class='row'>
+                        
+                        <div class='col'>Дата рождения</div>
+                        <div class='col'>@Html.DisplayFor(Model=>Model.BirthDate)</div>
+                        <div class="w-100"></div>
+                        <div class='col'>Пол</div>
+                        <div class='col'>@Html.Partial("_SexView")</div>
+                        <div class="w-100"></div>
+                        <div class='col'>Адрес</div>
+                        <div class='col'>@Model.Street.Name</div>
+                        <div class="w-100"></div>
+                        <div class='col'>Участок</div>
+                        <div class='col'>
+                            <a href="/registrator/regions?q=@Model.Street.RegionId"><strong>@Model.Street.RegionId</strong></a>
+                        </div>
+                        @if (ViewData["ParentController"] == "Registrator")
+                        {
+                            <div class='w-100'></div>
+                            <div class='col mt-1 text-right'>
+                                @Html.ActionLink("Редактировать", "", "")
+                            </div>
+                        }
+                        
                     </div>
-                    }
-                </div>
-                
+                    
             </div>
         </div>
 
