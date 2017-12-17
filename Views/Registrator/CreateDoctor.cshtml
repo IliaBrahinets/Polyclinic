@@ -45,9 +45,9 @@
             </div>
         </div>
         <div class='form-group'>
-            <label asp-for='RegionId'>Участок</label>
-            <select asp-for='RegionId' class='form-control' enable-trigger="[{}]">
-                @foreach(Region Region in ViewBag.Regions)
+            <label asp-for='RegionId'>Номер участка</label>
+            <select asp-for='RegionId' class="form-control">
+                @foreach (var Region in ViewBag.Regions)
                 {
                     <option value="@Region.Id">@Region.Id</option>
 

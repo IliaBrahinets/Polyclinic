@@ -45,11 +45,18 @@
         </div>
 
         <div class='form-group'>
-            <label asp-for="Address">Адрес</label>
+            <label asp-for="Street">Адрес</label>
+            <select class="form-control" asp-for="StreetId">
+                @foreach (Street Street in ViewBag.Streets)
+                {
 
-            <input asp-for="Address" class="form-control" type="text" />
+                    <option value="@Street.Id">@Street.Name</option>
+
+                }
+            </select>
 
         </div>
+       
         <div class='form-group'>
             <button class='btn btn-primary' type='submit'>
                 Сохранить

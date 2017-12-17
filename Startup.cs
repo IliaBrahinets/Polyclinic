@@ -24,8 +24,9 @@ namespace Polyclinic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<PolyclinicContext>(options =>
-        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
         }
@@ -40,7 +41,7 @@ namespace Polyclinic
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
@@ -49,7 +50,7 @@ namespace Polyclinic
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Registrator}/{action=Index}");
+                    template: "{controller=registrator}/{action=Index}");
             });
         }
     }

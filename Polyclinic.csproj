@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\Registrator\Новая папка\" />
+    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

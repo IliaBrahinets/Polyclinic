@@ -11,24 +11,33 @@
     <div class='row'>
         <div class='col'>
             <div class='filter card p-3 mb-2'>
-                <form>
+                <form asp-controller="Registrator" asp-action="Doctors" class='mb-2'>
                     <div class='form-group'>
-                        <label for='Speciality'>Специальность врача</label>
-                        <select class='form-control form-control-sm' name='speciality'>
-                            <option>Окулист</option>
-                            <option>Дерматолог</option>
-                            <option>Невролог</option>
-                            <option>Хирург</option>
-                            <option>Терапевт</option>
-                        </select>
-                        <label class='mt-1' for='region'>Участок</label>
-                        <select class='form-control form-control-sm' name='region'>
-                            <option>ул.Осенняя</option>
-                            <option>Дерматолог</option>
-                            <option>Невролог</option>
-                            <option>Хирург</option>
-                            <option>Терапевт</option>
-                        </select>
+                     
+                        <div class='form-group'>
+
+                            <label class="mt-1">Специальность</label>
+                            <select name="q" class="form-control">
+                                @foreach (var Speciality in ViewBag.Specialities)
+                                {
+                                    <option value="@Speciality.Name">@Speciality.Name</option>
+                                }
+                            </select>
+
+                       
+
+
+
+                            <label class='mt-1'>Участок</label>
+                            <select name="w" class="form-control">
+                                @foreach (var Region in ViewBag.Regions)
+                                {
+                                    <option value="@Region.Id">@Region.Id</option>
+                                }
+                            </select>
+                        </div>
+                    
+                     
                     </div>
                     <div class='text-center mt-4'>
                         <button type="submit" class="btn btn-primary">Показать</button>
@@ -53,9 +62,7 @@
             <div class='row mt-2'>
                 <table class='table text-center table-responsive-md'>
                     <tr>
-                        <th>Имя</th>
-                        <th>Фамилия</th>
-                        <th>Отчество</th>
+                        <th>ФИО</th>
                         <th>Номер кабинета</th>
                         <th>Специальность</th>
                         <th>Участок</th>
@@ -65,12 +72,13 @@
                     @foreach (Doctor item in Model)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Surname)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Lastname)</td>
+                            <td>
+                                @Html.Partial("_ManShortName", item)
+                            </td>
+                           
                             <td>@Html.DisplayFor(modelItem => item.ChainedCabinet)</td>
                             <td>@Html.DisplayFor(modelItem => item.Speciality.Name)</td>
-                            <td>ул.Весенняя</td>
+                            <td>@Html.DisplayFor(modelItem => item.Region.Id)</td>
                             <td>@Html.ActionLink("Расписание", "", "") </td>
                             <td><a asp-action="DeleteDoctor" asp-route-id="@item.Id">Удалить</a> | @Html.ActionLink("Редактировать", "", "")</td>
                         </tr>
