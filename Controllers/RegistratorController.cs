@@ -34,26 +34,27 @@ namespace Polyclinic.Controllers
             return View();
         }
 
-        public IActionResult Doctors()
+        public async Task<IActionResult> Doctors()
         {
-            return View(db.Doctors.Include(x => x.Speciality));
+            return View(await db.Doctors.Include(x => x.Speciality).ToListAsync());
         }
 
         public async Task<IActionResult> CreateDoctor()
         {
 
             ViewBag.Specialities = await db.Specialities.ToListAsync();
+            ViewBag.Regions = await db.Regions.ToListAsync();
 
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId")] Doctor doctor)
+        public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId,RegionId")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
                
-                db.Add(doctor);
+                db.Doctors.Add(doctor);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Doctors));
             }
@@ -268,7 +269,7 @@ namespace Polyclinic.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(speciality);
+                db.Specialities.Add(speciality);
                 await db.SaveChangesAsync();
                
             }
