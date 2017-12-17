@@ -39,6 +39,8 @@ namespace Polyclinic.Controllers
             }
             db.Entry(patient).Collection(x => x.DoctorVisits).Load();
             db.Entry(patient).Reference(x=>x.Street).Load();
+            ViewBag.Specialities = db.Specialities.ToList();
+
             return View(patient);
         }
      
@@ -97,13 +99,14 @@ namespace Polyclinic.Controllers
         }
         public async Task<IActionResult> Patients()
          {
+            ViewBag.Regions = await db.Regions.ToListAsync();
             List<Patient> patients = await db.Patients.ToListAsync();
 
-            foreach(Patient patient in patients)
+            foreach (Patient patient in patients)
             {
                 await db.Entry(patient).Reference(x => x.Street).LoadAsync();
             }
-            
+
 
             return View(patients);
         }

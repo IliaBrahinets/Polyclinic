@@ -45,11 +45,11 @@
                 <div class='form-group'>
                     <label for='speciality'>Специальность врача</label>
                     <select class='form-control form-control-sm' name='speciality'>
-                        <option>Окулист</option>
-                        <option>Дерматолог</option>
-                        <option>Невролог</option>
-                        <option>Хирург</option>
-                        <option>Терапевт</option>
+                        @foreach(var Speciality in ViewBag.Specialities)
+                        {
+                            <option value="@Speciality.Name">@Speciality.Name</option>
+
+                        }
                     </select>
                 </div>
                 <div class='form-group'>
