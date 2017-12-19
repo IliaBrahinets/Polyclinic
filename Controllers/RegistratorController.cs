@@ -45,11 +45,15 @@ namespace Polyclinic.Controllers
         }
      
 
-        public async Task<IActionResult> Doctors(string q,int w)
+        public async Task<IActionResult> Doctors(string q,int w,string e)
         {
             ViewBag.Specialities = await db.Specialities.ToListAsync();
             ViewBag.Regions = await db.Regions.ToListAsync();
             var Doctors = from m in db.Doctors select m;
+            if (!String.IsNullOrEmpty(e))
+            {
+                Doctors = Doctors.Where(s => s.Surname.ToLower().Contains(e));
+            }
             if (!String.IsNullOrEmpty(q))
             {
                 Doctors = Doctors.Where(s => s.Speciality.Name.ToLower().Contains(q));
@@ -97,21 +101,36 @@ namespace Polyclinic.Controllers
             }
             return NotFound();
         }
-        public async Task<IActionResult> Patients()
+        public async Task<IActionResult> Patients(DateTime birthdate,string surname,int region,bool? sex)
          {
             ViewBag.Regions = await db.Regions.ToListAsync();
-            List<Patient> patients = await db.Patients.ToListAsync();
+            var Patients = from m in db.Patients select m;
 
-            foreach (Patient patient in patients)
+            foreach (Patient patient in db.Patients)
             {
                 await db.Entry(patient).Reference(x => x.Street).LoadAsync();
             }
+            if (!String.IsNullOrEmpty(surname))
+            {
+                Patients = Patients.Where(s => s.Surname.ToLower().Contains(surname));
+            }
+            if (region!=0)
+            {
+                Patients = Patients.Where(s => s.Street.RegionId==region);
+            }
+            if (sex==false || sex == true)
+            {
+                Patients = Patients.Where(s => s.Sex == sex);
+            }
 
 
-            return View(patients);
+
+                return View(Patients);
         }
 
-    public async Task<IActionResult> CreatePatient()
+       
+
+        public async Task<IActionResult> CreatePatient()
     {
         ViewBag.Streets = await db.Streets.ToListAsync();
 
@@ -120,7 +139,7 @@ namespace Polyclinic.Controllers
     }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,StreetId,Sex")] Patient patient)
+        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,StreetId,Sex,Housenumber")] Patient patient)
         {
              if (ModelState.IsValid)
              {
