@@ -101,13 +101,23 @@ namespace Polyclinic.Controllers
             }
             return NotFound();
         }
-        public async Task<IActionResult> Patients(DateTime birthdate,string surname,int region,bool? sex)
+        public async Task<IActionResult> Patients(string birthdate,string surname,int region,bool? sex)
          {
             ViewBag.Regions = await db.Regions.ToListAsync();
+            
             var Patients = from m in db.Patients select m;
 
+            if (!String.IsNullOrEmpty(birthdate))
+            {
+                var minDate = DateTime.ParseExact(birthdate.Substring(0, 10), "dd.MM.yyyy", null);
+                var maxDate = DateTime.ParseExact(birthdate.Substring(13, 10), "dd.MM.yyyy", null);
+
+                Patients = Patients.Where(s => s.BirthDate.CompareTo(minDate) >= 0 && s.BirthDate.CompareTo(maxDate) <= 0);
+
+            }
             foreach (Patient patient in db.Patients)
             {
+              
                 await db.Entry(patient).Reference(x => x.Street).LoadAsync();
             }
             if (!String.IsNullOrEmpty(surname))

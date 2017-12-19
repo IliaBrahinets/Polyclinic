@@ -29,7 +29,8 @@ namespace Polyclinic.Data
             var Specialities = new Speciality[]
             {
             new Speciality{Name="Хирург",CheckUpTime=15},
-            new Speciality{Name="Стоматолог",CheckUpTime=30}
+            new Speciality{Name="Стоматолог",CheckUpTime=30},
+            new Speciality{Name="Офтальмолог",CheckUpTime=20}
             };
             var Drugs = new Drug[]
             {
