@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Polyclinic.Data;
 using Polyclinic.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.IO;
 
 namespace Polyclinic.Controllers
 {
@@ -39,16 +42,22 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
             db.Entry(patient).Collection(x => x.DoctorVisits).Load();
-            db.Entry(patient).Reference(x => x.Street).Load();
+            db.Entry(patient).Reference(x=>x.Street).Load();
+            ViewBag.Specialities = db.Specialities.ToList();
+
             return View(patient);
         }
 
 
-        public async Task<IActionResult> Doctors(string q, int w)
+        public async Task<IActionResult> Doctors(string q,int w,string e)
         {
             ViewBag.Specialities = await db.Specialities.ToListAsync();
             ViewBag.Regions = await db.Regions.ToListAsync();
             var Doctors = from m in db.Doctors select m;
+            if (!String.IsNullOrEmpty(e))
+            {
+                Doctors = Doctors.Where(s => s.Surname.ToLower().Contains(e));
+            }
             if (!String.IsNullOrEmpty(q))
             {
                 Doctors = Doctors.Where(s => s.Speciality.Name.ToLower().Contains(q));
@@ -175,17 +184,122 @@ namespace Polyclinic.Controllers
             }
             return NotFound();
         }
-        public async Task<IActionResult> Patients()
-        {
-            List<Patient> patients = await db.Patients.ToListAsync();
+        public async Task<IActionResult> Patients(string birthdate,string surname,int region,bool? sex)
+         {
+            ViewBag.Regions = await db.Regions.ToListAsync();
+            
+            var Patients = from m in db.Patients select m;
 
-            foreach (Patient patient in patients)
+            if (!String.IsNullOrEmpty(birthdate))
             {
+                var minDate = DateTime.ParseExact(birthdate.Substring(0, 10), "dd.MM.yyyy", null);
+                var maxDate = DateTime.ParseExact(birthdate.Substring(13, 10), "dd.MM.yyyy", null);
+
+                Patients = Patients.Where(s => s.BirthDate.CompareTo(minDate) >= 0 && s.BirthDate.CompareTo(maxDate) <= 0);
+            }
+            foreach (Patient patient in db.Patients)
+            {
+              
                 await db.Entry(patient).Reference(x => x.Street).LoadAsync();
+            }
+            if (!String.IsNullOrEmpty(surname))
+            {
+                Patients = Patients.Where(s => s.Surname.ToLower().Contains(surname));
+            }
+            if (region!=0)
+            {
+                Patients = Patients.Where(s => s.Street.RegionId==region);
+            }
+            if (sex==false || sex == true)
+            {
+                Patients = Patients.Where(s => s.Sex == sex);
             }
 
 
-            return View(patients);
+
+                return View(Patients);
+        }
+       
+        public async Task<IActionResult> ExportToWord(PatientRecord patientRecord)
+        {
+            if (patientRecord.Id != 0)
+            {
+                
+                MemoryStream mem = new MemoryStream();
+                using (WordprocessingDocument wordDoc =
+                    WordprocessingDocument.Create(mem, DocumentFormat.OpenXml.WordprocessingDocumentType.Document, true))
+                {
+                    wordDoc.AddMainDocumentPart();
+                    // instantiate the members of the hierarchy
+                    Document doc = new Document();
+                    Body body = new Body();
+                    Paragraph para = new Paragraph();
+                    Run run = new Run();
+                    Text text = new Text() {Text = patientRecord.Doctor.Id.ToString()};
+
+                    // put the hierarchy together
+                    run.Append(text);
+                    para.Append(run);
+                    body.Append(para);
+                    doc.Append(body);
+                    wordDoc.MainDocumentPart.Document = doc;
+                    wordDoc.Close();
+                }
+                return File(mem.ToArray(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "talon.docx");
+            }
+            return View();
+        }
+        public async Task<IActionResult> ViewPatientRecord(Patient patientId)
+        {
+            
+            ViewBag.Doctors = await db.Doctors.ToListAsync();
+            ViewBag.Patients = await db.Patients.ToListAsync();
+
+            ViewBag.Specialities = await db.Specialities.ToListAsync();
+            var PatientRecords = from m in db.PatientRecords select m;
+
+            if (patientId.Id != 0)
+            {
+                PatientRecords = PatientRecords.Where(s => s.PatientId == patientId.Id);
+            }
+            return View(PatientRecords);
+        }
+
+        public async Task<IActionResult> CreatePatientRecord()
+        {
+            
+            
+            ViewBag.Doctors = await db.Doctors.ToListAsync();
+            ViewBag.Patients = await db.Patients.ToListAsync();
+            ViewBag.Specialities = await db.Specialities.ToListAsync();
+
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePatientRecord([Bind("DateTime,PatientId,DoctorId")] PatientRecord patientRecord)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                db.PatientRecords.Add(patientRecord);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(ViewPatientRecord));
+            }
+            return View(patientRecord);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeletePatientRecord(int? id)
+        {
+            if (id != null)
+            {
+                PatientRecord patientRecord = new PatientRecord { Id = id.Value };
+                db.Entry(patientRecord).State = EntityState.Deleted;
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(ViewPatientRecord));
+            }
+            return NotFound();
         }
 
         public async Task<IActionResult> CreatePatient()

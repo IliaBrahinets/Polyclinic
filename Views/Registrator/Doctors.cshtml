@@ -19,21 +19,18 @@
                     <div class='form-group'>
                      
                         <div class='form-group'>
-
                             <label class="mt-1">Специальность</label>
                             <select name="q" class="form-control">
+                                <option value="">Все</option>
                                 @foreach (var Speciality in ViewBag.Specialities)
                                 {
                                     <option value="@Speciality.Name">@Speciality.Name</option>
                                 }
                             </select>
 
-                       
-
-
-
                             <label class='mt-1'>Участок</label>
                             <select name="w" class="form-control">
+                                <option value="">Все</option>
                                 @foreach (var Region in ViewBag.Regions)
                                 {
                                     <option value="@Region.Id">@Region.Id</option>
@@ -55,7 +52,7 @@
             <form>
                 <div class='form-row'>
                     <div class='col'>
-                        <input class='form-control' type='search' placeholder='Введите ФИО...'>
+                        <input name="e" class='form-control' type='search' placeholder='Введите фамилию врача...'>
                     </div>
                     <div class='col-sm-2'>
                         <button class='btn btn-primary w-100' type='submit'>Показать</button>
