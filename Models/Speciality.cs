@@ -7,15 +7,20 @@ using System;
 using System.Collections.Generic;
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Polyclinic.CustomValidators;
 
 public class Speciality
 {
     public int Id { get; set; }
+
     [Required(ErrorMessage = "Требуется название")]
+    [RegularExpression("^[A-Яа-я]+$",ErrorMessage = "Должно состоять только из букв")]
+    [Remote(action: "isSpecialityExist", controller: "Registrator")]
     public string Name { get; set; }
 
     [Required(ErrorMessage = "Требуется длительность приема")]
-    [Range(1,1440,ErrorMessage = "Знaчение должно быть между 1 и 1440")]
+    [MinValue(0, "Должен быть больше либо равен 0")]
     public int CheckUpTime { get; set; }
 
     public ICollection<Doctor> Doctors { get; set; }

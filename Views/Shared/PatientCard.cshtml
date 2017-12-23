@@ -13,19 +13,21 @@
                
                     <div class='row'>
                         
-                        <div class='col'>Дата рождения</div>
-                        <div class='col'>@Html.DisplayFor(Model=>Model.BirthDate)</div>
+                        <div class='col-md'>Дата рождения</div>
+                        <div class='col-md'>@Html.DisplayFor(Model=>Model.BirthDate)</div>
                         <div class="w-100"></div>
-                        <div class='col'>Пол</div>
-                        <div class='col'>@Html.Partial("_SexView")</div>
+                        <div class='col-md'>Пол</div>
+                        <div class='col-md'>@Html.Partial("_SexView")</div>
                         <div class="w-100"></div>
-                        <div class='col'>Адрес</div>
-                        <div class='col'>@Model.Street.Name</div>
+                        <div class='col-md'>Адрес</div>
+                        <div class='col-md'>@Model.Street.Name @Model.HouseNumber</div>
                         <div class="w-100"></div>
-                        <div class='col'>Участок</div>
-                        <div class='col'>
+                        <div class='col-md'>Участок</div>
+                        <div class='col-md'>
                             <a href="/registrator/regions?q=@Model.Street.RegionId"><strong>@Model.Street.RegionId</strong></a>
                         </div>
+               
+
                         @if (ViewData["ParentController"] == "Registrator")
                         {
                             <div class='w-100'></div>

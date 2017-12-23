@@ -1,4 +1,8 @@
 @model IEnumerable<Doctor>
+@{
+    ViewData["Title"] = "Доктора";
+}
+
 <div class='mt-4'>
     <div class='row'>
         <div class='newDoctor col mb-2 text-center'>
@@ -9,7 +13,7 @@
 
 
     <div class='row'>
-        <div class='col'>
+        <div class='col-lg-2'>
             <div class='filter card p-3 mb-2'>
                 <form asp-controller="Registrator" asp-action="Doctors" class='mb-2'>
                     <div class='form-group'>
@@ -79,8 +83,8 @@
                             <td>@Html.DisplayFor(modelItem => item.ChainedCabinet)</td>
                             <td>@Html.DisplayFor(modelItem => item.Speciality.Name)</td>
                             <td>@Html.DisplayFor(modelItem => item.Region.Id)</td>
-                            <td>@Html.ActionLink("Расписание", "", "") </td>
-                            <td><a asp-action="DeleteDoctor" asp-route-id="@item.Id">Удалить</a> | @Html.ActionLink("Редактировать", "", "")</td>
+                            <td><a asp-action="DoctorScheduleView" asp-route-id="@item.Id">Расписание</a></td>
+                            <td><a asp-action="DeleteDoctor" asp-route-id="@item.Id">Удалить</a> | <a asp-action="EditDoctor" asp-route-id="@item.Id">Редактировать</a></td>
                         </tr>
                     }
                 </table>

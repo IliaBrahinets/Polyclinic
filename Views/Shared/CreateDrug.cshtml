@@ -1,7 +1,6 @@
 ﻿@model Drug
 @{
-    ViewData["Title"] = "CreateDrug";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Справочник лекарств";
 }
 <div class='container mt-4'>
 
@@ -10,12 +9,18 @@
         <div class='form-group'>
             <label asp-for='Name'>Название</label>
             <input asp-for='Name' class='form-control' type='text' placeholder='Название лекарства...' />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class='form-group'>
             <label asp-for='Description'>Описание лекарства</label>
             <textarea asp-for='Description' class='form-control' type='text' placeholder='Описание...' rows='4'></textarea>
+            <span asp-validation-for='Description' class='text-danger'></span>
         </div>
         <button class='btn btn-primary' type='submit'>Сохранить</button>
     </form>
 
 </div>
+
+@section Scripts{
+    @Html.Partial("_ValidationScriptsPartial")
+}

@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<Disease>
 
 @{
+    ViewData["Title"] = "Справочник болезней";
 }
 <div class='container mt-4'>
 
     <div class='mb-2'>
-        @Html.ActionLink("Добавить", "CreateDrug")
+        @Html.ActionLink("Добавить", "CreateDisease")
     </div>
 
     <form asp-controller="Registrator" asp-action="DrugsDirectory" class='mb-2'>

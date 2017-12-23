@@ -3,7 +3,10 @@
 *@
 @{
 }
-@model Street
+@model Street[]
+@{
+    ViewData["Title"] = "Создание региона";
+}
 
 <div class='container mt-4'>
     <form id="CreateRegionForm" asp-action="CreateRegion" asp-controller="registrator" method="post" enctype="multipart/form-data">
@@ -13,14 +16,14 @@
         <div class="streetFieldsContainer">
             <div class='streetField form-group form-row'>
                 <div class='col-md'>
-                    <label asp-for='Name'>Улица</label>
-                    <input asp-for='Name' class='streetInput form-control' type='text' placeholder='Введите улицу...' />
-                    <span asp-validation-for='Name' class="text-danger"></span>
+                    <label asp-for='@Model[0].Name'>Улица</label>
+                    <input asp-for='@Model[0].Name' class='streetInput form-control' type='text' placeholder='Введите улицу...' />
+                    <span asp-validation-for='@Model[0].Name' class="text-danger"></span>
                 </div>
                 <div class='col-md'>
-                    <label asp-for='Addresses'>Номера через запятую</label>
-                    <input asp-for='Addresses' class='streetNumber form-control' type='text' placeholder='Введите номера...' />
-                    <span asp-validation-for='Addresses' class="text-danger"></span>
+                    <label asp-for='@Model[0].Addresses'>Номера через запятую</label>
+                    <input asp-for='@Model[0].Addresses' class='streetNumber form-control' type='text' placeholder='Введите номера...' />
+                    <span asp-validation-for='@Model[0].Addresses' class="text-danger"></span>
                 </div>
 
                 <div class="w-100"></div>
@@ -43,13 +46,14 @@
 </div>
 
 @section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvWQAIEkFj89pU7bRqI4g8n0W9NFI_Uuk&libraries=places"></script>
     <script type="text/javascript" src="~/lib/googleMapsAutoCompleteInit/StreetAutoCompleteInit.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/Registrator/CreateRegion/main.js" asp-append-version="true"></script>
-     @Html.Partial("_ValidationScriptsPartial")
+
 }
 
 @section Styles{
     <link rel="stylesheet" href="~/css/Registrator/CreateRegion/main.css" asp-append-version="true" />
-   
+
 } 

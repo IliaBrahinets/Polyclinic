@@ -5,7 +5,7 @@
 $(function () {
     //default date range picker
     $('#daterange').daterangepicker({
-        autoApply:true
+        format: 'HH:mm'
     });
 
     //date time picker
@@ -13,12 +13,13 @@ $(function () {
         timePicker: true,
         timePickerIncrement: 30,
         locale: {
-            format: 'MM/DD/YYYY h:mm A'
+            format: 'hh:mm A'
         }
     });
 
     //single date
     $('#date').daterangepicker({
         singleDatePicker: true,
+        autoUpdateInput : false
     });
 });

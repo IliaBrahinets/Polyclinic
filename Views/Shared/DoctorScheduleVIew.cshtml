@@ -1,4 +1,6 @@
-﻿@{ ViewData["Title"] = "Doctor"; }
+﻿@model Doctor
+
+@{ ViewData["Title"] = "Doctor"; }
 
 <script type='text/template' id='scheduletemplate'>
     <div class='container mb-3 mt-3'>
@@ -53,6 +55,7 @@
 </script>
 
 <diV class='container'>
+    <div class="mt-2"><a asp-action="DoctorScheduleEdit" asp-route-id="@Model.Id">Редактировать</a></div>
     <div id='schedule'></div>
 
     <table class='patientList table table-sm text-center'>

@@ -5,16 +5,15 @@
 
 using System;
 
+using Polyclinic.Models;
+
 public class PatientRecord
 {
     public int Id { get; set; }
 
-    public DateTime DateTime { get; set; }
-
     public int PatientId { get; set; }
     public Patient Patient { get; set; }
 
-    public int DoctorId { get; set; }
-    public Doctor Doctor { get; set; }
-
+    public int RelieveId { get; set; }
+    public Relieve Relieve { get; set; }
 }

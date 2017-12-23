@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Polyclinic.Data;
 using Polyclinic.Models;
 using System.Diagnostics;
-
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Polyclinic.Controllers
 {
@@ -38,12 +39,12 @@ namespace Polyclinic.Controllers
                 return NotFound();
             }
             db.Entry(patient).Collection(x => x.DoctorVisits).Load();
-            db.Entry(patient).Reference(x=>x.Street).Load();
+            db.Entry(patient).Reference(x => x.Street).Load();
             return View(patient);
         }
-     
 
-        public async Task<IActionResult> Doctors(string q,int w)
+
+        public async Task<IActionResult> Doctors(string q, int w)
         {
             ViewBag.Specialities = await db.Specialities.ToListAsync();
             ViewBag.Regions = await db.Regions.ToListAsync();
@@ -52,12 +53,12 @@ namespace Polyclinic.Controllers
             {
                 Doctors = Doctors.Where(s => s.Speciality.Name.ToLower().Contains(q));
             }
-            if (w!=0)
+            if (w != 0)
             {
-                Doctors = Doctors.Where(x => x.Region.Id==w);
+                Doctors = Doctors.Where(x => x.Region.Id == w);
             }
             return View(Doctors);
-            
+
 
         }
 
@@ -66,22 +67,101 @@ namespace Polyclinic.Controllers
 
             ViewBag.Specialities = await db.Specialities.ToListAsync();
             ViewBag.Regions = await db.Regions.ToListAsync();
-            return View();
+
+            return View("EditDoctor");
         }
+
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateDoctor([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId,RegionId")] Doctor doctor)
         {
-            
+
             if (ModelState.IsValid)
             {
-               
                 db.Add(doctor);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Doctors));
             }
             return View(doctor);
         }
+
+        [HttpPost]
+        public async Task<JsonResult> IsDoctorNotExist([Bind("Name,Surname,Lastname,ChainedCabinet,SpecialityId,RegionId")] Doctor doctor)
+        {
+            if (doctor == null)
+                return Json(data: true);
+
+            if (!ModelState.IsValid)
+            {
+                return Json(data: true);
+            }
+
+            Doctor TryDoctor = await db.Doctors.FirstOrDefaultAsync(
+                x => (x.Name.Equals(doctor.Name)
+                      && x.Surname.Equals(doctor.Surname)
+                      && x.Lastname.Equals(doctor.Lastname)
+                      && x.ChainedCabinet.Equals(doctor.ChainedCabinet)
+                      && x.SpecialityId.Equals(doctor.SpecialityId)
+                      && x.RegionId.Equals(doctor.RegionId)));
+
+            if (TryDoctor == null)
+                return Json(data: true);
+
+            return Json(data: "“акой доктор существует");
+
+
+        }
+
+        public async Task<JsonResult> IsCabinetAvaliable(int? Id, int? ChainedCabinet)
+        {
+            if (ChainedCabinet == null)
+                return Json(data: true);
+
+            Doctor TryDoctor = await db.Doctors.FirstOrDefaultAsync(x => 
+                                        (x.ChainedCabinet == ChainedCabinet)
+                                        &&(x.Id != Id));
+
+            if (TryDoctor == null)
+                return Json(data: true);
+
+            return Json(data: " абинет зан€т");
+        }
+
+        public async Task<IActionResult> EditDoctor(int? id)
+        {
+            if (id != null)
+            {
+                Doctor doctor = await db.Doctors.FindAsync(id);
+
+                if (doctor == null)
+                    return RedirectToAction(nameof(Doctors));
+
+                ViewBag.Specialities = await db.Specialities.ToListAsync();
+                ViewBag.Regions = await db.Regions.ToListAsync();
+
+                return View(doctor);
+            }
+
+            return RedirectToAction(nameof(Doctors));
+           
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditDoctor(Doctor doctor)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.Doctors.Update(doctor);
+                await db.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Doctors));
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> DeleteDoctor(int? id)
@@ -96,63 +176,325 @@ namespace Polyclinic.Controllers
             return NotFound();
         }
         public async Task<IActionResult> Patients()
-         {
+        {
             List<Patient> patients = await db.Patients.ToListAsync();
 
-            foreach(Patient patient in patients)
+            foreach (Patient patient in patients)
             {
                 await db.Entry(patient).Reference(x => x.Street).LoadAsync();
             }
-            
+
 
             return View(patients);
         }
 
-    public async Task<IActionResult> CreatePatient()
-    {
-        ViewBag.Streets = await db.Streets.ToListAsync();
+        public async Task<IActionResult> CreatePatient()
+        {
 
-        return View();
+            return View("EditPatient");
 
-    }
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,StreetId,Sex")] Patient patient)
+        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,Sex,StreetId,StreetName,HouseNumber")] Patient patient)
         {
-             if (ModelState.IsValid)
-             {
-                 db.Patients.Add(patient);
-                 await db.SaveChangesAsync();
-                 return RedirectToAction(nameof(Patients));
+            if (ModelState.IsValid)
+            {
+                patient.CreationDate = DateTime.Today.Date;
+
+                //we need check for this Street
+
+                if (patient.StreetId == null)
+                {
+                    Street StreetMatched =
+                           await db.Streets.FirstOrDefaultAsync(x => (x.Name.Equals(patient.StreetName)
+                                             && x.Addresses.Contains(patient.HouseNumber)));
+
+
+                    patient.StreetId = StreetMatched.Id;
+                }
+
+
+
+                db.Patients.Add(patient);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Patients));
             }
-             return View(patient);
-         }
-         [HttpGet]
-         public async Task<IActionResult> DeletePatient(int? id)
-         {
-             if (id != null)
-             {
+            return View(patient);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> isPatientNotExist([Bind("Name,Surname,Lastname,BirthDate,Sex,StreetId,StreetName,HouseNumber")]Patient patient)
+        {
+            if (patient == null)
+                return Json(data: true);
+
+            if (!ModelState.IsValid)
+            {
+                return Json(data: true);
+            }
+            Patient TryPatient = await db.Patients.FirstOrDefaultAsync(
+                x => (x.BirthDate.Equals(patient.BirthDate)
+                      && x.Name.Equals(patient.Name) 
+                      && x.Surname.Equals(patient.Surname)
+                      && x.Lastname.Equals(patient.Lastname)
+                      && x.Sex.Equals(patient.Sex)
+                      && x.StreetId.Equals(patient.StreetId)
+                      && x.HouseNumber.Equals(patient.HouseNumber)) );
+
+            if(TryPatient == null)
+                return Json(data: true);
+
+            return Json(data: "“акой пациент существует");
+
+
+        }
+
+      
+        public async Task<IActionResult> EditPatient(int? id)
+        {
+            if (id != null)
+            {
+                Patient patient = await db.Patients.FindAsync(id);
+
+                if(patient == null)
+                    return RedirectToAction(nameof(Patients));
+
+                await db.Entry(patient).Reference(x => x.Street).LoadAsync();
+
+                return View(patient);
+            }
+
+            return RedirectToAction(nameof(Patients));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPatient(Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                if (patient.StreetId == null)
+                {
+                    Street StreetMatched =
+                           await db.Streets.FirstOrDefaultAsync(x => (x.Name.Equals(patient.StreetName)
+                                             && x.Addresses.Contains(patient.HouseNumber)));
+
+
+                    patient.StreetId = StreetMatched.Id;
+                }
+
+                db.Patients.Update(patient);
+                await db.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Patients));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePatient(int? id)
+        {
+            if (id != null)
+            {
                 Patient patient = new Patient { Id = id.Value };
                 db.Entry(patient).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
-                 return RedirectToAction(nameof(Patients));
-             }
-            return NotFound();
-         }
+            }
 
-        public IActionResult DoctorScheduleView()
+            return RedirectToAction(nameof(Patients));
+        }
+
+
+        public async Task<IActionResult> DoctorScheduleView(int? id)
         {
+            Relieve relieve= new Relieve{Date = DateTime.Parse("23.11.17"),DoctorId = 1,StartTime=DateTime.Parse("08:00"),EndTime=DateTime.Parse("15:00") };
+            db.Relieves.Add(relieve);
+            db.SaveChanges();
 
             ViewData["ParentController"] = "Registrator";
 
-            return View();
+            if(id != null)
+            {
+                Doctor doctor = await db.Doctors.FindAsync(id);
+
+                if (doctor != null)
+                {
+                    await db.Entry(doctor).Reference(x => x.Speciality).LoadAsync();
+
+                    return View(doctor);
+                }
+            }
+
+            return NotFound();
         }
 
-        public IActionResult DoctorScheduleEdit()
+        public async Task<IActionResult> DoctorScheduleEdit(int? id)
+        {
+         
+            if (id != null)
+            {
+                Doctor doctor = await db.Doctors.FindAsync(id);
+
+                if (doctor != null)
+                {
+                    await db.Entry(doctor).Reference(x => x.Speciality).LoadAsync();
+
+                    return View(doctor);
+                }
+            }
+
+            return NotFound();
+        }
+
+        public async Task<IActionResult> Relieves(int? Year,int? Month,int? Day,int? DoctorId)
+        {
+            if(DoctorId != null)
+            {
+                Doctor doctor = await db.Doctors.FindAsync(DoctorId);
+
+                if (doctor != null)
+                {
+
+                    IQueryable<Relieve> q = db.Entry(doctor).Collection(x => x.Schedule).Query();
+
+                    List<Relieve> Relieves = await q.Where(x => (Year == null || x.Date.Year == Year)
+                                                          && (Month == null || x.Date.Month == Month)
+                                                          && (Day == null || x.Date.Day == Day)).ToListAsync();
+
+                   
+
+                    return Json(Relieves);
+                }
+
+            }
+
+            return NotFound();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRelieve([Bind("Date,DoctorId,StartTime,EndTime")] Relieve relieve)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Relieves.Add(relieve);
+                await db.SaveChangesAsync();
+
+                return Json(data: relieve.Id);
+            }
+
+            return NotFound();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditRelieve(Relieve relieve)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Relieves.Update(relieve);
+                await db.SaveChangesAsync();
+                return Json(data: true);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteRelieve(int? id)
         {
 
-            return View();
+            if (id != null)
+            {
+                Relieve relieve = await db.Relieves.FindAsync(id);
+
+
+                if (relieve != null)
+                {
+                    db.Entry(relieve).State = EntityState.Deleted;
+                    await db.SaveChangesAsync();
+                    return Json(data: true);
+                }
+            }
+
+            return NotFound();
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRelieveTime([Bind("Description,StartTime,EndTime")] RelieveTime relieveTime)
+        {
+            if (ModelState.IsValid)
+            { 
+                db.RelieveTimes.Add(relieveTime);
+                await db.SaveChangesAsync();
+
+                return Json(data:relieveTime.Id);
+            }
+
+            return NotFound();
+         
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditRelieveTime(RelieveTime relieveTime)
+        {
+            if (ModelState.IsValid)
+            {
+                db.RelieveTimes.Update(relieveTime);
+                await db.SaveChangesAsync();
+                return Json(data: true);
+            }
+
+            return NotFound();
+
+        }
+
+
+        public async Task<IActionResult> RelieveTimes(int? id)
+        {
+          
+            if (id != null)
+            {
+                RelieveTime relieveTime = await db.RelieveTimes.FindAsync(id);
+
+                if (relieveTime != null)
+                    return Json(relieveTime);
+            }
+            else
+            {
+                return Json(await db.RelieveTimes.ToListAsync());
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteRelieveTime(int? id)
+        {
+
+            if (id != null)
+            {
+                RelieveTime relieveTime = await db.RelieveTimes.FindAsync(id);
+
+
+                if (relieveTime != null)
+                {
+                    db.Entry(relieveTime).State = EntityState.Deleted;
+                    await db.SaveChangesAsync();
+                    return Json(data:true);
+                }
+            }
+     
+            return NotFound();
+        }
+
 
         public async Task<IActionResult> Regions(String q)
         {
@@ -180,7 +522,7 @@ namespace Polyclinic.Controllers
 
                 foreach (Region Region in Regions)
                 {
-                    
+
                     foreach (Street Street in Region.Streets)
 
                         if (Street.Name.ToLower().Contains(q))
@@ -202,7 +544,7 @@ namespace Polyclinic.Controllers
         public IActionResult CreateRegion()
         {
             return View();
-        }   
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -256,9 +598,10 @@ namespace Polyclinic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateStreet([Bind("Name,Addresses,RegionId")] Street street)
         {
-           
+
             if (ModelState.IsValid)
             {
+                street.Addresses = street.Addresses.ToUpper();
                 db.Add(street);
                 await db.SaveChangesAsync();
 
@@ -266,16 +609,16 @@ namespace Polyclinic.Controllers
             return RedirectToAction(nameof(Regions));
         }
 
-        public async Task<IActionResult> EditStreet([Bind("Name,Addresses,RegionId")]Street street)
+        public async Task<IActionResult> EditStreet(Street street)
         {
             db.Streets.Update(street);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Regions));
         }
-        
+
         public async Task<IActionResult> DeleteStreet(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -284,15 +627,77 @@ namespace Polyclinic.Controllers
 
             if (exist)
             {
-                Street street = new Street { Id = (int)id  };
+                Street street = new Street { Id = (int)id };
                 db.Entry(street).State = EntityState.Deleted;
 
                 await db.SaveChangesAsync();
             }
-           
+
             return RedirectToAction(nameof(Regions));
 
         }
+
+        [AcceptVerbs("Get", "Post")]
+        public async Task<JsonResult> isStreetExist()
+        {
+
+            IQueryCollection args = HttpContext.Request.Query;
+
+            if (args.Count != 2) return Json(data: false);
+
+            String Name = "";
+            String Addresses = "";
+
+            foreach(String key in args.Keys)
+            {
+                if (key.Contains("Name"))
+                    Name = args[key];
+
+                if (key.Contains("Addresses"))
+                    Addresses = args[key];
+            }
+
+            List<Street> StreetsMatched = await db.Streets.Where(x => x.Name.Equals(Name)).ToListAsync();
+
+            if (StreetsMatched.Count == 0)
+                return Json(data: true);
+
+            String[] AddressesArr = Addresses.Split(new Char[]{','});
+
+            foreach(String Address in AddressesArr)
+                foreach(Street street in StreetsMatched)
+                    if (street.Addresses.Contains(Address))
+                        return Json("—уществует адрес уже прив€занный к участку");
+
+            return Json(data: true);                
+
+        }
+
+
+        //for CreatePatient
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult isStreetChain(String StreetName,String HouseNumber)
+        {
+            if ((StreetName == null) || (HouseNumber == null)) return Json(data:false);
+
+            Street street = db.Streets.FirstOrDefault(
+                x => (x.Name.Equals(StreetName) 
+                && x.Addresses.Contains(HouseNumber)
+                ) );
+
+            if (street == null)
+            {
+                return Json(data: "”лица или номер дома не закреплены ни за одним участком");
+            }
+            else
+            {
+                HttpContext.Response.Headers.Add("Id", street.Id.ToString());
+                return Json(data: true);
+            }
+        }
+
+
+
 
         public IActionResult Specialities(String q)
         {
@@ -325,10 +730,21 @@ namespace Polyclinic.Controllers
             }
             return RedirectToAction(nameof(Specialities));
         }
+        public async Task<JsonResult> isSpecialityExist(String Name)
+        {
+            if (Name == null) return Json(false);
 
-       
-      
-        public async Task<IActionResult> EditSpeciality([Bind("Id,Name,CheckUpTime")]Speciality spec)
+            Speciality spec = await db.Specialities.FirstOrDefaultAsync(x => x.Name.ToLower().Equals( Name.ToLower() ) );
+
+            if (spec == null)
+                return Json(true);
+            else
+                return Json("—пециальность с таким названием уже существует");
+        
+        }
+
+
+        public async Task<IActionResult> EditSpeciality(Speciality spec)
         {
             db.Specialities.Update(spec);
             await db.SaveChangesAsync();
@@ -385,6 +801,20 @@ namespace Polyclinic.Controllers
             return View(disease);
         }
 
+        public async Task<JsonResult> isDiseaseExist(String Name)
+        {
+            if (Name == null) return Json(false);
+
+            Disease spec = await db.Diseases.FirstOrDefaultAsync(x => x.Name.ToLower().Equals(Name.ToLower()));
+
+            if (spec == null)
+                return Json(true);
+            else
+                return Json("Ѕолезнь с таким названием уже существует");
+
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> DeleteDisease(int? id)
         {
@@ -403,7 +833,7 @@ namespace Polyclinic.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditDisease([Bind("Id,Name,Description")]Disease disease)
+        public async Task<IActionResult> EditDisease(Disease disease)
         {
             db.Diseases.Update(disease);
             await db.SaveChangesAsync();
@@ -442,8 +872,21 @@ namespace Polyclinic.Controllers
             return RedirectToAction(nameof(DrugsDirectory));
         }
 
+        public async Task<JsonResult> isDrugExist(String Name)
+        {
+            if (Name == null) return Json(false);
+
+            Drug spec = await db.Drugs.FirstOrDefaultAsync(x => x.Name.ToLower().Equals(Name.ToLower()));
+
+            if (spec == null)
+                return Json(true);
+            else
+                return Json("Ћекарство с таким названием уже существует");
+
+        }
+
         [HttpGet]
-        public async Task<IActionResult> EditDrug([Bind("Id,Name,Description")]Drug drug)
+        public async Task<IActionResult> EditDrug(Drug drug)
         {
             db.Drugs.Update(drug);
             await db.SaveChangesAsync();

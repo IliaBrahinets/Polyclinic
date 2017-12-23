@@ -9,14 +9,18 @@ using System.ComponentModel.DataAnnotations;
 using Polyclinic.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Polyclinic.CustomValidators;
+using Microsoft.AspNetCore.Mvc;
+
 public class Doctor : Man
 {
-    
+    [Required(ErrorMessage = "Введите кабинет")]
+    [MinValue(0,"Должен быть больше либо равен 0")]
+    [Remote( action: "IsCabinetAvaliable", controller: "Registrator",AdditionalFields = nameof(Id) )]
     public int ChainedCabinet { get; set; }
 
     public int? RegionId { get; set; }
     public Region Region { get; set; }
-
 
     public int? SpecialityId { get; set; }
     public Speciality Speciality { get; set; }

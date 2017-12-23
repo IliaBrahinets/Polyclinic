@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections;
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Polyclinic.Models
 {
@@ -12,10 +13,12 @@ namespace Polyclinic.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Введите название")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Введите адреса через запятую")]
+        [RegularExpression("^([1-9][0-9]*[а-яА-Я]?,)*[1-9][0-9]*[а-яА-Я]?$", ErrorMessage = "Неправильный формат")]
+        [Remote(action: "isStreetExist", controller: "Registrator",AdditionalFields=nameof(Name))]
         public string Addresses { get; set; }
 
         public int RegionId { get; set; }
