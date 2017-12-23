@@ -86,7 +86,11 @@
                                 </td>    
                                 <th>@Html.DisplayFor(modelItem => item.Street.RegionId)</th>
                              
-                                <td>@Html.ActionLink("Записать на прием", "", "") | <a asp-action="PatientCard" asp-route-id="@item.Id">Карточка</a></td>
+                                <td>
+                                <a asp-action="CreatePatientRecord" asp-route-id="@item.Id">Записать на приём</a> | 
+                                <a asp-action="PatientCard" asp-route-id="@item.Id">Карточка</a> | 
+                                <a asp-action="ViewPatientRecord" asp-route-id="@item.Id">Приёмы</a>
+                                </td>
                                 <td>@Html.ActionLink("Редактировать", "", "") |<a asp-action="DeletePatient" asp-route-id="@item.Id"> Удалить</a></td>
                             </tr>
                         </tbody>
