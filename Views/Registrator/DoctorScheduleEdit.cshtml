@@ -1,15 +1,19 @@
+@model Doctor
+
 @{ ViewData["Title"] = "Doctor"; }
 
 <script type='text/template' id='scheduletemplate'>
     <div class='container mb-3 mt-3'>
         <div class='clndr-controls row'>
-            <h3 class='month col text-left'>
+            <h3 class='month col-md-6 text-left'>
                 <%= month %>
-                    <%= year %>
+                <%= year %>
             </h3>
-            <div class = 'col row justify-content-end'>
-                <div class='clndr-control-button clndr-previous-button col btn btn-primary mr-1 ml-1'>назад</div>
-                <div class='clndr-control-button clndr-next-button col btn btn-primary mr-1 ml-1'>вперед</div>
+            <div class='col-md-6'>
+                <div class="text-right">
+                    <button class='clndr-control-button clndr-previous-button col btn btn-primary mr-1 ml-1'>назад</button>
+                    <button class='clndr-control-button clndr-next-button col btn btn-primary mr-1 ml-1'>вперед</button>
+                </div>
             </div>
         </div>
     </div>
@@ -38,8 +42,7 @@
                                     <% _.each(days[d].events,function(event) { %>
 
                                     <div class='row day-inf pr-0 text-center'>
-                                        <div class='relief-time col-sm pr-0 pl-0'><%= event.relief %></div>
-                                        <div class='count col-sm pr-0 pl-0'><%= event.count %></div>
+                                        <div class='relief-time col-sm pr-0 pl-0'><%= event.StartTime %>-<%= event.EndTime %></div>
                                     </div>
 
                                     <% }); %>
@@ -52,37 +55,107 @@
     </table>
 </script>
 
+<script>
+    var RequestData = {};
+    RequestData.DoctorId = @(Model.Id);
+</script>
+
+
 <div class = 'row' id = 'scheduleEdit'>
     <div class = 'col-lg-8'>
         <div id='schedule'></div>
     </div>
 
     <div class = 'row col-md'>
-        <div class= 'col-sm mt-2' id = 'reliefsSetted'>
-            <h4 class = 'text-center'>Назначенные</h3>
+        <div class= 'col-sm mt-2'>
+
+            <h4 class='text-center'>Назначенные</h4>
+            <div class='text-center'><a href="javascript:" data-toggle="modal" data-target="#RelievesModal" data-action="CreateRelieve">Добавить</a></div>
             <div>
-                <div class="btn-group-vertical w-100" role="group">
-                    <button type="button" class="btn btn-light">8:00-19:00</button>
-                    <button type="button" class="btn btn-light">14:00-18:00</button>
-                    <button type="button" class="btn btn-light">9:00-15:00</button>
-                </div>
+                <script type="text/template" id="relievesSettedTemplate">
+                    <div class="row">
+                        <div class="Relieve col-sm-8">
+                            <button class="btn btn-link" aria-pressed="false">
+                                <strong><%= StartTime %>-<%= EndTime %></strong>
+                            </button>
+
+                        </div>
+                        <div class="DeleteButton col-sm-4 p-1">
+                            <a data-toggle="modal" data-target="#RelievesModal" data-action="DeleteRelieve">
+                                <span class="oi oi-x" title="Удалить" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    </div>
+                </script>
+                <div class="btn-group-vertical w-100"  id ='relievesSetted'></div>
             </div>
         </div>
-        <div class= 'col-sm mt-2' id ='reliefsAvaliable'>
-            <h4 class = 'text-center'>Использованные</h3>
-            <div>
-                <div class="btn-group-vertical w-100" role="group">
-                    <button type="button" class="btn btn-light">8:00-19:00</button>
-                    <div class = 'text-center'>
-                        <small class="relief-desc form-text text-muted">
-                            Для окулистов
-                        </small>
+        <div class= 'col-sm mt-2'>
+
+            <h4 class = 'text-center'>Использованные</h4>
+
+            <div class = 'text-center'><a href = "javascript:" data-toggle="modal" data-target="#RelieveTimesModal" data-action="CreateRelieveTime">Добавить</a></div>
+
+            <script type="text/template" id="relievesUsedTemplate">
+                <div class="row">
+                    <div class="RelieveTime col-sm-8">
+                        <button class="btn btn-link" aria-pressed="false" data-toggle="modal" data-target="#RelievesModal"
+                                data-action="CreateRelieve" data-method="CreateRelieveFromUsed">
+                            <span class="oi oi-arrow-left" title="Редактировать"></span>
+                        </button>
+                        <strong><%= StartTime %>-<%= EndTime %></strong>
                     </div>
-                    <button type="button" class="btn btn-light">14:00-18:00</button>
-                    <button type="button" class="btn btn-light">10:00-14:00</button>
-                    <button type="button" class="btn btn-light">9:00-13:00</button>
-                    <button type="button" class="btn btn-light">9:00-15:00</button>
-                </div>
+                    <div class="EditButton col-sm-2 p-1">
+                    <a data-toggle="modal" data-target="#RelieveTimesModal" data-action="EditRelieveTime">
+                        <span class="oi oi-pencil" title="Редактировать"></span>
+                    </a>
+                    </div>
+                    <div class="DeleteButton col-sm-2 p-1">
+                    <a data-toggle="modal" data-target="#RelieveTimesModal" data-action="DeleteRelieveTime">
+                        <span class="oi oi-x" title="Удалить" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="w-100"></div>
+                    <% if((Description !== null) && (Description !== undefined)) {%>
+                        <div class='col-md-12 text-center'>
+                            <small class="relieve-desc text-muted">
+                                <%= Description %>
+                            </small>
+                        </div>
+                    <% } %>
+                 </div>
+            </script>
+
+            <div class="w-100" id ='relievesUsed'></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RelieveTimesModal" tabindex="-1" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_RelieveTimeForm", new RelieveTime { })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RelievesModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_RelieveForm", new Relieve { })
             </div>
         </div>
     </div>
@@ -90,15 +163,20 @@
 
 @section Styles {
      <link rel='stylesheet' href='~/css/Registrator/DoctorScheduleEdit/main.css' asp-append-version='true' />
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/open-iconic-bootstrap.css"  />
 }
 
 @section Scripts {
+
+    @Html.Partial("_ValidationScriptsPartial")
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 
     <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
 
     <script src='~/lib/clndr/src/clndr.js' asp-append-version='true'></script>
+
+    <script src="~/lib/UsefulFeatures.js" asp-append-version="true"></script>
 
     <script src='~/js/Registrator/DoctorScheduleEdit/main.js' asp-append-version='true'></script>
 

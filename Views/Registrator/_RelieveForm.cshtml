@@ -1,0 +1,32 @@
+﻿@model Relieve
+
+
+<form asp-antiforgery="true">
+    <div asp-validation-summary="ModelOnly" class="text-danger" id="RelieveTimeForm"></div>
+
+    <input asp-for="Id" hidden />
+
+    <input asp-for="DoctorId" hidden />
+
+    <input asp-for="Date" type="text" hidden />
+
+    <div class="form-group">
+        <div class="form-row">
+            <div class="col-md-6">
+                <label asp-for="StartTime">Начало</label>
+                <input class="form-control" placeholder="Начало..." asp-for="StartTime" value=""/>
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="EndTime">Конец</label>
+                <input class="form-control" placeholder="Конец..." asp-for="EndTime" value=""/>
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class='form-group text-center'>
+        <button class='btn btn-primary' type='submit'>
+            Сохранить
+        </button>
+    </div>
+</form>

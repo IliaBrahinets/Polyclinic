@@ -1,4 +1,5 @@
 @model Patient
+
 @{ 
     ViewData["Title"] = "Карточка пациента";
 }
@@ -13,26 +14,19 @@
                
                     <div class='row'>
                         
-                        <div class='col'>Дата рождения</div>
-                        <div class='col'>@Html.DisplayFor(Model=>Model.BirthDate)</div>
+                        <div class='col-md'>Дата рождения</div>
+                        <div class='col-md'>@Html.DisplayFor(Model=>Model.BirthDate)</div>
                         <div class="w-100"></div>
-                        <div class='col'>Пол</div>
-                        <div class='col'>@Html.Partial("_SexView")</div>
+                        <div class='col-md'>Пол</div>
+                        <div class='col-md'>@Html.Partial("_SexView")</div>
                         <div class="w-100"></div>
-                        <div class='col'>Адрес</div>
-                        <div class='col'>@Model.Street.Name</div>
+                        <div class='col-md'>Адрес</div>
+                        <div class='col-md'>@Model.StreetName @Model.HouseNumber</div>
                         <div class="w-100"></div>
-                        <div class='col'>Участок</div>
-                        <div class='col'>
-                            <a href="/registrator/regions?q=@Model.Street.RegionId"><strong>@Model.Street.RegionId</strong></a>
+                        <div class='col-md'>Участок</div>
+                        <div class='col-md'>
+                            <a href="/registrator/regions?q=@Model.RegionId"><strong>@Model.RegionId</strong></a>
                         </div>
-                        @if (ViewData["ParentController"] == "Registrator")
-                        {
-                            <div class='w-100'></div>
-                            <div class='col mt-1 text-right'>
-                                @Html.ActionLink("Редактировать", "", "")
-                            </div>
-                        }
                         
                     </div>
                     
@@ -42,19 +36,20 @@
 
         <div class='filter card p-3'>
             <form>
+                <input name="Id" value="@Model.Id" hidden />
                 <div class='form-group'>
                     <label for='speciality'>Специальность врача</label>
-                    <select class='form-control form-control-sm' name='speciality'>
-                        <option>Окулист</option>
-                        <option>Дерматолог</option>
-                        <option>Невролог</option>
-                        <option>Хирург</option>
-                        <option>Терапевт</option>
+                    <select class='form-control form-control-sm' name='SpecialityId'>
+                        <option value="">Все</option>
+                        @foreach(Speciality speciality in ViewBag.Specialities)
+                        {
+                            <option value="@speciality.Id">@speciality.Name</option>
+                        }
                     </select>
                 </div>
                 <div class='form-group'>
-                    <label for='datePicker'>Дата</label>
-                    <input type='text' id = 'datePicker' name='datePicker' class='form-control form-contrl-sm'>
+                    <label for='Date'>Дата</label>
+                    <input type='text' id = 'datePicker' name='DateRange' class='form-control form-contrl-sm'>
                 </div>
                 <div class='text-center mt-4'>
                     <button type="submit" class="btn btn-primary">Применить фильтр</button>
@@ -63,62 +58,48 @@
         </div>
     </div>
 
-    <div class='col'>
+    <div class='col-lg-9'>
 
         <table  id = 'checkUpList' class="table table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">Дата</th>
                     <th scope="col">Время</th>
                     <th scope="col">Специальность</th>
                     <th scope="col">ФИО</th>
                 </tr>
             </thead>
             <tbody>
-                <tr data-toggle = 'collapse' data-target = '#checkUpList tbody tr:nth-of-type(2) .collapse'>
-                    <td class = 'date'>19.11.2017</td>
-                    <td class = 'time'>15:30</td>
-                    <td class = 'speciality'>Хирург</td>
-                    <td class = 'name'>Иванов Иван Петрович</td>
-                </tr>
-                <tr class = 'record-inf'>
-                    <td class = 'pt-0 pb-0' colspan="4">
-                        <div class = 'collapse text-left pl-4 pr-4'>
+                @{
+                    var i = 2;
+                }
+                @foreach (DoctorVisit doctorVisit in Model.DoctorVisits)
+                {
+                    <tr data-toggle = 'collapse' data-target = '#checkUpList tbody tr:nth-of-type(@i) .collapse'>
+                        <td class = 'dateTime'>@Html.DisplayFor(x => doctorVisit.DateTime)</td>
+                        <td class = 'speciality'>@Html.DisplayFor(x => doctorVisit.Doctor.Speciality.Name)</td>
+                        <td class = 'name'>@Html.Partial("_ManShortName",doctorVisit.Doctor)</td>
+                    </tr>
+                    <tr class = 'record-inf'>
+                        <td class = 'pt-0 pb-0' colspan="4">
+                            <div class = 'collapse text-left pl-4 pr-4'>
 
-                            <div class = 'pt-4'></div>
+                                <div class = 'pt-4'></div>
 
-                            <h4 class="card-title diagnosis-title">Диагноз</h4>
-                            <p class="card-text diagnosis">Перелом руки</p>
-                            <h4 class="card-title recomend-title">Рекомендации</h4>
-                            <p class="card-text recomend">Употребление кальция</p>
+                                <h4 class="card-title diagnosis-title">Диагноз</h4>
+                                <p class="card-text diagnosis">@Html.DisplayFor(x => @doctorVisit.Diagnosis)</p>
+                                <h4 class="card-title recomend-title">Рекомендации</h4>
+                                <p class="card-text recomend">@Html.DisplayFor(x => @doctorVisit.Medicines)</p>
 
-                            <div class = 'pt-4'></div>
+                                <div class = 'pt-4'></div>
 
-                        </div>
-                    </td>
-                </tr>
-                <tr data-toggle = 'collapse' data-target = '#checkUpList tbody tr:nth-of-type(4) .collapse'>
-                    <td class = 'date'>19.11.2017</td>
-                    <td class = 'time'>15:30</td>
-                    <td class = 'speciality'>Хирург</td>
-                    <td class = 'name'>Иванов Иван Петрович</td>
-                </tr>
-                <tr class = 'record-inf'>
-                    <td class = 'pt-0 pb-0' colspan="4">
-                        <div class = 'collapse text-left pl-4 pr-4'>
+                            </div>
+                        </td>
+                    </tr>
 
-                            <div class = 'pt-4'></div>
+                    i += 2;
 
-                            <h4 class="card-title diagnosis-title">Диагноз</h4>
-                            <p class="card-text diagnosis">Перелом руки</p>
-                            <h4 class="card-title recomend-title">Рекомендации</h4>
-                            <p class="card-text recomend">Употребление кальция</p>
-
-                            <div class = 'pt-4'></div>
-
-                        </div>
-                    </td>
-                </tr>
+                }
+              
             </tbody>
         </table>
 

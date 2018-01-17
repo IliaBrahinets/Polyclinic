@@ -1,0 +1,42 @@
+
+@media (max-width: 690px) {
+    #Doctors {
+        font-size: 14.5px;
+    }
+    #Doctors th,#Doctors td{
+        padding:.2rem;
+    }
+}
+
+
+@media (max-width: 533px) {
+    #Doctors {
+        font-size: 12.5px;
+    }
+
+}
+
+@media (max-width: 414px) {
+    #Doctors {
+        font-size: 9.5px;
+    }
+}
+}
+
+@media (max-width: 414px) {
+    #Doctors {
+        font-size: 10.5px;
+    }
+}
+
+@media (max-width: 384px) {
+    #Doctors {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    #Doctors {
+        font-size: 9px;
+    }
+}

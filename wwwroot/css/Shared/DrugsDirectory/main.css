@@ -16,7 +16,21 @@ input {
    border: solid transparent;
    border: 0px;
 }
-.drug-header input{
+.drug-header{
     font-size: 1.2em;
     color: #007bff;
+}
+
+.drug-info button {
+    padding: 0;
+    vertical-align: unset;
+}
+
+@media (max-width:450px) {
+    #drugsList .btn, #drugsList .form-control {
+        font-size: inherit;
+    }
+    #drugsList {
+        font-size: 10px;
+    }
 }

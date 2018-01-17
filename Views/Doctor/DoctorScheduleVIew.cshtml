@@ -1,0 +1,156 @@
+﻿@model Doctor
+
+@{ ViewData["Title"] = "Расписание доктора";
+}
+
+<div class="row text-center">
+    <div class="col-md-6"><h3>@Model.Speciality.Name</h3></div>
+    <div class="col-md-6"><h3>@Model.GetShortName()</h3></div>
+</div>
+
+<hr />
+
+<script type='text/template' id='scheduletemplate'>
+    <div class='container mb-3 mt-3'>
+        <div class='clndr-controls row'>
+            <h3 class='month col-md-6 text-left'>
+                <%= month %>
+                <%= year %>
+            </h3>
+            <div class='col-md-6'>
+                <div class="text-right">
+                    <button class='clndr-control-button clndr-previous-button col btn btn-primary mr-1 ml-1'>назад</button>
+                    <button class='clndr-control-button clndr-next-button col btn btn-primary mr-1 ml-1'>вперед</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class='clndr-table table table-bordered text-center' border='0' cellspacing='0' cellpadding='0'>
+        <thead class='thead-light'>
+            <tr class='header-days'>
+                <% for(var i = 0; i < daysOfTheWeek.length; i++) { %>
+                    <th class='header-day'>
+                        <%= daysOfTheWeek[i] %>
+                    </th>
+                    <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < numberOfRows; i++){ %>
+                <tr>
+                    <% for(var j = 0; j < 7; j++){ %>
+                        <% var d = j + i * 7; %>
+                            <td class='<%= days[d].classes %>'>
+
+                                    <div class='day-contents text-left'>
+                                            <span>
+                                                <%= days[d].day %>
+                                            </span>
+                                    </div>
+                                    <% _.each(days[d].events,function(event) { %>
+
+                                    <div class='row day-inf pr-0 text-center'>
+                                        <div class='relief-time col-sm-8 pr-0 pl-0'><%= event.StartTime %>-<%= event.EndTime %></div>
+                                        <div class='count col-sm-4 pr-0 pl-0'><%= event.Count %></div>
+                                    </div>
+
+                                    <% }); %>
+
+                            </td>
+                            <% } %>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+</script>
+
+<script>
+    var RequestData = {};
+    RequestData.DoctorId = @(Model.Id);
+</script>
+
+
+<div class='container'>
+
+    <div id='schedule'></div>
+
+    <script type="text/template" id="PatientRecordTemplate">
+            <td><%=DateTime%></td>
+
+            <td>
+                <% if(PatientId) {%>
+                    <%=PatientShortName%>
+                <% } %>
+            </td>
+
+            <td class='recordActions'>
+                 
+                <% if(PatientId) { %>
+
+                    <a href="" data-toggle="modal" data-target="#WriteCheckUpInfoModal" data-action="WriteCheckUpInfo">Записать результаты приема</a>
+
+                <% } %>
+
+                <% if(PatientId) { %>
+
+                | <a href="PatientCard?Id=<%=PatientId%>">Карточка пациента</a>
+
+                <% } %>
+
+            </td>
+
+
+    </script>
+
+    <table class='table table-sm text-center'>
+        <thead>
+            <tr>
+                <td>Время</td>
+                <td>ФИО</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody id="PatientRecordsList">
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="WriteCheckUpInfoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("_WriteCheckUpInfoForm", new DoctorVisit { })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @section Styles {
+        <link rel='stylesheet' href='~/css/Shared/DoctorScheduleView/main.css' asp-append-version='true' />
+    }
+    @section Scripts {
+
+        @Html.Partial("_ValidationScriptsPartial")
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+
+        <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
+
+        <script src='~/lib/clndr/src/clndr.js' asp-append-version='true'></script>
+
+        <script src="~/lib/UsefulFeatures.js" asp-append-version="true"></script>
+
+        <script src="~/lib/formDataInput(on,off)Trigger/main.js" asp-append-version="true"></script>
+
+        <script src='~/js/Doctor/DoctorScheduleView/main.js' asp-append-version='true'></script>
+
+    }
+
+</diV>

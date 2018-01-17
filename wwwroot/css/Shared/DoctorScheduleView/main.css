@@ -1,5 +1,5 @@
 #schedule tbody tr td {
-    padding: 5px!important;
+    padding: 3px !important;
 }
 
 #schedule .adjacent-month {
@@ -9,8 +9,16 @@
 }
 
 #schedule .today {
-    border: 3px solid rgb(207, 113, 113)
+    border: 3px solid rgb(207, 113, 113);
+    padding: 2px !important;
 }
+
+#schedule .selected {
+    border-width: 3px;
+    border-color: dimgrey;
+    padding: 1px !important;
+}
+
 
 #schedule .header-days {
     font-size: 1.3em;
@@ -37,7 +45,7 @@
 }
 
 #schedule .day-inf {
-    font-size: 0.7em;
+    font-size: 0.85em;
     margin-left: 0;
     margin-right: 0;
 }
@@ -46,4 +54,40 @@
     max-width: 100px;
 }
 
-.patientList .recordActions {}
+@media (max-width:1000px) {
+    div .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    #schedule table {
+        font-size: 13px;
+    }
+}
+
+
+@media (max-width:750px) {
+    #schedule table {
+        font-size: 11px;
+    }
+}
+
+@media (max-width:500px) {
+    #schedule table {
+        font-size: 9px;
+    }
+}
+
+
+@media (max-width:450px) {
+    #schedule table {
+        font-size: 8px;
+    }
+}
+
+
+@media (max-width:360px) {
+    #schedule table {
+        font-size: 6.5px;
+    }
+}

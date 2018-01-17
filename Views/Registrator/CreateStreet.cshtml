@@ -1,5 +1,7 @@
 ﻿@model Street
-
+@{ 
+    ViewData["Title"] = "Создание улицы";
+}
 
 <!DOCTYPE html>
 
@@ -23,7 +25,7 @@
                         <input asp-for='Name' class='streetInput form-control' type='text' placeholder='Введите улицу...' />
                         <span asp-validation-for='Name' class="text-danger"></span>
                     </div>
-                </div>  
+                </div>
                 <div class="w-100"></div>
                 <div class="w-25">
                     <div class='col-md'>
@@ -31,7 +33,7 @@
                         <input asp-for='Addresses' class='streetNumber form-control' type='text' placeholder='Введите номера...' />
                         <span asp-validation-for='Addresses' class="text-danger"></span>
                     </div>
-                    </div>
+                </div>
 
 
                 <div class="w-25">
@@ -46,9 +48,9 @@
                         </select>
 
                     </div>
-                    </div>
-
                 </div>
+
+            </div>
             <div class="col-md">
                 <button class='btn btn-primary' type='submit'>Сохранить</button>
             </div>
@@ -57,17 +59,19 @@
     </div>
 
 
-    
-       @section Scripts {
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvWQAIEkFj89pU7bRqI4g8n0W9NFI_Uuk&libraries=places"></script>
-    <script type="text/javascript" src="~/js/Registrator/CreateRegion/main.js" asp-append-version="true"></script>
-    @Html.Partial("_ValidationScriptsPartial")
+
+    @section Scripts {
+        @Html.Partial("_ValidationScriptsPartial")
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvWQAIEkFj89pU7bRqI4g8n0W9NFI_Uuk&libraries=places"></script>
+        <script src="~/lib/googleMapsAutoCompleteInit/StreetAutoCompleteInit.js"></script>
+        <script type="text/javascript" src="~/js/Registrator/CreateRegion/main.js" asp-append-version="true"></script>
+
     }
 
     @section Styles{
         <link rel="stylesheet" href="~/css/Registrator/CreateRegion/main.css" asp-append-version="true" />
 
     }
-    
+
 </body>
 </html>

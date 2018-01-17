@@ -6,3 +6,49 @@
 .show {
     opacity:1;
 }
+
+
+@media (max-width:750px) {
+    #Specialities .btn, #Specialities .form-control {
+        font-size: inherit;
+    }
+
+    #RegionsList .btn {
+        vertical-align: unset;
+    }
+
+    #Specialities {
+        font-size: 12px;
+    }
+
+    #Specialities th, #Specialities td {
+        padding: .1rem;
+    }
+}
+
+
+@media (max-width:500px) {
+    #Specialities {
+        font-size: 10px;
+    }
+}
+
+
+@media (max-width:420px) {
+    #Specialities {
+        font-size: 11px;
+    }
+}
+
+
+@media (max-width:360px) {
+    #Specialities {
+        font-size: 10px;
+    }
+}
+
+@media (max-width:320px) {
+    #Specialities {
+        font-size: 9px;
+    }
+}

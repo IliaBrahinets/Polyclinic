@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Doctor>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h3>Регистратор</h3>
+            <hr />
+            <a class="btn btn-primary" href="/Registrator">Продолжить</a>
+        </div>
+        <div class="col-md-6">
+            <form asp-action="Index" class = "text-center">
+                <h3>Доктор</h3>
+                <hr />
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Продолжить</button>
+                </div>
+                <div class="form-group">
+                    <label name ="Id">ФИО</label>
+                    <select name="Id" class="form-control">
+                        @foreach (Doctor doctor in Model)
+                        {
+                            <option value="@doctor.Id">@Html.Partial("_ManShortName", doctor)</option>
+                        }
+                    </select>
+               </div>
+              
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/SignIn/main.css" asp-append-version="true"/>
+}

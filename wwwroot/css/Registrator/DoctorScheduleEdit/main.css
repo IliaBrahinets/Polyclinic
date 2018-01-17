@@ -1,5 +1,5 @@
 #schedule tbody tr td {
-    padding: 5px!important;
+    padding: 3px!important;
 }
 
 #schedule .adjacent-month {
@@ -9,8 +9,16 @@
 }
 
 #schedule .today {
-    border: 3px solid rgb(207, 113, 113)
+    border: 3px solid rgb(207, 113, 113);
+    padding: 2px !important;
 }
+
+#schedule .selected {
+    border-width: 3px;
+    border-color: dimgrey;
+    padding: 1px !important;
+}
+
 
 #schedule .header-days {
     font-size: 1.3em;
@@ -31,13 +39,19 @@
     padding: 10px;
 }
 
+.day.inactive {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+
 #schedule .day-contents {
     /*border-bottom: 2px solid #b6b8bb;*/
     font-size: 1.3em;
 }
 
 #schedule .day-inf {
-    font-size: 0.7em;
+    font-size: 0.85em;
     margin-left: 0;
     margin-right: 0;
 }
@@ -48,12 +62,27 @@
 
 .patientList .recordActions {}
 
-#reliefsSetted>div,
-#reliefsAvaliable>div {
+#relievesSetted>div,
+#relievesUsed>div {
     border: 1px solid rgba(0, 0, 0, .15);
     border-radius: .25rem;
     max-height: 100%;
+    width:100%;
 }
 
-#reliefsSetted,
-#reliefsAvaliable {}
+
+.RelieveTime button, .Relieve button {
+    color: black;
+}
+.RelieveTime button:hover, .Relieve button:hover {
+    color: black;
+    background-color: gainsboro;
+    text-decoration: none;
+}
+
+.disabled {
+    opacity:0.3;
+    pointer-events: none;
+    cursor: default;
+}
+

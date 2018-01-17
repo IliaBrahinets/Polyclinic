@@ -10,3 +10,47 @@
 .show {
     opacity: 1;
 }
+
+
+@media (max-width:750px){
+
+    #RegionsList .btn, #RegionsList .form-control {
+        font-size: inherit;
+    }
+
+    #RegionsList .btn{
+        vertical-align:unset;
+    }
+
+    #RegionsList{
+        font-size:14px;
+    }
+    #RegionsList th,#RegionsList td {
+        padding: .1rem; 
+    }
+}
+
+
+@media (max-width:500px) {
+    #RegionsList {
+        font-size: 11px;
+    }
+}
+
+
+@media (max-width:420px) {
+    #RegionsList {
+        font-size: 9px;
+    }
+    #RegionsList th, #RegionsList td {
+         padding: 0;
+    }
+}
+
+
+@media (max-width:320px) {
+    #RegionsList {
+        font-size: 7.5px;
+    }
+   
+}

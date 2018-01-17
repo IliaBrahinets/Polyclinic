@@ -1,17 +1,27 @@
 @{
     ViewData["Title"] = "Результаты приема";      
 }
+@model DoctorVisit
+
 <div class = 'container mt-4'>
-    <form>
+    <form asp-action="WriteCheckUpInfo">
+
+        <input name="RecordId" hidden />
+
         <div class='form-group'>
-            <label for="diagnosis">Диагноз</label>
-            <textarea class="form-control" name="diagnosis" rows="4"></textarea>
-            <label for="diagnosis">Рекомендации</label>
-            <textarea class="form-control" name="recomend" rows="4"></textarea>
+            <label asp-for="Diagnosis">Диагноз</label>
+            <textarea class="form-control" asp-for="Diagnosis" rows="4"></textarea>
+            <span asp-validation-for="Diagnosis" class="text-danger"></span>
+
+            <br />
+
+            <label asp-for="Medicines">Рекомендации</label>
+            <textarea class="form-control" asp-for="Medicines" rows="4"></textarea>
+            <span asp-validation-for="Medicines" class="text-danger"></span>
         </div>
 
         <div class="form-check m-4 font-weight-bold">
-                <label><input type="checkbox" class="form-check-input" name = 'attendance' value = 'false'>Не явился</label>
+                <label><input type="checkbox" class="form-check-input" name="NonAppeared" value = 'false'>Не явился</label>
         </div>
 
         <button class = 'btn btn-primary' type = 'submit'>Сохранить</button>
@@ -23,5 +33,5 @@
 }
 
 @section Scripts {
-
+   @Html.Partial("_ValidationScriptsPartial")
 }

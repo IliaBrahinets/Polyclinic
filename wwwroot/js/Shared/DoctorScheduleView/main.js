@@ -1,6 +1,59 @@
+function Time(time) {
+
+    this.TimeComp = [];
+
+    //only for HH:mm:ms
+    if (time instanceof String || typeof time === "string") {
+        this.TimeComp  = time.split(":");
+       
+        this.TimeComp.forEach(function (value, index, array) {
+            array[index] = parseInt(value);
+
+        });
+    }
+
+    if (time instanceof Array) {
+        this.TimeComp = time;
+    }
+    
+
+    function hours() {
+        if (this.TimeComp.length > 0)
+            return this.TimeComp[0];
+
+        return 0;
+    }
+    this.hours = hours;
+
+    function minutes() {
+        if (this.TimeComp.length > 1)
+            return this.TimeComp[1];
+
+        return 0;
+    }
+    this.minutes = minutes;
+
+    function seconds() {
+        if (this.TimeComp.length > 2)
+            return this.TimeComp[2];
+
+        return 0;
+    }
+    this.seconds = seconds;
+}
+
+moment.prototype.addTime = function (time) {
+    if (time instanceof Time) {
+        return this.add({
+            hours: time.hours(),
+            minutes: time.minutes(),
+            seconds: time.seconds()
+        })
+    }
+}
 //configuring clndr.js
 $(document).ready(function() {
-
+    //RequestData
     // Assuming you've got the appropriate language files,
     // clndr will respect whatever moment's language is set to.
 
@@ -8,73 +61,164 @@ $(document).ready(function() {
 
     // Here's some magic to make sure the dates are happening this month.
     var thisMonth = moment().format('DD-MM-YYYY');
-    console.log(thisMonth);
-    // Events to load into calendar
-    var eventArray = [{
-        date: '2017-11-23',
-        relief: '8:00-19:00',
-        count: '8/10'
-    }, {
-        date: '2017-11-23',
-        relief: '8:00-19:00',
-        count: '8/10'
-    }];
 
     // The order of the click handlers is predictable. Direct click action
     // callbacks come first: click, nextMonth, previousMonth, nextYear,
     // previousYear, nextInterval, previousInterval, or today. Then
     // onMonthChange (if the month changed), inIntervalChange if the interval
     // has changed, and finally onYearChange (if the year changed).
-    var sh = $('#schedule').clndr({
 
-        //daysOfTheWeek: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Вс'],
+    var schedule = $('#schedule').clndr({
+
         moment: moment,
 
         numberOfRows: 5,
 
-        events: eventArray,
+        dateParameter: 'Date',
+
+        trackSelectedDate: true,
+
         clickEvents: {
-            click: function(target) {
-                console.log('Cal-1 clicked: ', target);
+            //dont use a selected date in click handlers because a seleceted date is setted after invoking click handlers
+            click: function (target) {
+
+                PatientRecordsList.DeleteAll();
+             
+                //as ISO
+                var Start = moment(target.date).format(0);
+                var End = moment(target.date).add({ days: 1 }).format(0);
+                
+
+                $.ajax({
+                    url: "PatientRecords",
+                    dataType: "json",
+                    data: {
+                        DoctorId: RequestData.DoctorId,
+                        StartDateTime: Start,
+                        EndDateTime: End
+                    },
+                    success: function (response) {
+
+                        PatientRecordsList.Add(response);
+                    }
+                });
+
+                //
+
             },
-            today: function() {
+            today: function () {
                 console.log('Cal-1 today');
             },
-            nextMonth: function() {
-                console.log('Cal-1 next month');
+            nextMonth: function () {
+
+                schedule.removeEvents(function () {
+                    return true;
+                });
+
+                schedule.getRelieves();
+
             },
-            previousMonth: function() {
-                console.log('Cal-1 previous month');
+            previousMonth: function () {
+
+                schedule.removeEvents(function () {
+                    return true;
+                });
+
+                schedule.getRelieves();
+
             },
-            onMonthChange: function() {
+            onMonthChange: function () {
                 console.log('Cal-1 month changed');
             },
-            nextYear: function() {
+            nextYear: function () {
                 console.log('Cal-1 next year');
             },
-            previousYear: function() {
+            previousYear: function () {
                 console.log('Cal-1 previous year');
             },
-            onYearChange: function() {
+            onYearChange: function () {
                 console.log('Cal-1 year changed');
             },
-            nextInterval: function() {
+            nextInterval: function () {
                 console.log('Cal-1 next interval');
             },
-            previousInterval: function() {
+            previousInterval: function () {
                 console.log('Cal-1 previous interval');
             },
-            onIntervalChange: function() {
+            onIntervalChange: function () {
                 console.log('Cal-1 interval changed');
             }
         },
-        doneRendering: function() {
-
+        doneRendering: function () {
+       
         },
         showAdjacentMonths: true,
         adjacentDaysChangeMonth: false,
         template: $("#scheduletemplate").html()
     });
 
+    schedule.getRelievesByDateComp = function (year, month, day) {
+
+        schedule.removeEvents(function (event) {
+            var curr = moment(event.Date);
+            console.log(year);
+            if (curr.get("year") == year || year == undefined)
+                if (curr.get("month") == month-1 || month == undefined)
+                    if (curr.get("date") == day || day == undefined)
+                        return true;
+
+            return false;
+
+        });
+
+        $.ajax({
+            url: "Relieves",
+            dataType: "json",
+            data: {
+                DoctorId: RequestData.DoctorId,
+                year: year,
+                month: month,
+                day: day,
+                WithRecordsCount: "true"
+            },
+            success: function (response) {
+                schedule.addEvents(response);
+            }
+        });
+
+    };
+
+    schedule.getRelievesByMomentObj = function (Date) {
+        console.log(Date);
+        schedule.getRelievesByDateComp(Date.get("year"), parseInt(Date.get("month"))+1, Date.get("Date"));
+    }
+
+    schedule.getRelieves = function () {
+
+        //by default current month
+        var currDate = schedule.intervalStart;
+
+        schedule.getRelievesByDateComp(currDate.format("YYYY"), currDate.format("MM"));
+    
+
+    };
+    //
+    var PatientRecordsList = new ListView({
+        container: $("#PatientRecordsList"),
+        itemTag:"tr",
+        template: $("#PatientRecordTemplate").html()
+    });
+
+    //
+  
+    function init() {
+
+        schedule.getRelieves();
+
+        $("#schedule .today").trigger("click");
+
+    }
+
+    init();
 
 });

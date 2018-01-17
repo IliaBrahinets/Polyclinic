@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model DoctorVisit
+
+<form id = "WriteCheckUpInfoForm" asp-action="WriteCheckUpInfo">
+
+    <input name="RecordId" hidden />
+
+    <div class='form-group'>
+        <label asp-for="Diagnosis">Диагноз</label>
+        <textarea class="form-control triggered" asp-for="Diagnosis" rows="4"  data-trigger-elem="NonAppeared"
+                                                                               data-trigger-type="disable"></textarea>
+        <span asp-validation-for="Diagnosis" class="text-danger"></span>
+
+        <br />
+
+        <label asp-for="Medicines">Рекомендации</label>
+        <textarea class="form-control triggered" asp-for="Medicines" rows="4"  data-trigger-elem="NonAppeared"
+                                                                               data-trigger-type="disable"></textarea>
+        <span asp-validation-for="Medicines" class="text-danger"></span>
+    </div>
+
+    <div class="form-check m-4 font-weight-bold">
+        <label><input type="checkbox" class="form-check-input" name="NonAppeared" value='true'>Не явился</label>
+    </div>
+
+    <button class='btn btn-primary' type='submit'>Сохранить</button>
+</form>

@@ -1,16 +1,40 @@
 @model Patient
+
+@{ 
+
+    if (Model == null)
+    {
+        ViewBag.action = "Create";
+    }
+    else
+    {
+        ViewBag.action = "Edit";
+    }
+}
 @{
-    ViewData["Title"] = "CreatePatient";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.action == "Create") {
+        ViewData["Title"] = "Создание пациента";
+    }
+    else
+    {
+        ViewData["Title"] = "Редактирование пациента";
+    }
 }
 <div class='container mt-4'>
-    <form asp-action="CreatePatient" asp-controller="registrator">
+    <form asp-action="@(ViewBag.action)Patient" asp-controller="registrator" class="fullyCheckForm" data-check-url="/Registrator/isPatientNotExist" data-message-elem=".TotalMessage">
+
+        @if (Model != null)
+        {
+            <input asp-for="Id" hidden />
+            <input asp-for="CreationDate" type="text" hidden />
+        }
+
         <div class='form-group'>
             <div class='form-row'>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class='col-sm-4'>
                     <label asp-for='Name'>Имя</label>
-                    <input asp-for='Name' class="form-control" placeholder='Имя' />
+                    <input asp-for='Name' class="form-control" placeholder='Имя'  />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class='col-sm-4'>
@@ -33,30 +57,38 @@
                         <option value="true">M</option>
                         <option value="false">Ж</option>
                     </select>
-                    <input asp-for="Sex" type="hidden" />
                 </div>
                 <div class='col-sm'>
                     <div class='form-group'>
                         <label asp-for="BirthDate">Дата рождения</label>
-                        <input asp-for="BirthDate" class='form-control' type='date'>
+                        <input asp-for="BirthDate" type="text" class ='form-control' id='birthdate'>
                     </div>
                 </div>
             </div>
         </div>
 
+        <input asp-for="RegionId" hidden/>
+
         <div class='form-group'>
-            <label asp-for="Street">Адрес</label>
-            <select class="form-control" asp-for="StreetId">
-                @foreach (Street Street in ViewBag.Streets)
-                {
+            <div class="form-row">
+                <div class="col-sm-6">
+                    <label asp-for="StreetName">Адрес</label>
+                    <input asp-for="StreetName" class="streetInput form-control">
+                    <span asp-validation-for="StreetName" class="text-danger"></span>
 
-                    <option value="@Street.Id">@Street.Name</option>
-
-                }
-            </select>
-
+                </div>
+                <div class="col-sm-6">
+                    <label asp-for="HouseNumber">Номер</label>
+                    <input class="form-control" asp-for="HouseNumber">
+                    <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                </div>
+            </div>
         </div>
-       
+
+       <div class="form-group">
+           <span class="TotalMessage text-danger"></span>
+       </div>
+
         <div class='form-group'>
             <button class='btn btn-primary' type='submit'>
                 Сохранить
@@ -65,12 +97,16 @@
     </form>
 </div>
 @section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
     <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
     <script src='~/lib/datetimepicker/js/daterangepicker.js' asp-append-version='true'></script>
-    <script src='~/js/Registrator/CreatePatient/main.js' asp-append-version='true'></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvWQAIEkFj89pU7bRqI4g8n0W9NFI_Uuk&libraries=places"></script>
+    <script src="~/lib/googleMapsAutoCompleteInit/StreetAutoCompleteInit.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/fullyCheckForm/main.js" asp-append-version="true"></script>
+    <script src='~/js/Registrator/EditPatient/main.js' asp-append-version='true'></script>
 }
 @section Styles {
     <link rel='stylesheet' href='~/lib/datetimepicker/css/daterangepicker.css' asp-append-version='true' />
     <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' asp-append-version='true' />
-    <link rel='stylesheet' href='~/css/Registrator/CreatePatient/main.css' asp-append-version='true' />
+    <link rel='stylesheet' href='~/css/Registrator/EditPatient/main.css' asp-append-version='true' />
 }

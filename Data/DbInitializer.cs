@@ -67,7 +67,7 @@ namespace Polyclinic.Data
             
             context.Regions.Add(Region);
            
-                context.Streets.Add(Street);
+            context.Streets.Add(Street);
             
             context.SaveChanges();
         }

@@ -14,8 +14,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="WordTemplates\template.docx" />
+    <Content Include="WordTemplates\tmp.docx" />
+    <Content Include="WordTemplates\tmp.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+    <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\css\Registrator\Новая папка\" />
     <Folder Include="Pages\" />
   </ItemGroup>

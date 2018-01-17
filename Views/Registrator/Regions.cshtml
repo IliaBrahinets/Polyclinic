@@ -1,9 +1,12 @@
 @model dynamic
+@{ 
+    ViewData["Title"] = "Участки";
+}
 <div class = 'container mt-4'>
     
     <div class='mb-2'>
-        @Html.ActionLink("Добавить участок", "CreateRegion", "") |
-        @Html.ActionLink("Добавить улицу", "CreateStreet", "")
+        @Html.ActionLink("Добавить участок", "CreateRegion", "Registrator") |
+        @Html.ActionLink("Добавить улицу", "CreateStreet", "Registrator")
     </div>
 
     <form asp-controller="Registrator" asp-action="Regions" class='mb-2'>
@@ -54,7 +57,7 @@
                                  </td>
                                  <td>
                                      <a asp-action="DeleteStreet" asp-route-id="@street.Id">Удалить</a> |
-                                     <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
+                                     <button class='clickShowHideNext btn btn-link p-0'>Изменить</button> |
                                      <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionId"]' asp-action="EditStreet" asp-route-id="@street.Id">Сохранить</a>
                                  </td>
                              </tr>

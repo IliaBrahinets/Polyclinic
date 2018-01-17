@@ -1,4 +1,7 @@
 @model IEnumerable<Patient>
+@{ 
+    ViewData["Title"] = "Пациенты";
+}
 <div class='mt-4'>
     <div class='row'>
         <div class='newPatient col mb-2 text-center'>
@@ -12,31 +15,31 @@
             <div class='filter card p-3 mb-2'>
                 <form>
                     <div class='form-group'>
-                        <label for='birthdate'>Дата рождения</label>
-                        <input class='form-control form-control-sm' type='text' id='birthdate' name='birthdate'>
+                        <label for='Birthdate'>Дата рождения</label>
+                        <input class='form-control form-control-sm' type='text' id='birthdate' name='Birthdate'>
                     </div>
                     <div class='form-group'>
-                        <label for='sex'>Пол</label>
-                        <select class='form-control form-control-sm' name='sex'>
-                            <option value='All'>
+                        <label for='Sex'>Пол</label>
+                        <select class='form-control form-control-sm' name='Sex'>
+                            <option value=''>
                                 Оба
                             </option>
-                            <option value='M'>
+                            <option value='trur'>
                                 М
                             </option>
-                            <option value='Fm'>
+                            <option value='false'>
                                 Ж
                             </option>
                         </select>
                     </div>
                     <div class='form-group'>
-                        <label for='region'>Участок</label>
-                        <select class='form-control form-control-sm' name='region'>
-                            <option>ул.Осенняя</option>
-                            <option>Дерматолог</option>
-                            <option>Невролог</option>
-                            <option>Хирург</option>
-                            <option>Терапевт</option>
+                        <label for='RegionId'>Участок</label>
+                        <select class='form-control form-control-sm' name='RegionId'>
+                            <option value="">Все</option>
+                            @foreach (var Region in ViewBag.Regions)
+                            {
+                                <option value="@Region.Id">@Region.Id</option>
+                            }
                         </select>
                     </div>
                     <div class='form-group text-center'>
@@ -49,7 +52,7 @@
             <form>
                 <div class='form-row'>
                     <div class='col'>
-                        <input class='form-control' type='search' placeholder='Введите ФИО...'>
+                        <input name="surname" class='form-control' type='search' placeholder='Введите фамилию пациента...'>
                     </div>
                     <div class='col-sm-2'>
                         <button class='btn btn-primary w-100' type='submit'>Показать</button>
@@ -58,10 +61,9 @@
             </form>
             <div class='mt-2'>
 
-                <table class='table text-center table-responsive-lg'>
+                <table class='table text-center table-responsive-lg' id="Patients">
                     <thead>
                         <tr>
-
                             <th>ФИО</th>
                             <th>Дата рождения</th>
                             <th>Пол</th>
@@ -74,12 +76,6 @@
 
                     @foreach (var item in Model)
                     {
-
-                        /* if (item.Surname != null && item.Lastname != null)
-                          {{
-                             var sur = item.Surname.Substring(0, 1);
-                              var last = item.Lastname.Substring(0, 1);
-                          }*/
                         <tbody>
                             <tr>
                                 <td>
@@ -88,10 +84,59 @@
                                 <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
                                 <td>@Html.Partial("_SexView",item)</td>
                                 <td>
-                                @Html.DisplayFor(modelItem => item.Street.Name)
-                                </td>    
-                                <td>@Html.ActionLink("Записать на прием", "", "") | <a asp-action="PatientCard" asp-route-id="@item.Id">Карточка</a></td>
-                                <td>@Html.ActionLink("Редактировать", "", "") |<a asp-action="DeletePatient" asp-route-id="@item.Id"> Удалить</a></td>
+                                @Html.DisplayFor(modelItem => item.StreetName)  @Html.DisplayFor(modelItem => item.HouseNumber)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.RegionId)</td>
+                                <td>
+                                    <div class="noDropdown">
+                                            @if (ViewBag.RecordId != null)
+                                                {
+
+                                                    @Html.ActionLink("Записать на прием", "CreatePatientRecord", "Registrator", new { RecordId = ViewBag.RecordId, PatientId = item.Id });
+
+                                                }
+                                                else
+                                                {
+
+                                                    @Html.ActionLink("Записать на прием", "Doctors", "Registrator", new { PatientId = item.Id })
+
+                                                }
+
+
+                                        | <a asp-action="PatientCard" asp-route-id="@item.Id">Карточка</a>
+                                        | <a asp-action="PatientsRecordsView" asp-route-id="@item.Id">Записи к врачам</a>
+
+                                    </div>
+                                    <div class="Dropdown">
+                                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownheader" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Действия
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownheader">
+                                            @if (ViewBag.RecordId != null)
+                                            {
+
+                                                @Html.ActionLink("Записать на прием", "CreatePatientRecord", "Registrator", new { RecordId = ViewBag.RecordId, PatientId = item.Id },
+                                                                                                                            new { @class = "dropdown-item", role = "button" });
+
+                                            }
+                                            else
+                                            {
+
+                                                @Html.ActionLink("Записать на прием", "Doctors", "Registrator", new { PatientId = item.Id },
+                                                                                                                    new { @class = "dropdown-item", role = "button" });
+                                            }
+
+
+                                            @Html.ActionLink("Карточка", "PatientCard", null, new { Id = item.Id },
+                                                                                               new { @class = "dropdown-item", role = "button" })
+
+                                            @Html.ActionLink("Записи пациента", "PatientsRecordsView", "Registrator", new { Id = item.Id },
+                                                                                                               new { @class = "dropdown-item", role = "button" })
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td> <a asp-action="EditPatient" asp-route-id="@item.Id">Редактировать</a> | <a asp-action="DeletePatient" asp-route-id="@item.Id">Удалить</a></td>
                             </tr>
                         </tbody>
                     }
@@ -103,7 +148,6 @@
         </div>
     </div>
 
-</div>
 </div>
 @section Scripts {
     <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>

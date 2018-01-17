@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 using Polyclinic.Data;
+using Polyclinic.Helpers;
+using Newtonsoft.Json.Serialization;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Polyclinic
 {
@@ -17,6 +19,7 @@ namespace Polyclinic
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -28,7 +31,10 @@ namespace Polyclinic
             services.AddDbContext<PolyclinicContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,13 +50,41 @@ namespace Polyclinic
                 app.UseExceptionHandler("/Error");
             }
 
+
+            app.UseSession();
+
             app.UseStaticFiles();
 
+
+            var locale = Configuration["SiteLocale"];
+            RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
+            {
+                SupportedCultures = new List<CultureInfo> { new CultureInfo(locale) },
+                SupportedUICultures = new List<CultureInfo> { new CultureInfo(locale) },
+                DefaultRequestCulture = new RequestCulture(locale)
+            };
+            app.UseRequestLocalization(localizationOptions);
+
+            app.Use(async (context, next) =>
+            {
+                if (!context.Session.IsSetted("CreationDateTime"))
+                {
+                    context.Session.Set<DateTime>("CreationDateTime", DateTime.UtcNow);
+
+                    context.Response.Redirect("/");
+
+                }
+                else
+                {
+                    await next.Invoke();
+                }
+            });
+      
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=registrator}/{action=Index}");
+                    template: "{controller=SignIn}/{action=Index}");
             });
         }
     }

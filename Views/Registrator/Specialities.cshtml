@@ -1,5 +1,7 @@
 @model IEnumerable<Speciality>
-
+@{ 
+    ViewData["Title"] = "Специальности";
+}
 <div class = 'container mt-4'>
     
     <div class='mb-2'>
@@ -17,7 +19,7 @@
         </div>
     </form>
 
-    <table class = 'table text-center'>
+    <table class = 'table text-center' id="Specialities">
         
         <thead>
             <th>Название</th>
@@ -38,7 +40,7 @@
                         </td>
                         <td>
                             <a asp-action="DeleteSpeciality" asp-route-id="@item.Id">Удалить</a> | 
-                            <a class='clickShowHideNext' href="javascript:1;">Изменить</a> | 
+                            <button class='clickShowHideNext btn btn-link p-0'>Изменить</button> | 
                             <a class = 'sendWithAddition hide' data-to-add = '["Name","CheckUpTime"]' asp-action="EditSpeciality" asp-route-id="@item.Id">Сохранить</a>
 
                         </td>

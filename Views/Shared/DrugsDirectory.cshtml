@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Drug>
 
 @{
+    ViewData["Title"] = "Справочник лекарств";
 }
 <div class='container mt-4'>
 
@@ -8,7 +9,7 @@
         @Html.ActionLink("Добавить", "CreateDrug")
     </div>
 
-    <form asp-controller="Registrator" asp-action="DrugsDirectory" class='mb-2'>
+    <form asp-action="DrugsDirectory" class='mb-2'>
         <div class='form-row'>
             <div class='col'>
                 <input name="q" class='form-control' type='search' placeholder='Введите название...'>
@@ -44,7 +45,7 @@
                     <div class='card-body'>
                             
                         <div class="text-right">
-                            <a class='clickShowHideNext' href="javascript:1;">Изменить</a> |
+                            <button class='clickShowHideNext btn btn-link' >Изменить</button> |
                             <a class='sendWithAddition hide' data-to-add='["Name","Description"]' asp-action="EditDrug" asp-route-id="@item.Id">Сохранить</a>
                         </div>
 

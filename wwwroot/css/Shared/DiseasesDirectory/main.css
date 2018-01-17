@@ -18,7 +18,22 @@ input {
     border: 0px;
 }
 
-.disease-header input {
+.disease-header {
     font-size: 1.2em;
     color: #007bff;
+}
+
+.disease-info button {
+    padding: 0;
+    vertical-align:unset;
+}
+
+
+@media (max-width:450px){
+    #diseasesList .btn, #diseasesList .form-control {
+        font-size: inherit;
+    }
+    #diseasesList {
+        font-size: 10px;
+    }
 }

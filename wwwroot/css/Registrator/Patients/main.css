@@ -1,0 +1,66 @@
+
+#Patients td .Dropdown {
+    display:none;
+}
+
+
+#Patients td .noDropdown {
+    display: block;
+}
+
+
+@media (max-width: 800px) {
+    #Patients {
+        font-size: 15px;
+    }
+
+   #Patients th, #Patients td {
+       padding: .15rem;
+   }
+
+    #Patients td .Dropdown {
+        display: block;
+    }
+
+    #Patients td .Dropdown .btn {
+        font-size:inherit;
+    }
+
+
+
+    #Patients td .noDropdown {
+        display: none;
+    }
+
+}
+@media (max-width: 650px) {
+    #Patients {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 550px) {
+    #Patients {
+        font-size: 11px;
+    }
+    
+}
+
+
+@media (max-width: 450px) {
+    #Patients {
+        font-size: 9px;
+    }
+    #Patients th, #Patients td {
+         padding: .01rem
+    }
+}
+
+
+
+@media (max-width: 330px) {
+    #Patients {
+        font-size: 7px;
+    }
+
+}

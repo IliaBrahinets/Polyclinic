@@ -1,11 +1,35 @@
 @model Doctor
 
 @{
-    ViewData["Title"] = "CreateDoctor";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Model == null)
+    {
+        ViewBag.action = "Create";
+    }
+    else
+    {
+        ViewBag.action = "Edit";
+    }
 }
+
+@{
+    if (ViewBag.action == "Create")
+    {
+        ViewData["Title"] = "Создание доктора";
+    }
+    else
+    {
+        ViewData["Title"] = "Редактирование доктора";
+    }
+}
+
 <div class='container mt-4'>
-    <form asp-action="CreateDoctor" asp-controller="registrator">
+    <form asp-action="@(ViewBag.action)Doctor" asp-controller="registrator" class="fullyCheckForm" data-check-url="/Registrator/IsDoctorNotExist" data-message-elem=".TotalMessage">
+
+        @if(Model != null)
+        {
+            <input asp-for="Id" hidden />
+        }
+
         <div class='form-group'>
             <div class='form-row'>
                 <div class='col-sm-4'>
@@ -29,30 +53,36 @@
             <div class='col-sm-4'>
                 <label asp-for='ChainedCabinet'>Номер кабинета</label>
                 <input asp-for='ChainedCabinet' class="form-control" placeholder='Номер' />
-                <span asp-validation-for="ChainedCabinet"></span>
+                <span asp-validation-for="ChainedCabinet" class="text-danger"></span>
 
             </div>
             <div class='col-sm-8'>
 
                 <label asp-for='SpecialityId'>Специальность</label>
-                <select asp-for='SpecialityId' class = "form-control">
+                <select asp-for='SpecialityId' class="form-control">
                     @foreach (var Speciality in ViewBag.Specialities)
                     {
-                        <option value ="@Speciality.Id">@Speciality.Name</option>
-                        
+                        <option value="@Speciality.Id">@Speciality.Name</option>
+
                     }
-               </select>
+                </select>
             </div>
         </div>
         <div class='form-group'>
             <label asp-for='RegionId'>Номер участка</label>
-            <select asp-for='RegionId' class="form-control">
+            <select asp-for='RegionId' class="form-control triggered" data-trigger-elem="SpecialityId"
+                                                                      data-trigger-val='["Терапевт","терапевт"]'
+                                                                      data-trigger-type="enable">
                 @foreach (var Region in ViewBag.Regions)
                 {
                     <option value="@Region.Id">@Region.Id</option>
 
                 }
             </select>
+        </div>
+
+        <div class="form-group">
+            <span class="TotalMessage text-danger"></span>
         </div>
 
         <div class='form-group'>
@@ -63,3 +93,9 @@
 
     </form>
 </div>
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/lib/fullyCheckForm/main.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/formDataInput(on,off)Trigger/main.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/Registrator/EditDoctor/main.js" asp-append-version="true"></script>
+}
