@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\**" />
+    <Content Remove="Pages\**" />
+    <EmbeddedResource Remove="Pages\**" />
+    <None Remove="Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\SpecialitiesController.cs" />
     <Compile Remove="Views\Registrator\DiseasesDirectory.cshtml.cs" />
   </ItemGroup>
@@ -28,10 +35,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
     <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.7.2" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1003" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
+    <PackageReference Include="Quartz" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +45,6 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\css\Registrator\Новая папка\" />
-    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

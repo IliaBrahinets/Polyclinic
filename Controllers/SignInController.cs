@@ -21,16 +21,6 @@ namespace Polyclinic.Controllers
             db = context;
         }
 
-        //work with a session
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            base.OnActionExecuting(context);
-
-            //to the ISO date 
-            ViewData["CreationDateTime"] = HttpContext.Session.Get<DateTime>("CreationDateTime").ToUniversalTime().ToString("s");
-        }
-
-
         public async Task<IActionResult> Index()
         {
             return View(await db.Doctors.ToListAsync());

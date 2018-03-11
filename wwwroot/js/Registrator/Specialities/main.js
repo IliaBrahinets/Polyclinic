@@ -22,7 +22,7 @@
 
         var Input = data_group.find("input[name=" + InputNames[i] + "]");
 
-        RequestStr += (ReqNames[i] || InputNames[i]) + "=" + Input.val();
+        RequestStr += (ReqNames[i] || InputNames[i]) + "=" + encodeURIComponent(Input.val());
 
     }
 

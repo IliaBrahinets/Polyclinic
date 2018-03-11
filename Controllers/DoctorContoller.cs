@@ -7,12 +7,13 @@ using Polyclinic.Data;
 using Polyclinic.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Polyclinic.Controllers
 {
     public class DoctorController : SharedController
     {
-        public DoctorController(PolyclinicContext context):base(context)
+        public DoctorController(PolyclinicContext context,ILogger<DoctorController> logger):base(context, logger)
         {
         }
 

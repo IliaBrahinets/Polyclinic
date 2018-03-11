@@ -57,8 +57,7 @@
                                  </td>
                                  <td>
                                      <a asp-action="DeleteStreet" asp-route-id="@street.Id">Удалить</a> |
-                                     <button class='clickShowHideNext btn btn-link p-0'>Изменить</button> |
-                                     <a class='sendWithAddition hide' data-to-add='["Name","Addresses","RegionId"]' asp-action="EditStreet" asp-route-id="@street.Id">Сохранить</a>
+                                     <a asp-action="EditStreet" asp-route-id="@street.Id">Изменить</a>
                                  </td>
                              </tr>
                             

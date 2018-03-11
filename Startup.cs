@@ -7,23 +7,23 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 using Polyclinic.Data;
-<<<<<<< HEAD
 using Polyclinic.Helpers;
+using Polyclinic.Services;
 using Newtonsoft.Json.Serialization;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-=======
-using Newtonsoft.Json.Serialization;
->>>>>>> 1d6da768185f25c60ce092ba27cf556b2c007de8
+using Microsoft.Extensions.Logging;
 
 namespace Polyclinic
 {
     public class Startup
     {
+
+        protected ILogger _logger { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
 
         public IConfiguration Configuration { get; }
@@ -33,7 +33,7 @@ namespace Polyclinic
         {
             
             services.AddDbContext<PolyclinicContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                                                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -42,10 +42,12 @@ namespace Polyclinic
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            ConfigureLogging(env, loggerFactory);
+
             if (env.IsDevelopment())
-            {
+            {   
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
@@ -59,7 +61,6 @@ namespace Polyclinic
 
             app.UseStaticFiles();
 
-
             var locale = Configuration["SiteLocale"];
             RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
             {
@@ -68,21 +69,6 @@ namespace Polyclinic
                 DefaultRequestCulture = new RequestCulture(locale)
             };
             app.UseRequestLocalization(localizationOptions);
-
-            app.Use(async (context, next) =>
-            {
-                if (!context.Session.IsSetted("CreationDateTime"))
-                {
-                    context.Session.Set<DateTime>("CreationDateTime", DateTime.UtcNow);
-
-                    context.Response.Redirect("/");
-
-                }
-                else
-                {
-                    await next.Invoke();
-                }
-            });
       
             app.UseMvc(routes =>
             {
@@ -90,6 +76,19 @@ namespace Polyclinic
                     name: "default",
                     template: "{controller=SignIn}/{action=Index}");
             });
+        }
+
+        private void ConfigureLogging(IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            var logConfig = Configuration.GetSection("Logging");
+  
+            var fileConfig = logConfig.GetSection("File");
+
+            var path = fileConfig.GetValue<string>("path");
+            var logLevel = Enum.Parse<LogLevel>(fileConfig.GetValue<string>("Loglevel"));
+
+            loggerFactory.AddFile(path, logLevel);
+            
         }
     }
 }

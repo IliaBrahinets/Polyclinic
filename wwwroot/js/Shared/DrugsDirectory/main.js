@@ -10,7 +10,7 @@
 
         var data =$(this).closest(".data-group").find("[data-name=" + DataNames[i] + "]");
 
-        RequestStr += DataNames[i] + "=" + data.text() + "&";
+        RequestStr += DataNames[i] + "=" + encodeURIComponent(data.text()) + "&";
 
     }
 
