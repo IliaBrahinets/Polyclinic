@@ -42,3 +42,14 @@ E:\fold\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.AssemblyInfoInputs.cache
 E:\fold\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.AssemblyInfo.cs
 E:\fold\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.dll
 E:\fold\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.pdb
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.deps.json
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.runtimeconfig.json
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.runtimeconfig.dev.json
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.dll
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\bin\Debug\netcoreapp2.0\Polyclinic.pdb
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.csprojResolveAssemblyReference.cache
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.csproj.CoreCompileInputs.cache
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.AssemblyInfoInputs.cache
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.AssemblyInfo.cs
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.dll
+C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\Polyclinic\obj\Debug\netcoreapp2.0\Polyclinic.pdb

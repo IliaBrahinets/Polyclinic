@@ -5,6 +5,7 @@ namespace Polyclinic.Data
 {
     public class PolyclinicContext : DbContext
     {
+
         public PolyclinicContext(DbContextOptions<PolyclinicContext> options) : base(options)
         {
 

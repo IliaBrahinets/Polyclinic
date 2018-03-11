@@ -25,11 +25,11 @@ public class Patient : Man
     [Required(ErrorMessage = "Введите название улицы")]
     public string StreetName { get; set; }
 
+    private string houseNumber;
     //write a reg exp
     [Required(ErrorMessage = "Введите номер")]
     [RegularExpression("^[1-9]+[0-9]*[а-яА-Я]?$", ErrorMessage = "Неправильный формат")]
-    [Remote(action: "IsStreetChain", controller: "Registrator", AdditionalFields = nameof(StreetName), HttpMethod ="POST")]
-    public string HouseNumber { get; set; }
+    public string HouseNumber { get => houseNumber; set => houseNumber = value.ToUpper(); }
 
     [DataType(DataType.Date)]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
@@ -38,6 +38,11 @@ public class Patient : Man
     public ICollection<DoctorVisit> DoctorVisits { get; set; }
 
     public ICollection<PatientRecord> PatientRecords { get; set; }
+
+    public Patient()
+    {
+        CreationDate = DateTime.UtcNow;
+    }
 
     // override object.Equals
     public override bool Equals(object obj)

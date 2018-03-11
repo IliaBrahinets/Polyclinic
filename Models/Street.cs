@@ -16,10 +16,11 @@ namespace Polyclinic.Models
         [Required(ErrorMessage ="Введите название")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage ="Введите адреса через запятую")]
+        private string addresses;
+        [Required(ErrorMessage = "Введите адреса через запятую")]
         [RegularExpression("^([1-9][0-9]*[а-яА-Я]?,)*[1-9][0-9]*[а-яА-Я]?$", ErrorMessage = "Неправильный формат")]
-        [Remote(action: "isStreetExist", controller: "Registrator",AdditionalFields=nameof(Name))]
-        public string Addresses { get; set; }
+        [Remote(action: "isStreetExist", controller: "Registrator", AdditionalFields = "Name,Id")]
+        public string Addresses { get => addresses; set => addresses = value.ToUpper(); }
 
         public int RegionId { get; set; }
         public Region Region { get; set; }

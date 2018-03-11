@@ -11,26 +11,19 @@ using Newtonsoft.Json.Linq;
 using Polyclinic.Data;
 using Polyclinic.Helpers;
 using Polyclinic.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Polyclinic.Controllers
 {
     public abstract class SharedController : Controller
     {
         protected readonly PolyclinicContext db;
+        protected readonly ILogger _logger;
 
-        public SharedController(PolyclinicContext context)
+        public SharedController(PolyclinicContext context, ILogger logger)
         {
             db = context;
-        }
-
-        //work with a session
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            base.OnActionExecuting(context);
-
-            //to the ISO date 
-            ViewData["CreationDateTime"] = HttpContext.Session.Get<DateTime>("CreationDateTime").ToUniversalTime().ToString("s");
-
+            _logger = logger;
         }
 
         public async Task<IActionResult> PatientCard(int? Id,int? SpecialityId,string DateRange)
@@ -321,8 +314,9 @@ namespace Polyclinic.Controllers
                 {
                     await db.SaveChangesAsync();
                 }
-                catch (DbUpdateException)
+                catch (DbUpdateException ex)
                 {
+                    _logger.LogError(ex, "Error deleting an Entity");
                     return false;
                 }
 

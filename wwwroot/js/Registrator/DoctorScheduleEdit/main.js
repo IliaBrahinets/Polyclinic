@@ -6,8 +6,6 @@ $(document).ready(function () {
 
     moment.locale("ru");
 
-    // Here's some magic to make sure the dates are happening this month.
-    var thisMonth = moment().format('DD-MM-YYYY');
 
     // The order of the click handlers is predictable. Direct click action
     // callbacks come first: click, nextMonth, previousMonth, nextYear,
@@ -24,8 +22,7 @@ $(document).ready(function () {
         dateParameter: 'Date',
 
         constraints: {
-            //including the  current day
-            startDate: moment($.getJSON("GetCurrentDate"))
+            startDate: moment.utc($.getJSON("GetCurrentDate")).add(-1, "day")
         },
 
         trackSelectedDate: true,

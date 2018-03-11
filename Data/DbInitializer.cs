@@ -1,8 +1,15 @@
-﻿using Polyclinic.Models;
-using System;
+﻿using System;
 using System.Linq;
 
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+
+using Quartz;
+using Quartz.Impl;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
+
+using Polyclinic.Models;
 
 namespace Polyclinic.Data
 {
@@ -11,6 +18,12 @@ namespace Polyclinic.Data
         public static void Initialize(PolyclinicContext context)
         {
             context.Database.EnsureCreated();
+            InitData(context);
+
+        }
+
+        public static void InitData(PolyclinicContext context)
+        {
 
             // Look for any students.
             if (context.Specialities.Any())
@@ -25,7 +38,10 @@ namespace Polyclinic.Data
             {
                 return;   // DB has been seeded
             }
-
+            if (context.Regions.Any())
+            {
+                return;   // DB has been seeded
+            }
             var Specialities = new Speciality[]
             {
             new Speciality{Name="Хирург",CheckUpTime=15},
@@ -41,15 +57,17 @@ namespace Polyclinic.Data
                  new Disease{Name="Рак",Description="Всё плохо"},
                  new Disease{Name="Простуда",Description="Пей чай"}
             };
+
             var Region = new Region { };
             var Street = new Street
             {
-                Name = "улица Пролетарская", Addresses = "1,2"
+                Name = "улица Пролетарская",
+                Addresses = "1,2"
             };
             Region.Streets = new List<Street>();
-           
-                Region.Streets.Add(Street);
-            
+
+            Region.Streets.Add(Street);
+
 
             foreach (Disease s in Diseases)
             {
@@ -64,12 +82,13 @@ namespace Polyclinic.Data
                 context.Drugs.Add(s);
             }
 
-            
+
             context.Regions.Add(Region);
-           
+
             context.Streets.Add(Street);
-            
+
             context.SaveChanges();
         }
+
     }
 }

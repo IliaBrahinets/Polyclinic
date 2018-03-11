@@ -15,17 +15,17 @@ using OpenXmlPowerTools;
 using System.Xml.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Polyclinic.Controllers
 {
     public class RegistratorController : SharedController
     {
-
-        public RegistratorController(PolyclinicContext context) : base(context)
+        public RegistratorController(PolyclinicContext context, ILogger<RegistratorController> logger) : base(context,logger)
         {
-         
+
         }
-     
+
         public async Task<IActionResult> Doctors(string Surname, string Speciality, int? RegionId, int? PatientId)
         {
             ViewBag.Specialities = await db.Specialities.ToListAsync();
@@ -249,25 +249,15 @@ namespace Polyclinic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,Sex,StreetId,StreetName,HouseNumber")] Patient patient)
+        public async Task<IActionResult> CreatePatient([Bind("Name,Surname,Lastname,BirthDate,Sex,RegionId,StreetName,HouseNumber")] Patient patient)
         {
             if (ModelState.IsValid)
             {
-                patient.CreationDate = DateTime.Today.ToUniversalTime();
+                //try assign a region
+                Street street = await db.Streets.FirstOrDefaultAsync(x => x.Name.Equals(patient.StreetName) && x.Addresses.Contains(patient.HouseNumber));
 
-                //we need check for this Street
-
-                if (patient.RegionId == null)
-                {
-                    Street StreetMatched =
-                           await db.Streets.FirstOrDefaultAsync(x => (x.Name.Equals(patient.StreetName)
-                                             && x.Addresses.Contains(patient.HouseNumber)));
-
-
-                    patient.RegionId = StreetMatched.RegionId;
-                }
-
-
+                if (street != null)
+                    patient.RegionId = street.RegionId;
 
                 db.Patients.Add(patient);
                 await db.SaveChangesAsync();
@@ -323,15 +313,14 @@ namespace Polyclinic.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (patient.RegionId == null)
-                {
-                    Street StreetMatched =
-                           await db.Streets.FirstOrDefaultAsync(x => (x.Name.Equals(patient.StreetName)
-                                             && x.Addresses.Contains(patient.HouseNumber)));
+                
+                Street StreetMatched =
+                        await db.Streets.FirstOrDefaultAsync(x => (x.Name.Equals(patient.StreetName)
+                                                                && x.Addresses.Contains(patient.HouseNumber)));
 
-
+                if (StreetMatched != null)
                     patient.RegionId = StreetMatched.RegionId;
-                }
+      
 
                 db.Patients.Update(patient);
                 await db.SaveChangesAsync();
@@ -439,6 +428,37 @@ namespace Polyclinic.Controllers
             }
 
             return View("EmptyPage");
+        }
+
+        public async Task<ActionResult> DeleteOutOfDatePlacesForRecords()
+        {
+            List<Relieve> OutOfDate = await db.Relieves.Where(x => (x.Date < DateTime.UtcNow)).ToListAsync();
+
+            foreach (Relieve Relieve in OutOfDate)
+            {
+                bool NotConfirmedRecordsExist = await db.PatientRecords.AnyAsync(x => (x.PatientId != null
+                                                                                && x.DoctorId == Relieve.DoctorId
+                                                                                && x.DateTime >= Relieve.StartTime
+                                                                                && x.DateTime < Relieve.EndTime));
+
+                if (!NotConfirmedRecordsExist)
+                {
+                    db.Relieves.Remove(Relieve);
+                }
+
+                db.PatientRecords.RemoveRange(
+                    db.PatientRecords.Where(x => (x.PatientId == null
+                                                && x.DoctorId == Relieve.DoctorId
+                                                && x.DateTime >= Relieve.StartTime
+                                                && x.DateTime < Relieve.EndTime)));
+
+
+            }
+
+            await db.SaveChangesAsync();
+
+            return Ok();
+
         }
         public IActionResult TalonView(int? PatientRecordId)
         {
@@ -571,50 +591,11 @@ namespace Polyclinic.Controllers
 
             if(patientRecord != null && patientRecord.PatientId != null)
             {
-                Relieve relieve = db.Relieves.FirstOrDefault(x => (x.DoctorId == patientRecord.DoctorId 
-                                                                && x.StartTime <= patientRecord.DateTime
-                                                                && patientRecord.DateTime <= x.EndTime));
-
-                //we take in account the cases when you delete a Relieve with created Records
-
-                string returnString = "";
-
-                if (relieve != null)
-                {
-                    await db.Entry(relieve).Reference(x => x.Doctor).LoadAsync();
-                    await db.Entry(relieve.Doctor).Reference(x => x.Speciality).LoadAsync();
-
-                    int diff = (int)(patientRecord.DateTime.TimeOfDay.TotalMinutes - relieve.StartTime.TimeOfDay.TotalMinutes);
-
-                    
-
-                    if (diff % relieve.Doctor.Speciality.CheckUpTime == 0)
-                    {
-                        patientRecord.PatientId = null;
-                        db.PatientRecords.Update(patientRecord);
-
-                        returnString = "Update";
-                    }
-                    else
-                    {
-                        db.PatientRecords.Remove(patientRecord);
-
-                        returnString = "Delete";
-                    }
-
-
-                }
-                else
-                {
-                    db.PatientRecords.Remove(patientRecord);
-
-                    returnString = "Delete";
-                }
-
+                patientRecord.PatientId = null;
+                db.PatientRecords.Update(patientRecord);
                 await db.SaveChangesAsync();
 
-                return Json(data: returnString);
-                
+                return Json(data:true);
 
             }
 
@@ -870,6 +851,10 @@ namespace Polyclinic.Controllers
 
                 foreach (Street Street in Streets)
                 {
+                    //check whether there are patients live on that street
+                    IQueryable<Patient> patients = db.Patients.Where(x => (x.RegionId == null && Street.Name.Equals(x.StreetName) && Street.Addresses.Contains(x.HouseNumber)));
+                    await patients.ForEachAsync(x => x.Region = region);
+
                     db.Streets.Add(Street);
                 }
                 db.Regions.Add(region);
@@ -900,18 +885,53 @@ namespace Polyclinic.Controllers
 
             if (ModelState.IsValid)
             {
-                street.Addresses = street.Addresses.ToUpper();
-                db.Add(street);
+
+                //check whether there are patients live on that street
+                IQueryable<Patient> patients = db.Patients.AsTracking().Where(x => (x.RegionId == null && street.Name.Equals(x.StreetName) && street.Addresses.Contains(x.HouseNumber)));
+                await patients.ForEachAsync(x => x.RegionId = street.RegionId);
+
+
+                db.Streets.Add(street);
                 await db.SaveChangesAsync();
 
             }
             return RedirectToAction(nameof(Regions));
         }
+
+        public async Task<IActionResult> EditStreet(int? Id)
+        {
+            Street street = await db.Streets.FindAsync(Id);
+
+            if (street != null)
+                return View(street);
+
+            return NotFound();
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditStreet(Street street)
         {
             if (ModelState.IsValid)
             {
+                Street prevStreet = await db.Streets.AsNoTracking().FirstOrDefaultAsync(x => x.Id == street.Id);
+
                 db.Streets.Update(street);
+
+                IQueryable<Patient> prevChainedPateints = db.Patients.AsTracking().Where(x => (x.RegionId != null 
+                                                                                            && prevStreet.Name.Equals(x.StreetName) 
+                                                                                            && prevStreet.Addresses.Contains(x.HouseNumber)));
+                await prevChainedPateints.ForEachAsync(x => x.RegionId = null);
+
+
+                //check whether there are patients live on that street
+                IQueryable<Patient> patients = db.Patients.AsTracking().Where(x => (x.RegionId == null 
+                                                                                    && street.Name.Equals(x.StreetName) 
+                                                                                    && street.Addresses.Contains(x.HouseNumber)));
+                await patients.ForEachAsync(x => x.RegionId = street.RegionId);
+
+
                 await db.SaveChangesAsync();
             }
 
@@ -924,17 +944,19 @@ namespace Polyclinic.Controllers
             return RedirectToAction(nameof(Regions));
 
         }
+
         [AcceptVerbs("Get", "Post")]
         public async Task<JsonResult> isStreetExist()
         {
 
             IQueryCollection args = HttpContext.Request.Query;
 
-            if (args.Count != 2) return Json(data: false);
+            if (args.Count < 2) return Json(data: false);
 
+            int Id = -1;
             String Name = "";
             String Addresses = "";
-
+            
             foreach(String key in args.Keys)
             {
                 if (key.Contains("Name"))
@@ -942,9 +964,12 @@ namespace Polyclinic.Controllers
 
                 if (key.Contains("Addresses"))
                     Addresses = args[key];
+
+                if (key.Contains("Id"))
+                    Int32.TryParse(args[key],out Id);
             }
 
-            List<Street> StreetsMatched = await db.Streets.Where(x => x.Name.Equals(Name)).ToListAsync();
+            List<Street> StreetsMatched = await db.Streets.Where(x => (x.Name.Equals(Name) && x.Id != Id)).ToListAsync();
 
             if (StreetsMatched.Count == 0)
                 return Json(data: true);
