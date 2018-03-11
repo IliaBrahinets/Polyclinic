@@ -21,7 +21,7 @@ namespace Polyclinic.Controllers
 {
     public class RegistratorController : SharedController
     {
-        public RegistratorController(PolyclinicContext context, ILogger<RegistratorController> logger) : base(context,logger)
+        public RegistratorController(PolyclinicContext context, ILogger<RegistratorController> logger) : base(context, logger)
         {
 
         }
@@ -42,7 +42,7 @@ namespace Polyclinic.Controllers
             {
                 Doctors = Doctors.Where(x => x.Speciality.Name.ToLower().Contains(Speciality));
             }
-          
+
             //
             if (PatientId != null)
             {
@@ -66,9 +66,9 @@ namespace Polyclinic.Controllers
                         Doctors = Doctors.Where(x => x.RegionId == patient.RegionId);
                     else
                         if (RegionId == null)
-                            Doctors = Doctors.Where(x => (x.RegionId == null || x.RegionId == patient.RegionId));
-                        else
-                            return View(new List<Doctor>());
+                        Doctors = Doctors.Where(x => (x.RegionId == null || x.RegionId == patient.RegionId));
+                    else
+                        return View(new List<Doctor>());
                 }
                 else
                 {
@@ -85,7 +85,7 @@ namespace Polyclinic.Controllers
             return View(Doctors);
 
         }
-      
+
         public async Task<IActionResult> CreateDoctor()
         {
 
@@ -129,7 +129,7 @@ namespace Polyclinic.Controllers
             if (TryDoctor == null)
                 return Json(data: true);
 
-            return Json(data: "����� ������ ����������");
+            return Json(data: "Такой доктор существует");
 
 
         }
@@ -138,14 +138,14 @@ namespace Polyclinic.Controllers
             if (ChainedCabinet == null)
                 return Json(data: true);
 
-            Doctor TryDoctor = await db.Doctors.FirstOrDefaultAsync(x => 
+            Doctor TryDoctor = await db.Doctors.FirstOrDefaultAsync(x =>
                                         (x.ChainedCabinet == ChainedCabinet)
-                                        &&(x.Id != Id));
+                                        && (x.Id != Id));
 
             if (TryDoctor == null)
                 return Json(data: true);
 
-            return Json(data: "������� �����");
+            return Json(data: "Кабинет занят");
         }
         public async Task<IActionResult> EditDoctor(int? id)
         {
@@ -163,7 +163,7 @@ namespace Polyclinic.Controllers
             }
 
             return RedirectToAction(nameof(Doctors));
-           
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -210,7 +210,7 @@ namespace Polyclinic.Controllers
             }
 
             ViewBag.Regions = await db.Regions.ToListAsync();
-            
+
             //RecordAction
             if (RecordId != null)
                 HttpContext.Session.SetInt32("RecordId", (int)RecordId);
@@ -277,18 +277,18 @@ namespace Polyclinic.Controllers
             }
             Patient TryPatient = await db.Patients.FirstOrDefaultAsync(
                 x => (x.BirthDate.Equals(patient.BirthDate)
-                      && x.Name.Equals(patient.Name) 
+                      && x.Name.Equals(patient.Name)
                       && x.Surname.Equals(patient.Surname)
                       && x.Lastname.Equals(patient.Lastname)
                       && x.Sex.Equals(patient.Sex)
                       && x.RegionId.Equals(patient.RegionId)
                       && x.StreetName.Equals(patient.StreetName)
-                      && x.HouseNumber.Equals(patient.HouseNumber)) );
+                      && x.HouseNumber.Equals(patient.HouseNumber)));
 
-            if(TryPatient == null)
+            if (TryPatient == null)
                 return Json(data: true);
 
-            return Json(data: "����� ������� ����������");
+            return Json(data: "Такой пациент существует");
 
 
         }
@@ -298,7 +298,7 @@ namespace Polyclinic.Controllers
             {
                 Patient patient = await db.Patients.FindAsync(id);
 
-                if(patient == null)
+                if (patient == null)
                     return RedirectToAction(nameof(Patients));
 
                 return View(patient);
@@ -313,14 +313,14 @@ namespace Polyclinic.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 Street StreetMatched =
                         await db.Streets.FirstOrDefaultAsync(x => (x.Name.Equals(patient.StreetName)
                                                                 && x.Addresses.Contains(patient.HouseNumber)));
 
                 if (StreetMatched != null)
                     patient.RegionId = StreetMatched.RegionId;
-      
+
 
                 db.Patients.Update(patient);
                 await db.SaveChangesAsync();
@@ -337,7 +337,7 @@ namespace Polyclinic.Controllers
         }
         public async Task<IActionResult> DoctorScheduleEdit(int? id)
         {
-         
+
             if (id != null)
             {
                 Doctor doctor = await db.Doctors.FindAsync(id);
@@ -390,7 +390,7 @@ namespace Polyclinic.Controllers
                                                     .Include(x => x.Doctor)
                                                     .Include(x => x.Doctor.Speciality).ToListAsync());
         }
-        public async Task<IActionResult> CreatePatientRecord(int? RecordId,int? PatientId)
+        public async Task<IActionResult> CreatePatientRecord(int? RecordId, int? PatientId)
         {
             if (RecordId != null && PatientId != null)
             {
@@ -399,7 +399,7 @@ namespace Polyclinic.Controllers
                 HttpContext.Session.Remove("RecordId");
                 HttpContext.Session.Remove("PatientId");
 
-                if(patientRecord == null)
+                if (patientRecord == null)
                 {
                     return NotFound();
                 }
@@ -408,23 +408,23 @@ namespace Polyclinic.Controllers
                 bool isExistRecord = db.PatientRecords.Any(x => (x.PatientId == PatientId && patientRecord.DateTime == x.DateTime));
                 if (isExistRecord)
                 {
-                    ViewData["PageMessage"] = PageMessage("danger","������!", "������� ��� ����� ������ �� ��� �����!");
+                    ViewData["PageMessage"] = PageMessage("danger", "Ошибка!", "Пациент уже имеет запись на это время!");
                     return View("EmptyPage");
                 }
 
                 //
                 if (patientRecord.PatientId == null)
-                {  
+                {
 
                     patientRecord.PatientId = PatientId;
 
                     db.PatientRecords.Update(patientRecord);
                     await db.SaveChangesAsync();
 
-                    return View("TalonView",patientRecord);
+                    return View("TalonView", patientRecord);
                 }
 
-                ViewData["PageMessage"] = PageMessage("danger","������!","�� ��� ����� ������� �������!");
+                ViewData["PageMessage"] = PageMessage("danger", "Ошибка!", "На это время записан пациент!");
             }
 
             return View("EmptyPage");
@@ -488,7 +488,7 @@ namespace Polyclinic.Controllers
                 string path = $"WordTemplates/tmp.docx";
 
                 //if (System.IO.File.Exists(path))
-                  //  return path;
+                //  return path;
 
                 await db.Entry(patientRecord).Reference(x => x.Doctor).LoadAsync();
                 await db.Entry(patientRecord.Doctor).Reference(x => x.Speciality).LoadAsync();
@@ -589,13 +589,13 @@ namespace Polyclinic.Controllers
 
             PatientRecord patientRecord = await db.PatientRecords.FindAsync(Id);
 
-            if(patientRecord != null && patientRecord.PatientId != null)
+            if (patientRecord != null && patientRecord.PatientId != null)
             {
                 patientRecord.PatientId = null;
                 db.PatientRecords.Update(patientRecord);
                 await db.SaveChangesAsync();
 
-                return Json(data:true);
+                return Json(data: true);
 
             }
 
@@ -634,7 +634,7 @@ namespace Polyclinic.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+
                 //since Start[End]Time is stored as DateTime, but it's only a time information 
                 //for comfort we set a Date Component as relieve's date
                 relieve.StartTime = relieve.Date.Add(relieve.StartTime.TimeOfDay);
@@ -646,7 +646,7 @@ namespace Polyclinic.Controllers
                                                                               || (x.StartTime < relieve.StartTime && x.EndTime > relieve.EndTime))));
 
                 if (isIntersectWithExistRel)
-                    return NotFound("������������ � ������������!");
+                    return NotFound("Пересекается с существующей!");
 
                 db.Relieves.Add(relieve);
 
@@ -654,14 +654,14 @@ namespace Polyclinic.Controllers
                 Doctor doctor = await db.Doctors.FindAsync(relieve.DoctorId);
 
                 await db.Entry(doctor).Reference(x => x.Speciality).LoadAsync();
-           
+
 
                 //initially it equals to StartTime
                 DateTime RecordTime = relieve.StartTime;
 
                 DateTime EndTime = relieve.EndTime;
 
-                while(DateTime.Compare(RecordTime,EndTime) < 0)
+                while (DateTime.Compare(RecordTime, EndTime) < 0)
                 {
                     PatientRecord patientRecord = new PatientRecord { DateTime = RecordTime, DoctorId = doctor.Id };
 
@@ -669,7 +669,7 @@ namespace Polyclinic.Controllers
 
                     RecordTime = RecordTime.AddMinutes(doctor.Speciality.CheckUpTime);
                 }
-                
+
 
                 await db.SaveChangesAsync();
 
@@ -706,16 +706,17 @@ namespace Polyclinic.Controllers
                                                                                   && x.DateTime <= relieve.EndTime));
 
                 if (isAnyPatientRecords)
-                    return NotFound("���� ������ ���������!");
+                    return NotFound("Есть записи пациентов!");
 
-                db.PatientRecords.RemoveRange(await db.PatientRecords.Where(x => (x.PatientId == null 
+                db.PatientRecords.RemoveRange(await db.PatientRecords.Where(x => (x.PatientId == null
                                                                                && x.DoctorId == relieve.DoctorId
                                                                                && relieve.StartTime <= x.DateTime
                                                                                && x.DateTime <= relieve.EndTime)).ToArrayAsync());
 
                 //SaveChanges will be called in DeleteEntity
-            }else return NotFound();
-            
+            }
+            else return NotFound();
+
             bool isAllRight = await DeleteEntity<Relieve>(id);
 
             if (isAllRight)
@@ -750,15 +751,15 @@ namespace Polyclinic.Controllers
         public async Task<IActionResult> CreateRelieveTime([Bind("Description,StartTime,EndTime")] RelieveTime relieveTime)
         {
             if (ModelState.IsValid)
-            { 
+            {
                 db.RelieveTimes.Add(relieveTime);
                 await db.SaveChangesAsync();
 
-                return Json(data:relieveTime.Id);
+                return Json(data: relieveTime.Id);
             }
 
             return NotFound();
-         
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -778,21 +779,18 @@ namespace Polyclinic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRelieveTime(int? id)
         {
-         
-            if (id != null)
-            {
-                Doctor doctor = await db.Doctors.FindAsync(id);
 
             bool isAllRight = await DeleteEntity<RelieveTime>(id);
 
             if (isAllRight)
             {
                 return Json(data: true);
-            } else
+            }
+            else
             {
                 return NotFound();
             }
-            
+
         }
 
 
@@ -910,7 +908,7 @@ namespace Polyclinic.Controllers
                 return View(street);
 
             return NotFound();
-            
+
         }
 
         [HttpPost]
@@ -923,15 +921,15 @@ namespace Polyclinic.Controllers
 
                 db.Streets.Update(street);
 
-                IQueryable<Patient> prevChainedPateints = db.Patients.AsTracking().Where(x => (x.RegionId != null 
-                                                                                            && prevStreet.Name.Equals(x.StreetName) 
+                IQueryable<Patient> prevChainedPateints = db.Patients.AsTracking().Where(x => (x.RegionId != null
+                                                                                            && prevStreet.Name.Equals(x.StreetName)
                                                                                             && prevStreet.Addresses.Contains(x.HouseNumber)));
                 await prevChainedPateints.ForEachAsync(x => x.RegionId = null);
 
 
                 //check whether there are patients live on that street
-                IQueryable<Patient> patients = db.Patients.AsTracking().Where(x => (x.RegionId == null 
-                                                                                    && street.Name.Equals(x.StreetName) 
+                IQueryable<Patient> patients = db.Patients.AsTracking().Where(x => (x.RegionId == null
+                                                                                    && street.Name.Equals(x.StreetName)
                                                                                     && street.Addresses.Contains(x.HouseNumber)));
                 await patients.ForEachAsync(x => x.RegionId = street.RegionId);
 
@@ -960,8 +958,8 @@ namespace Polyclinic.Controllers
             int Id = -1;
             String Name = "";
             String Addresses = "";
-            
-            foreach(String key in args.Keys)
+
+            foreach (String key in args.Keys)
             {
                 if (key.Contains("Name"))
                     Name = args[key];
@@ -970,7 +968,7 @@ namespace Polyclinic.Controllers
                     Addresses = args[key];
 
                 if (key.Contains("Id"))
-                    Int32.TryParse(args[key],out Id);
+                    Int32.TryParse(args[key], out Id);
             }
 
             List<Street> StreetsMatched = await db.Streets.Where(x => (x.Name.Equals(Name) && x.Id != Id)).ToListAsync();
@@ -978,28 +976,28 @@ namespace Polyclinic.Controllers
             if (StreetsMatched.Count == 0)
                 return Json(data: true);
 
-            String[] AddressesArr = Addresses.Split(new Char[]{','});
+            String[] AddressesArr = Addresses.Split(new Char[] { ',' });
 
-            foreach(String Address in AddressesArr)
-                foreach(Street street in StreetsMatched)
+            foreach (String Address in AddressesArr)
+                foreach (Street street in StreetsMatched)
                     if (street.Addresses.Contains(Address))
-                        return Json("���������� ����� ��� ����������� � �������");
+                        return Json("Существует адрес уже привязанный к участку");
 
-            return Json(data: true);                
+            return Json(data: true);
 
         }
         //for CreatePatient
         [AcceptVerbs("Get", "Post")]
-        public JsonResult IsStreetChain(String StreetName,String HouseNumber)
+        public JsonResult IsStreetChain(String StreetName, String HouseNumber)
         {
-            String ErrMessage = "����� ��� ����� ���� �� ���������� �� �� ����� ��������";
+            String ErrMessage = "Улица или номер дома не закреплены ни за одним участком";
 
             if ((StreetName == null) || (HouseNumber == null)) return Json(data: ErrMessage);
 
             Street street = db.Streets.FirstOrDefault(
-                x => (x.Name.Equals(StreetName) 
+                x => (x.Name.Equals(StreetName)
                 && x.Addresses.Contains(HouseNumber)
-                ) );
+                ));
 
             if (street == null)
             {
@@ -1015,7 +1013,7 @@ namespace Polyclinic.Controllers
 
         public async Task<IActionResult> Specialities(String q)
         {
-           
+
             if (q != null)
             {
                 q = q.ToLower();
@@ -1023,7 +1021,7 @@ namespace Polyclinic.Controllers
             }
             else
             {
-               return View(await db.Specialities.ToListAsync());
+                return View(await db.Specialities.ToListAsync());
             }
         }
         public IActionResult CreateSpeciality()
@@ -1038,7 +1036,7 @@ namespace Polyclinic.Controllers
             {
                 db.Add(speciality);
                 await db.SaveChangesAsync();
-               
+
             }
             return RedirectToAction(nameof(Specialities));
         }
@@ -1046,13 +1044,13 @@ namespace Polyclinic.Controllers
         {
             if (Name == null) return Json(false);
 
-            Speciality spec = await db.Specialities.FirstOrDefaultAsync(x => x.Name.ToLower().Equals( Name.ToLower() ) );
+            Speciality spec = await db.Specialities.FirstOrDefaultAsync(x => x.Name.ToLower().Equals(Name.ToLower()));
 
             if (spec == null)
                 return Json(true);
             else
-                return Json("������������� � ����� ��������� ��� ����������");
-        
+                return Json("Специальность с таким названием уже существует");
+
         }
         public async Task<IActionResult> EditSpeciality(Speciality spec)
         {
@@ -1068,7 +1066,7 @@ namespace Polyclinic.Controllers
             await DeleteEntity<Speciality>(id);
 
             return RedirectToAction(nameof(Specialities));
-           
+
         }
         public IActionResult Index()
         {
