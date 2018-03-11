@@ -9200,3 +9200,2479 @@ Executed action Polyclinic.Controllers.DoctorController.Relieves (Polyclinic) in
 Information
 Microsoft.AspNetCore.Hosting.Internal.WebHost
 Request finished in 117.6512ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (337ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Specialities] AS [s])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.SignInController.Index (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [d].[Id], [d].[ChainedCabinet], [d].[Lastname], [d].[Name], [d].[RegionId], [d].[SpecialityId], [d].[Surname]
+FROM [Doctors] AS [d]
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/SignIn/Index.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.SignInController.Index (Polyclinic) in 3826.9595ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 4071.5361ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 POST http://localhost:49214/ application/x-www-form-urlencoded 187
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.SignInController.Index (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (18ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Session.DistributedSession
+Accessing expired session, Key:210a540f-65ad-66d2-4ac6-7b2c3b6afe2a
+Information
+Microsoft.AspNetCore.Mvc.RedirectToActionResult
+Executing RedirectResult, redirecting to /Doctor/DoctorScheduleView.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.SignInController.Index (Polyclinic) in 113.941ms
+Information
+Microsoft.AspNetCore.Session.DistributedSession
+Session started; Key:210a540f-65ad-66d2-4ac6-7b2c3b6afe2a, Id:7dacc3c4-2eb9-3605-6336-d59cfbfb5b7b
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 144.8853ms 302 
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Doctor/DoctorScheduleView  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.DoctorScheduleView (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Doctor/DoctorScheduleView.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.DoctorScheduleView (Polyclinic) in 763.3978ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 768.538ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Doctor/Relieves?DoctorId=1&year=2018&month=03&WithRecordsCount=true&_=1520779135965  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Doctor/PatientRecords?DoctorId=1&StartDateTime=2018-03-11T00%3A00%3A00%2B03%3A00&EndDateTime=2018-03-12T00%3A00%3A00%2B03%3A00&_=1520779135966  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, True) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.PatientRecords (Polyclinic) with arguments (1, 11.03.18 00:00:00, 12.03.18 00:00:00) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (15ms) [Parameters=[@__DoctorId_0='?', @__StartDateTime_1='?', @__EndDateTime_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [x].[Id], [x].[DateTime], [x].[DoctorId], [x].[PatientId], [x.Patient].[Id], [x.Patient].[BirthDate], [x.Patient].[CreationDate], [x.Patient].[HouseNumber], [x.Patient].[Lastname], [x.Patient].[Name], [x.Patient].[RegionId], [x.Patient].[Sex], [x.Patient].[StreetName], [x.Patient].[Surname]
+FROM [PatientRecords] AS [x]
+LEFT JOIN [Patients] AS [x.Patient] ON [x].[PatientId] = [x.Patient].[Id]
+WHERE (([x].[DoctorId] = @__DoctorId_0) AND ([x].[DateTime] >= @__StartDateTime_1)) AND ([x].[DateTime] < @__EndDateTime_2)
+ORDER BY [x].[DateTime]
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (62ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[DateTime], [e].[DoctorId], [e].[PatientId]
+FROM [PatientRecords] AS [e]
+WHERE [e].[DoctorId] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.PatientRecords (Polyclinic) in 131.8116ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 138.1273ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [
+  {
+    "Id": 1,
+    "Date": "2018-03-16T00:00:00",
+    "StartTime": "10:00",
+    "EndTime": "12:00",
+    "Count": "1/8"
+  }
+].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.Relieves (Polyclinic) in 150.4718ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 158.6512ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Doctor/PatientRecords?DoctorId=1&StartDateTime=2018-03-16T00%3A00%3A00%2B03%3A00&EndDateTime=2018-03-17T00%3A00%3A00%2B03%3A00&_=1520779135967  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.PatientRecords (Polyclinic) with arguments (1, 16.03.18 00:00:00, 17.03.18 00:00:00) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__DoctorId_0='?', @__StartDateTime_1='?', @__EndDateTime_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [x].[Id], [x].[DateTime], [x].[DoctorId], [x].[PatientId], [x.Patient].[Id], [x.Patient].[BirthDate], [x.Patient].[CreationDate], [x.Patient].[HouseNumber], [x.Patient].[Lastname], [x.Patient].[Name], [x.Patient].[RegionId], [x.Patient].[Sex], [x.Patient].[StreetName], [x.Patient].[Surname]
+FROM [PatientRecords] AS [x]
+LEFT JOIN [Patients] AS [x.Patient] ON [x].[PatientId] = [x.Patient].[Id]
+WHERE (([x].[DoctorId] = @__DoctorId_0) AND ([x].[DateTime] >= @__StartDateTime_1)) AND ([x].[DateTime] < @__EndDateTime_2)
+ORDER BY [x].[DateTime]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [
+  {
+    "Id": 1,
+    "PatientId": 1,
+    "DateTime": "10:00",
+    "PatientShortName": "Добрынин С.А."
+  },
+  {
+    "Id": 2,
+    "PatientId": null,
+    "DateTime": "10:15"
+  },
+  {
+    "Id": 3,
+    "PatientId": null,
+    "DateTime": "10:30"
+  },
+  {
+    "Id": 4,
+    "PatientId": null,
+    "DateTime": "10:45"
+  },
+  {
+    "Id": 5,
+    "PatientId": null,
+    "DateTime": "11:00"
+  },
+  {
+    "Id": 6,
+    "PatientId": null,
+    "DateTime": "11:15"
+  },
+  {
+    "Id": 7,
+    "PatientId": null,
+    "DateTime": "11:30"
+  },
+  {
+    "Id": 8,
+    "PatientId": null,
+    "DateTime": "11:45"
+  }
+].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.PatientRecords (Polyclinic) in 25.0954ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 27.8933ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 POST http://localhost:49214/Doctor/WriteCheckUpInfo application/x-www-form-urlencoded; charset=UTF-8 219
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.WriteCheckUpInfo (Polyclinic) with arguments (DoctorVisit, 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[DateTime], [e].[DoctorId], [e].[PatientId]
+FROM [PatientRecords] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (22ms) [Parameters=[@__patientRecord_DateTime_Date_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [x].[Id], [x].[Appeared], [x].[Date], [x].[DoctorId], [x].[NonAppeared]
+FROM [AttendenceStatistics] AS [x]
+WHERE [x].[Date] = @__patientRecord_DateTime_Date_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (21ms) [Parameters=[@__patientRecord_DoctorId_0='?', @__patientRecord_DateTime_1='?', @__patientRecord_DateTime_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [x].[Id], [x].[Date], [x].[DoctorId], [x].[EndTime], [x].[StartTime]
+FROM [Relieves] AS [x]
+WHERE (([x].[DoctorId] = @__patientRecord_DoctorId_0) AND ([x].[StartTime] <= @__patientRecord_DateTime_1)) AND (@__patientRecord_DateTime_2 < [x].[EndTime])
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__relieve_StartTime_0='?', @__relieve_EndTime_1='?'], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [PatientRecords] AS [x]
+WHERE (@__relieve_StartTime_0 <= [x].[DateTime]) AND ([x].[DateTime] < @__relieve_EndTime_1)
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (19ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?' (Size = 4000), @p6='?', @p7='?' (Size = 4000), @p8='?', @p9='?'], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AttendenceStatistics] ([Appeared], [Date], [DoctorId], [NonAppeared])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [Id]
+FROM [AttendenceStatistics]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+INSERT INTO [DoctorVisits] ([DateTime], [Diagnosis], [DoctorId], [Medicines], [PatientId])
+VALUES (@p4, @p5, @p6, @p7, @p8);
+SELECT [Id]
+FROM [DoctorVisits]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+DELETE FROM [PatientRecords]
+WHERE [Id] = @p9;
+SELECT @@ROWCOUNT;
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value True.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.WriteCheckUpInfo (Polyclinic) in 164.9451ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 192.2817ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Doctor/Relieves?DoctorId=1&year=2018&month=3&day=16&WithRecordsCount=true&_=1520779135968  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.Relieves (Polyclinic) with arguments (2018, 3, 16, 1, True) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Doctor/PatientRecords?DoctorId=1&StartDateTime=2018-03-16T00%3A00%3A00%2B03%3A00&EndDateTime=2018-03-17T00%3A00%3A00%2B03%3A00&_=1520779135969  
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.DoctorController.PatientRecords (Polyclinic) with arguments (1, 16.03.18 00:00:00, 17.03.18 00:00:00) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__DoctorId_0='?', @__StartDateTime_1='?', @__EndDateTime_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [x].[Id], [x].[DateTime], [x].[DoctorId], [x].[PatientId], [x.Patient].[Id], [x.Patient].[BirthDate], [x.Patient].[CreationDate], [x.Patient].[HouseNumber], [x.Patient].[Lastname], [x.Patient].[Name], [x.Patient].[RegionId], [x.Patient].[Sex], [x.Patient].[StreetName], [x.Patient].[Surname]
+FROM [PatientRecords] AS [x]
+LEFT JOIN [Patients] AS [x.Patient] ON [x].[PatientId] = [x.Patient].[Id]
+WHERE (([x].[DoctorId] = @__DoctorId_0) AND ([x].[DateTime] >= @__StartDateTime_1)) AND ([x].[DateTime] < @__EndDateTime_2)
+ORDER BY [x].[DateTime]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [
+  {
+    "Id": 2,
+    "PatientId": null,
+    "DateTime": "10:15"
+  },
+  {
+    "Id": 3,
+    "PatientId": null,
+    "DateTime": "10:30"
+  },
+  {
+    "Id": 4,
+    "PatientId": null,
+    "DateTime": "10:45"
+  },
+  {
+    "Id": 5,
+    "PatientId": null,
+    "DateTime": "11:00"
+  },
+  {
+    "Id": 6,
+    "PatientId": null,
+    "DateTime": "11:15"
+  },
+  {
+    "Id": 7,
+    "PatientId": null,
+    "DateTime": "11:30"
+  },
+  {
+    "Id": 8,
+    "PatientId": null,
+    "DateTime": "11:45"
+  }
+].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.PatientRecords (Polyclinic) in 3.8791ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 5.8211ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?', @__Day_3='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND (((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2)) AND (DATEPART(day, [e].[Date]) = @__Day_3))
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[DateTime], [e].[DoctorId], [e].[PatientId]
+FROM [PatientRecords] AS [e]
+WHERE [e].[DoctorId] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [
+  {
+    "Id": 1,
+    "Date": "2018-03-16T00:00:00",
+    "StartTime": "10:00",
+    "EndTime": "12:00",
+    "Count": "0/7"
+  }
+].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.DoctorController.Relieves (Polyclinic) in 19.8483ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 20.9774ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.SignInController.Index (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [d].[Id], [d].[ChainedCabinet], [d].[Lastname], [d].[Name], [d].[RegionId], [d].[SpecialityId], [d].[Surname]
+FROM [Doctors] AS [d]
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/SignIn/Index.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.SignInController.Index (Polyclinic) in 7.8781ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 11.544ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Index (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.RedirectToActionResult
+Executing RedirectResult, redirecting to /Registrator/Patients.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Index (Polyclinic) in 1.654ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 4.4652ms 302 
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Patients  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Patients (Polyclinic) with arguments (, , , , ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id]
+FROM [Regions] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/Patients.cshtml.
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [Patient].[Id], [Patient].[BirthDate], [Patient].[CreationDate], [Patient].[HouseNumber], [Patient].[Lastname], [Patient].[Name], [Patient].[RegionId], [Patient].[Sex], [Patient].[StreetName], [Patient].[Surname]
+FROM [Patients] AS [Patient]
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Patients (Polyclinic) in 605.0737ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 609.8094ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Doctors  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Doctors (Polyclinic) with arguments (, , , ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[CheckUpTime], [s].[Name]
+FROM [Specialities] AS [s]
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id]
+FROM [Regions] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/Doctors.cshtml.
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [m].[Id], [m].[ChainedCabinet], [m].[Lastname], [m].[Name], [m].[RegionId], [m].[SpecialityId], [m].[Surname]
+FROM [Doctors] AS [m]
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Doctors (Polyclinic) in 186.0151ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 192.1139ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleView?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleView (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleView.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleView (Polyclinic) in 141.7739ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 147.015ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&WithRecordsCount=true&_=1520779230899  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/AttendenceStatistics?DoctorId=1&year=2018&month=03&_=1520779230900  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, True) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.AttendenceStatistics (Polyclinic) with arguments (2018, 3, , 1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/PatientRecords?DoctorId=1&StartDateTime=2018-03-11T00%3A00%3A00%2B03%3A00&EndDateTime=2018-03-12T00%3A00%3A00%2B03%3A00&_=1520779230901  
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[DateTime], [e].[DoctorId], [e].[PatientId]
+FROM [PatientRecords] AS [e]
+WHERE [e].[DoctorId] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [
+  {
+    "Id": 1,
+    "Date": "2018-03-16T00:00:00",
+    "StartTime": "10:00",
+    "EndTime": "12:00",
+    "Count": "0/7"
+  }
+].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 14.76ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 20.1489ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.PatientRecords (Polyclinic) with arguments (1, 11.03.18 00:00:00, 12.03.18 00:00:00) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__DoctorId_0='?', @__StartDateTime_1='?', @__EndDateTime_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [x].[Id], [x].[DateTime], [x].[DoctorId], [x].[PatientId], [x.Patient].[Id], [x.Patient].[BirthDate], [x.Patient].[CreationDate], [x.Patient].[HouseNumber], [x.Patient].[Lastname], [x.Patient].[Name], [x.Patient].[RegionId], [x.Patient].[Sex], [x.Patient].[StreetName], [x.Patient].[Surname]
+FROM [PatientRecords] AS [x]
+LEFT JOIN [Patients] AS [x.Patient] ON [x].[PatientId] = [x.Patient].[Id]
+WHERE (([x].[DoctorId] = @__DoctorId_0) AND ([x].[DateTime] >= @__StartDateTime_1)) AND ([x].[DateTime] < @__EndDateTime_2)
+ORDER BY [x].[DateTime]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.PatientRecords (Polyclinic) in 8.2946ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 18.3144ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (3ms) [Parameters=[@__DoctorId_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [x].[Id], [x].[Appeared], [x].[Date], [x].[DoctorId], [x].[NonAppeared]
+FROM [AttendenceStatistics] AS [x]
+WHERE ([x].[DoctorId] = @__DoctorId_0) AND ((DATEPART(year, [x].[Date]) = @__Year_1) AND (DATEPART(month, [x].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.AttendenceStatistics[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.AttendenceStatistics (Polyclinic) in 34.9845ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 40.1822ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/PatientRecords?DoctorId=1&StartDateTime=2018-03-16T00%3A00%3A00%2B03%3A00&EndDateTime=2018-03-17T00%3A00%3A00%2B03%3A00&_=1520779230902  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.PatientRecords (Polyclinic) with arguments (1, 16.03.18 00:00:00, 17.03.18 00:00:00) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__DoctorId_0='?', @__StartDateTime_1='?', @__EndDateTime_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [x].[Id], [x].[DateTime], [x].[DoctorId], [x].[PatientId], [x.Patient].[Id], [x.Patient].[BirthDate], [x.Patient].[CreationDate], [x.Patient].[HouseNumber], [x.Patient].[Lastname], [x.Patient].[Name], [x.Patient].[RegionId], [x.Patient].[Sex], [x.Patient].[StreetName], [x.Patient].[Surname]
+FROM [PatientRecords] AS [x]
+LEFT JOIN [Patients] AS [x.Patient] ON [x].[PatientId] = [x.Patient].[Id]
+WHERE (([x].[DoctorId] = @__DoctorId_0) AND ([x].[DateTime] >= @__StartDateTime_1)) AND ([x].[DateTime] < @__EndDateTime_2)
+ORDER BY [x].[DateTime]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value [
+  {
+    "Id": 2,
+    "PatientId": null,
+    "DateTime": "10:15"
+  },
+  {
+    "Id": 3,
+    "PatientId": null,
+    "DateTime": "10:30"
+  },
+  {
+    "Id": 4,
+    "PatientId": null,
+    "DateTime": "10:45"
+  },
+  {
+    "Id": 5,
+    "PatientId": null,
+    "DateTime": "11:00"
+  },
+  {
+    "Id": 6,
+    "PatientId": null,
+    "DateTime": "11:15"
+  },
+  {
+    "Id": 7,
+    "PatientId": null,
+    "DateTime": "11:30"
+  },
+  {
+    "Id": 8,
+    "PatientId": null,
+    "DateTime": "11:45"
+  }
+].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.PatientRecords (Polyclinic) in 3.0692ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 4.9871ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 437.2763ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 443.0523ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/css/Registrator/DoctorScheduleEdit/main.css?v=DTxrKKHeBw-L_2By9yDjIhaCecdYetWICIjBfwrsNtE  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/js/Registrator/DoctorScheduleEdit/main.js?v=Yt5ihic3o1KJXawpjAMwWQgC_IH0-009KcS_X2RLcuc  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/css/Registrator/DoctorScheduleEdit/main.css'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\css\Registrator\DoctorScheduleEdit\main.css'
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/js/Registrator/DoctorScheduleEdit/main.js'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\js\Registrator\DoctorScheduleEdit\main.js'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.5353ms 200 text/css
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 9.0397ms 200 application/javascript
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779235116  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779235117  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 22.9781ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 26.8332ms 200 text/plain; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 33.4937ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 40.2822ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 32.0366ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 33.4416ms
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 6.1497ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 43.1449ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 7.7329ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 42.11ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 7.9022ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 11.0341ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 0.802ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.6621ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779241316  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779241317  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 5.51ms
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 7.8167ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 12.99ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 15.0343ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 16.0192ms
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 7.3086ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 17.797ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 13.7911ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 3.1502ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 POST http://localhost:49214/Registrator/CreateRelieve application/x-www-form-urlencoded; charset=UTF-8 261
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.CreateRelieve (Polyclinic) with arguments (Polyclinic.Models.Relieve) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__relieve_DoctorId_0='?', @__relieve_StartTime_1='?', @__relieve_EndTime_2='?', @__relieve_StartTime_3='?', @__relieve_EndTime_4='?', @__relieve_StartTime_5='?', @__relieve_EndTime_6='?'], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Relieves] AS [x]
+        WHERE ([x].[DoctorId] = @__relieve_DoctorId_0) AND (((([x].[StartTime] >= @__relieve_StartTime_1) AND ([x].[StartTime] < @__relieve_EndTime_2)) OR (([x].[EndTime] > @__relieve_StartTime_3) AND ([x].[EndTime] <= @__relieve_EndTime_4))) OR (([x].[StartTime] < @__relieve_StartTime_5) AND ([x].[EndTime] > @__relieve_EndTime_6))))
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (92ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?', @p4='?', @p5='?', @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?', @p15='?', @p16='?', @p17='?', @p18='?', @p19='?', @p20='?', @p21='?', @p22='?', @p23='?', @p24='?', @p25='?', @p26='?', @p27='?', @p28='?', @p29='?', @p30='?', @p31='?', @p32='?', @p33='?', @p34='?', @p35='?', @p36='?', @p37='?', @p38='?', @p39='?'], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [PatientRecords] USING (
+VALUES (@p0, @p1, @p2, 0),
+(@p3, @p4, @p5, 1),
+(@p6, @p7, @p8, 2),
+(@p9, @p10, @p11, 3),
+(@p12, @p13, @p14, 4),
+(@p15, @p16, @p17, 5),
+(@p18, @p19, @p20, 6),
+(@p21, @p22, @p23, 7),
+(@p24, @p25, @p26, 8),
+(@p27, @p28, @p29, 9),
+(@p30, @p31, @p32, 10),
+(@p33, @p34, @p35, 11)) AS i ([DateTime], [DoctorId], [PatientId], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([DateTime], [DoctorId], [PatientId])
+VALUES (i.[DateTime], i.[DoctorId], i.[PatientId])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [PatientRecords] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+INSERT INTO [Relieves] ([Date], [DoctorId], [EndTime], [StartTime])
+VALUES (@p36, @p37, @p38, @p39);
+SELECT [Id]
+FROM [Relieves]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value 2.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.CreateRelieve (Polyclinic) in 147.8631ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 152.5518ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 7.0553ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.3907ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 0.6899ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.5504ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779261956  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779261955  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 12.9466ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 22.1056ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 21.8045ms
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 27.6087ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 30.653ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 38.8251ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 13.8757ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 25.387ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.6968ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 5.3675ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 6.6897ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 1.2465ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 2.6102ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779263365  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779263366  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 22.4532ms
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 29.6435ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 6.9375ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 35.2703ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 28.4942ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 32.7896ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 35.8778ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 2.4175ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 3.8026ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 5.41ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 6.958ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 0.6785ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.9187ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779264445  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779264446  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (4ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 39.0275ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 41.6315ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 2.5482ms 200 image/x-icon
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 44.586ms
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 44.6303ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 49.0636ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 47.3427ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 7.8323ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 10.2484ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 5.8946ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 7.8429ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 0.6869ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.551ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779265634  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779265635  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 12.1943ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 27.025ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 29.7287ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 32.3787ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 35.1622ms
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 38.5369ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 9.9168ms 200 image/x-icon
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 5.441ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 7.7061ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 6.4734ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.2636ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 0.6911ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 2.0374ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779274345  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779274346  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 18.6114ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 22.8827ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 42.3874ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (4ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 48.0092ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 50.7369ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 54.9796ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 8.9217ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 38.6824ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.2459ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 7.2399ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.4446ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 1.4567ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 7.6182ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779296604  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 6.6388ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779296605  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 18.9683ms
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.8464ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 21.1151ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 29.0718ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 32.7633ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 24.1934ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 40.1141ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.4233ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 6.9698ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.2979ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/js/Registrator/DoctorScheduleEdit/main.js?v=Yt5ihic3o1KJXawpjAMwWQgC_IH0-009KcS_X2RLcuc  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+The file /js/Registrator/DoctorScheduleEdit/main.js was not modified
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.841ms 304 application/javascript
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/css/Registrator/DoctorScheduleEdit/main.css?v=DTxrKKHeBw-L_2By9yDjIhaCecdYetWICIjBfwrsNtE  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+The file /css/Registrator/DoctorScheduleEdit/main.css was not modified
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 8.7639ms 304 text/css
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 1.2396ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 3.0665ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779444473  
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779444472  
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (6ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 26.8308ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 28.302ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 23.8232ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 30.2422ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 23.0562ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 35.4116ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 10.7823ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 11.9991ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 1.1318ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 7.8167ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 11.7139ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/js/Registrator/DoctorScheduleEdit/main.js?v=Y_xSyBC5Ro96xWEZh5nwel5PCZgVm-QEtZ5FFDYUxgU  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/js/Registrator/DoctorScheduleEdit/main.js'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\js\Registrator\DoctorScheduleEdit\main.js'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 25.8824ms 200 application/javascript
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 4.0652ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 10.1038ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779518693  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 13.5574ms
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 15.6572ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 19.7252ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 23.1926ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 5.3654ms 200 image/x-icon
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/DoctorScheduleEdit?id=1  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) with arguments (1) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[CheckUpTime], [e].[Name]
+FROM [Specialities] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewResultExecutor
+Executing ViewResult, running view at path /Views/Registrator/DoctorScheduleEdit.cshtml.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.DoctorScheduleEdit (Polyclinic) in 7.0646ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 9.0497ms 200 text/html; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/css/Registrator/DoctorScheduleEdit/main.css?v=DTxrKKHeBw-L_2By9yDjIhaCecdYetWICIjBfwrsNtE  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/js/Registrator/DoctorScheduleEdit/main.js?v=_QCzhyoJsANvLITt64xPMDgT4ZA0IZqjIa758GqGipM  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/js/Registrator/DoctorScheduleEdit/main.js'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\js\Registrator\DoctorScheduleEdit\main.js'
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+The file /css/Registrator/DoctorScheduleEdit/main.css was not modified
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 5.0684ms 304 text/css
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 4.5104ms 200 application/javascript
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/GetCurrentDate  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) with arguments ((null)) - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor
+Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.GetCurrentDate (Polyclinic) in 1.5814ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 3.0969ms 200 text/plain; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/RelieveTimes  
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/Registrator/Relieves?DoctorId=1&year=2018&month=03&_=1520779539807  
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) with arguments () - ModelState is Valid
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executing action method Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) with arguments (2018, 3, , 1, ) - ModelState is Valid
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Infrastructure
+Entity Framework Core 2.0.1-rtm-125 initialized 'PolyclinicContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Description], [r].[EndTime], [r].[StartTime]
+FROM [RelieveTimes] AS [r]
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value System.Collections.Generic.List`1[RelieveTime].
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[ChainedCabinet], [e].[Lastname], [e].[Name], [e].[RegionId], [e].[SpecialityId], [e].[Surname]
+FROM [Doctors] AS [e]
+WHERE [e].[Id] = @__get_Item_0
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.RelieveTimes (Polyclinic) in 4.1803ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 6.8924ms 200 application/json; charset=utf-8
+Information
+Microsoft.EntityFrameworkCore.Database.Command
+Executed DbCommand (0ms) [Parameters=[@__get_Item_0='?', @__Year_1='?', @__Month_2='?'], CommandType='Text', CommandTimeout='30']
+SELECT [e].[Id], [e].[Date], [e].[DoctorId], [e].[EndTime], [e].[StartTime]
+FROM [Relieves] AS [e]
+WHERE ([e].[DoctorId] = @__get_Item_0) AND ((DATEPART(year, [e].[Date]) = @__Year_1) AND (DATEPART(month, [e].[Date]) = @__Month_2))
+Information
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonResultExecutor
+Executing JsonResult, writing value Polyclinic.Models.Relieve[].
+Information
+Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker
+Executed action Polyclinic.Controllers.RegistratorController.Relieves (Polyclinic) in 10.4468ms
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 15.0762ms 200 application/json; charset=utf-8
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request starting HTTP/1.1 GET http://localhost:49214/favicon.ico  
+Information
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware
+Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\Bragas-PC\Desktop\MVC\Polyclinic\wwwroot\favicon.ico'
+Information
+Microsoft.AspNetCore.Hosting.Internal.WebHost
+Request finished in 4.8362ms 200 image/x-icon
