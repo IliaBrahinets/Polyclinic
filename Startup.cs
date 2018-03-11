@@ -7,10 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 using Polyclinic.Data;
+<<<<<<< HEAD
 using Polyclinic.Helpers;
 using Newtonsoft.Json.Serialization;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+=======
+using Newtonsoft.Json.Serialization;
+>>>>>>> 1d6da768185f25c60ce092ba27cf556b2c007de8
 
 namespace Polyclinic
 {

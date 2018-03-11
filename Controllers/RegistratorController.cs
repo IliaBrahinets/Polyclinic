@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Polyclinic.Data;
 using Polyclinic.Models;
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Http;
 using DocumentFormat.OpenXml.Packaging;
 using System.IO;
@@ -15,6 +16,15 @@ using OpenXmlPowerTools;
 using System.Xml.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Hosting;
+=======
+using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.Data.SqlClient;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.IO;
+>>>>>>> 1d6da768185f25c60ce092ba27cf556b2c007de8
 
 namespace Polyclinic.Controllers
 {
@@ -129,7 +139,7 @@ namespace Polyclinic.Controllers
             if (TryDoctor == null)
                 return Json(data: true);
 
-            return Json(data: "Такой доктор существует");
+            return Json(data: "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
 
         }
@@ -145,7 +155,7 @@ namespace Polyclinic.Controllers
             if (TryDoctor == null)
                 return Json(data: true);
 
-            return Json(data: "Кабинет занят");
+            return Json(data: "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
         }
         public async Task<IActionResult> EditDoctor(int? id)
         {
@@ -298,7 +308,7 @@ namespace Polyclinic.Controllers
             if(TryPatient == null)
                 return Json(data: true);
 
-            return Json(data: "Такой пациент существует");
+            return Json(data: "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
 
         }
@@ -419,7 +429,7 @@ namespace Polyclinic.Controllers
                 bool isExistRecord = db.PatientRecords.Any(x => (x.PatientId == PatientId && patientRecord.DateTime == x.DateTime));
                 if (isExistRecord)
                 {
-                    ViewData["PageMessage"] = PageMessage("danger","Ошибка!", "Пациент уже имеет запись на это время!");
+                    ViewData["PageMessage"] = PageMessage("danger","пїЅпїЅпїЅпїЅпїЅпїЅ!", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!");
                     return View("EmptyPage");
                 }
 
@@ -435,7 +445,7 @@ namespace Polyclinic.Controllers
                     return View("TalonView",patientRecord);
                 }
 
-                ViewData["PageMessage"] = PageMessage("danger","Ошибка!","На это время записан пациент!");
+                ViewData["PageMessage"] = PageMessage("danger","пїЅпїЅпїЅпїЅпїЅпїЅ!","пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
             }
 
             return View("EmptyPage");
@@ -665,7 +675,7 @@ namespace Polyclinic.Controllers
                                                                               || (x.StartTime < relieve.StartTime && x.EndTime > relieve.EndTime))));
 
                 if (isIntersectWithExistRel)
-                    return NotFound("Пересекается с существующей!");
+                    return NotFound("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 
                 db.Relieves.Add(relieve);
 
@@ -725,7 +735,7 @@ namespace Polyclinic.Controllers
                                                                                   && x.DateTime <= relieve.EndTime));
 
                 if (isAnyPatientRecords)
-                    return NotFound("Есть записи пациентов!");
+                    return NotFound("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 
                 db.PatientRecords.RemoveRange(await db.PatientRecords.Where(x => (x.PatientId == null 
                                                                                && x.DoctorId == relieve.DoctorId
@@ -797,6 +807,10 @@ namespace Polyclinic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRelieveTime(int? id)
         {
+         
+            if (id != null)
+            {
+                Doctor doctor = await db.Doctors.FindAsync(id);
 
             bool isAllRight = await DeleteEntity<RelieveTime>(id);
 
@@ -954,7 +968,7 @@ namespace Polyclinic.Controllers
             foreach(String Address in AddressesArr)
                 foreach(Street street in StreetsMatched)
                     if (street.Addresses.Contains(Address))
-                        return Json("Существует адрес уже привязанный к участку");
+                        return Json("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
             return Json(data: true);                
 
@@ -963,7 +977,7 @@ namespace Polyclinic.Controllers
         [AcceptVerbs("Get", "Post")]
         public JsonResult IsStreetChain(String StreetName,String HouseNumber)
         {
-            String ErrMessage = "Улица или номер дома не закреплены ни за одним участком";
+            String ErrMessage = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 
             if ((StreetName == null) || (HouseNumber == null)) return Json(data: ErrMessage);
 
@@ -1022,7 +1036,7 @@ namespace Polyclinic.Controllers
             if (spec == null)
                 return Json(true);
             else
-                return Json("Специальность с таким названием уже существует");
+                return Json("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         
         }
         public async Task<IActionResult> EditSpeciality(Speciality spec)

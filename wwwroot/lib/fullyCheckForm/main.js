@@ -29,18 +29,18 @@ $(".fullyCheckForm").each(function (index, form) {
             success: function (data, status) {
                 if (data === true) {
 
+
                     form.off("submit", listener);
 
                     messageCont.text("");
-                    form.off("change", emptyListener);
 
                     form.submit();
 
-                } else {
-                    messageCont.text(data);
-                }
+                    element.off("submit", listener);
+
+                    messageCont.text("");
             }
-        });
+        }});
 
         return false;
     });

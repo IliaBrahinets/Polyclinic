@@ -6,6 +6,6 @@
     "\\Views",
     "\\Views\\Registrator"
   ],
-  "SelectedNode": "\\Views\\_ViewImports.cshtml",
+  "SelectedNode": "\\Controllers\\RegistratorController.cs",
   "PreviewInSolutionExplorer": false
 }

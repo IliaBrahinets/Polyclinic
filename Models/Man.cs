@@ -7,6 +7,7 @@ using System;
 
 using System.ComponentModel.DataAnnotations;
 
+
 public class Man
 {
     public int Id { get; set; }

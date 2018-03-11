@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PatientRecord>
+<div class="container">
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>
+                    ФИО пациента
+                </th>
+                <th>
+                    ФИО врача
+                </th>
+                <th>
+                    Специальность
+                </th>
+                <th>
+                    Кабинет 
+                </th>
+                <th>
+                    Дата приёма
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        
+        @foreach (var item in Model)
+        {
+
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.Partial("_ManShortName", item.Patient)
+                    </td>
+                    <td>
+                        @Html.Partial("_ManShortName", item.Doctor)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctor.Speciality.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctor.ChainedCabinet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                    <td>
+                   <a asp-action="DeletePatientRecord" asp-route-id="@item.Id"> Удалить</a> |
+                        <a asp-action="ExportToWord" asp-route-id="@item.Id"> Печать</a>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+@section Scripts {
+    <script src='~/lib/moment/min/moment-with-locales.min.js' asp-append-version='true'></script>
+    <script src='~/lib/datetimepicker/js/daterangepicker.js' asp-append-version='true'></script>
+    <script src='~/js/Registrator/Patients/main.js' asp-append-version='true'></script>
+}
+@section Styles {
+    <link rel='stylesheet' href='~/lib/datetimepicker/css/daterangepicker.css' asp-append-version='true' />
+    <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' asp-append-version='true' />
+    <link rel='stylesheet' href='~/css/Registrator/Patients/main.css' asp-append-version='true' />
+}
+
